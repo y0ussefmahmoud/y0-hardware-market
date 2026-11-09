@@ -11,12 +11,12 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import LoadingSpinner, { FullPageLoading } from '@/components/LoadingSpinner';
-import ErrorBoundary from '@/components/ErrorBoundary';
-import { useAuth } from '@/hooks/useAuth';
+import LoadingSpinner, { FullPageLoading } from '../../../components/LoadingSpinner';
+import ErrorBoundary from '../../../components/ErrorBoundary';
+import { useAuth } from '../../../hooks/useAuth';
 import { useRouter } from 'next/navigation';
-import { csrfFetch } from '@/lib/csrf';
-import AdminCommandCenter from '@/components/AdminCommandCenter';
+import { csrfFetch } from '../../../lib/csrf';
+import AdminCommandCenter from '../../../components/AdminCommandCenter';
 
 // Add useState import for ProductsTable
 

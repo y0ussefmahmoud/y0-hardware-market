@@ -541,3 +541,25 @@ export async function GET() {
    - `npm run build` compiled with Exit Code 0 across all 39 static and dynamic routes.
 
 ---
+
+
+---
+
+## ⚡ Urgent Fix Log: Webpack Module Aliases & Relative Imports Hardening (v1.1.19)
+**Timestamp:** 2026-11-09 23:18:00 (UTC+2 Cairo)
+**Status:** Completed (Aliases & Imports Resolved)
+
+### 📌 Summary of Changes:
+1. **Module Resolution in `tsconfig.json` & `next.config.ts`:**
+   - Added `"baseUrl": "."` in [tsconfig.json](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/tsconfig.json) alongside `"@/*": ["./src/*"]`.
+   - Injected explicit Webpack alias resolver in [next.config.ts](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/next.config.ts) mapping `'@'` to `path.resolve(__dirname, 'src')`.
+2. **Deterministic Relative Imports in Affected Pages:**
+   - Updated [account/page.tsx](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/src/app/[locale]/account/page.tsx): imported `useAuth` via explicit relative path `../../../hooks/useAuth`.
+   - Updated [admin/page.tsx](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/src/app/[locale]/admin/page.tsx): converted `LoadingSpinner`, `ErrorBoundary`, `useAuth`, `csrfFetch`, and `AdminCommandCenter` to guaranteed relative paths.
+3. **Safety & Verification:**
+   - 0 Database / API mutations.
+   - Preserved hotline `+20 1129334173` (01129334173) and `"Designed & Powered by Y0ussef.com"` signature.
+   - `npx tsc --noEmit` passed with 0 errors.
+   - `npm run build` compiled with Exit Code 0 across all 39 static and dynamic routes.
+
+---
