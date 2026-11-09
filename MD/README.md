@@ -519,3 +519,25 @@ export async function GET() {
    - `npm run build` completed with Exit Code 0 across all 39 routes.
 
 ---
+
+
+---
+
+## ⚡ Fix Log: Turbopack CSS Panic Resolution (v1.1.18)
+**Timestamp:** 2026-11-09 22:50:00 (UTC+2 Cairo)
+**Status:** Completed (Stable Webpack Production Engine & External Font Isolation)
+
+### 📌 Summary of Changes:
+1. **Production Engine Hardening:**
+   - Updated `build` script in [package.json](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/package.json) to `"next build --webpack"`.
+   - Added alternative `"build:turbo": "next build"`. This guarantees production and CI/CD hosting environments use the battle-tested Webpack compiler rather than triggering the Turbopack CSS internal panic.
+2. **CSS `@import` Clean-up in globals.css:**
+   - Removed external `@import url(...)` font declarations from [globals.css](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/src/app/globals.css) that conflicted with Tailwind v4 parser in Turbopack.
+   - Shifted external font stylesheets cleanly to `<link rel="stylesheet">` tags in [layout.tsx](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/src/app/[locale]/layout.tsx).
+3. **Safety & Verification:**
+   - 0 Backend / Database mutations.
+   - Preserved hotline `+20 1129334173` (01129334173) and `"Designed & Powered by Y0ussef.com"` signature.
+   - `npx tsc --noEmit` passed with 0 errors.
+   - `npm run build` compiled with Exit Code 0 across all 39 static and dynamic routes.
+
+---

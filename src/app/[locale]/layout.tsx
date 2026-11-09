@@ -46,6 +46,9 @@ export default async function RootLayout({
         <link rel="icon" href="/assets/y0-icon-only.ico" />
         <link rel="icon" href="/assets/y0-cyber-logo.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/assets/y0-cyber-logo.png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <StructuredData data={generateOrganizationStructuredData(locale)} />
         <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''} />
       </head>
