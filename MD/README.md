@@ -563,3 +563,24 @@ export async function GET() {
    - `npm run build` compiled with Exit Code 0 across all 39 static and dynamic routes.
 
 ---
+
+
+---
+
+## ⚡ Urgent Fix Log: Next.js API Route Handler Export & Dependency Sync (v1.1.20)
+**Timestamp:** 2026-11-09 23:28:00 (UTC+2 Cairo)
+**Status:** Completed (Route Handlers Standardized & Next.js Exact Version Locked)
+
+### 📌 Summary of Changes:
+1. **API Route Handler Standard Compliance (`/api/admin/orders`):**
+   - Confirmed zero default exports (`export default`) exist in [src/app/api/admin/orders/route.ts](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/src/app/api/admin/orders/route.ts).
+   - Typed request parameters with Next.js standard `NextRequest` for `GET` and `PUT` methods.
+2. **Next.js & SWC Version Synchronization:**
+   - Locked `"next": "16.4.5"` in [package.json](file:///O:/y0ussefmahmoud/Work/Y0ussef/In%20Progress/Y0%20Hardware%20Market/Y0%20Hardware%20Market%20v1.1.11/package.json) to eliminate SWC runtime mismatch warnings (`@next/swc` 16.2.10 vs Next 16.4.5) during hosting platform builds.
+3. **Safety & Verification:**
+   - 0 Database / API mutations.
+   - Preserved hotline `+20 1129334173` (01129334173) and `"Designed & Powered by Y0ussef.com"` signature.
+   - `npx tsc --noEmit` passed with 0 errors.
+   - `npm run build` compiled with Exit Code 0 across all 39 static and dynamic routes.
+
+---

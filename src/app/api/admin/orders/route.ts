@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { requireAdmin, unauthorizedAdminResponse } from '@/lib/auth';
 import { ORDER_STATUSES, PAYMENT_STATUSES } from '@/lib/security';
 import { rejectIfUnsafeMutation } from '@/lib/security-http';
 
 // GET all orders
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const admin = await requireAdmin(request);
     if (!admin) {
@@ -69,7 +69,7 @@ export async function GET(request: Request) {
 }
 
 // PUT update order status
-export async function PUT(request: Request) {
+export async function PUT(request: NextRequest) {
   try {
     const unsafe = rejectIfUnsafeMutation(request);
     if (unsafe) return unsafe;
