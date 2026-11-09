@@ -25,27 +25,55 @@ export function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
+
     async function checkAuth() {
       try {
-        const res = await fetch('/api/auth/me');
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+        const res = await fetch('/api/auth/me', {
+          credentials: 'include',
+          signal: controller.signal,
+        });
+        clearTimeout(timeoutId);
+
+        if (!res.ok) {
+          if (isMounted) {
+            setUser(null);
+            setIsAuthenticated(false);
+          }
+          return;
+        }
+
         const data = await res.json();
 
-        if (data.status === 'success') {
-          setUser(data.data.user);
-          setIsAuthenticated(true);
-        } else {
+        if (isMounted) {
+          if (data.status === 'success' && data.data?.user) {
+            setUser(data.data.user);
+            setIsAuthenticated(true);
+          } else {
+            setUser(null);
+            setIsAuthenticated(false);
+          }
+        }
+      } catch {
+        if (isMounted) {
           setUser(null);
           setIsAuthenticated(false);
         }
-      } catch {
-        setUser(null);
-        setIsAuthenticated(false);
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     }
 
     checkAuth();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const logout = async () => {

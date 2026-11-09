@@ -16,8 +16,8 @@ export async function GET(request: NextRequest) {
     const user = getUserFromNextRequest(request);
     if (!user) {
       return NextResponse.json(
-        { status: 'error', message: 'Unauthorized' },
-        { status: 401 }
+        { status: 'success', data: { user: null } },
+        { status: 200 }
       );
     }
 
@@ -29,8 +29,8 @@ export async function GET(request: NextRequest) {
 
     if ((users as any[]).length === 0) {
       return NextResponse.json(
-        { status: 'error', message: 'User not found' },
-        { status: 404 }
+        { status: 'success', data: { user: null } },
+        { status: 200 }
       );
     }
 
@@ -41,10 +41,10 @@ export async function GET(request: NextRequest) {
       }
     });
   } catch (error) {
-    console.error('Error fetching current user:', error);
+    console.warn('Error fetching current user:', error instanceof Error ? error.message : error);
     return NextResponse.json(
-      { status: 'error', message: 'Error fetching user data' },
-      { status: 500 }
+      { status: 'success', data: { user: null } },
+      { status: 200 }
     );
   }
 }

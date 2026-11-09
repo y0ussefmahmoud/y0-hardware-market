@@ -16,6 +16,7 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { csrfFetch } from '@/lib/csrf';
+import AdminCommandCenter from '@/components/AdminCommandCenter';
 
 // Add useState import for ProductsTable
 
@@ -85,18 +86,19 @@ export default function AdminDashboard() {
 
         <div className="container mx-auto px-4 py-8">
           {/* Navigation Tabs */}
-          <div className="flex space-x-4 rtl:space-x-reverse mb-8 border-b">
-            {['dashboard', 'products', 'orders', 'users', 'content'].map((tab) => (
+          <div className="flex flex-wrap gap-2 mb-8 border-b pb-2">
+            {['dashboard', 'command-center', 'products', 'orders', 'users', 'content'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 font-semibold ${
+                className={`px-4 py-2 font-semibold rounded-lg transition-all cursor-pointer ${
                   activeTab === tab
-                    ? 'border-b-2 border-purple-600 text-purple-600'
-                    : 'text-gray-600 hover:text-purple-600'
+                    ? 'bg-purple-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-purple-600 hover:bg-gray-100'
                 }`}
               >
                 {tab === 'dashboard' && tAdmin('tabs.dashboard')}
+                {tab === 'command-center' && '⚡ Ops Command Center'}
                 {tab === 'products' && tAdmin('tabs.products')}
                 {tab === 'orders' && tAdmin('tabs.orders')}
                 {tab === 'users' && tAdmin('tabs.users')}
@@ -104,6 +106,13 @@ export default function AdminDashboard() {
               </button>
             ))}
           </div>
+
+          {/* Command Center Content */}
+          {activeTab === 'command-center' && (
+            <div className="mb-12">
+              <AdminCommandCenter />
+            </div>
+          )}
 
           {/* Dashboard Content */}
           {activeTab === 'dashboard' && stats && (

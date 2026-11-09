@@ -70,12 +70,21 @@ export default async function ShopPage({
   console.log('Shop page - categories:', categories);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-surface text-on-surface min-h-screen">
       {/* Page Header */}
-      <div className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-2">{tShop('title')}</h1>
-          <p className="text-gray-600">{tShop('subtitle')}</p>
+      <div className="bg-gradient-to-b from-surface-container-lowest via-surface-container to-surface border-b border-outline-variant/30 py-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(0,242,254,0.08),rgba(11,19,38,0))] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary-container/30 text-primary-container font-mono text-xs uppercase tracking-widest mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+            <span>SYSTEM CATALOG // INVENTORY</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2 text-on-surface">
+            {tShop('title')}
+          </h1>
+          <p className="text-on-surface-variant font-mono text-sm max-w-2xl">
+            {tShop('subtitle')}
+          </p>
         </div>
       </div>
 
@@ -88,11 +97,11 @@ export default async function ShopPage({
 
           {/* Products Grid */}
           <div className="flex-1">
-            <div className="flex justify-between items-center mb-6">
-              <p className="text-gray-600">
+            <div className="flex flex-wrap justify-between items-center mb-6 gap-4 bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3">
+              <p className="text-on-surface-variant font-mono text-xs uppercase tracking-wider">
                 {products ? tShop('showingProducts', { count: products.length }) : tShop('loading')}
               </p>
-              <select className="border rounded-lg px-4 py-2">
+              <select className="bg-surface-container border border-outline-variant/40 rounded-lg px-3 py-1.5 text-xs font-mono text-on-surface focus:border-primary-container focus:outline-none">
                 <option>{tShop('sortNewest')}</option>
                 <option>{tShop('sortPriceLowHigh')}</option>
                 <option>{tShop('sortPriceHighLow')}</option>
@@ -101,14 +110,14 @@ export default async function ShopPage({
             </div>
 
             {!products ? (
-              <div className="text-center py-12">
-                <i className="fas fa-spinner fa-spin text-4xl text-gray-300 mb-4"></i>
-                <p className="text-gray-500">{tShop('loading')}</p>
+              <div className="text-center py-16 bg-surface-container-low border border-outline-variant/20 rounded-xl">
+                <i className="fas fa-spinner fa-spin text-3xl text-primary-container mb-4"></i>
+                <p className="text-on-surface-variant font-mono text-xs uppercase tracking-wider">{tShop('loading')}</p>
               </div>
             ) : products.length === 0 ? (
-              <div className="text-center py-12">
-                <i className="fas fa-search text-4xl text-gray-300 mb-4"></i>
-                <p className="text-gray-500">{tShop('noProducts')}</p>
+              <div className="text-center py-16 bg-surface-container-low border border-outline-variant/20 rounded-xl">
+                <i className="fas fa-search text-3xl text-outline-variant/50 mb-4"></i>
+                <p className="text-on-surface-variant font-mono text-xs uppercase tracking-wider">{tShop('noProducts')}</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -120,23 +129,23 @@ export default async function ShopPage({
 
             {/* Pagination */}
             {pagination && pagination.total_pages > 1 && (
-              <div className="flex justify-center mt-8 space-x-2 rtl:space-x-reverse">
-                <button className="px-4 py-2 border rounded-lg hover:bg-gray-50">
+              <div className="flex justify-center mt-10 space-x-2 rtl:space-x-reverse font-mono text-xs">
+                <button className="px-4 py-2 border border-outline-variant/40 rounded-lg bg-surface-container-low text-on-surface hover:border-primary-container hover:text-primary-container transition-colors uppercase tracking-wider">
                   {tShop('prev')}
                 </button>
                 {[...Array(pagination.total_pages)].map((_, i) => (
                   <button
                     key={i}
-                    className={`px-4 py-2 border rounded-lg ${
+                    className={`px-4 py-2 border rounded-lg transition-all ${
                       i + 1 === pagination.current_page
-                        ? 'bg-purple-600 text-white'
-                        : 'hover:bg-gray-50'
+                        ? 'bg-primary-container text-on-primary-container border-primary-container font-bold shadow-[0_0_15px_rgba(0,242,254,0.3)]'
+                        : 'bg-surface-container-low border-outline-variant/40 text-on-surface hover:border-primary-container hover:text-primary-container'
                     }`}
                   >
                     {i + 1}
                   </button>
                 ))}
-                <button className="px-4 py-2 border rounded-lg hover:bg-gray-50">
+                <button className="px-4 py-2 border border-outline-variant/40 rounded-lg bg-surface-container-low text-on-surface hover:border-primary-container hover:text-primary-container transition-colors uppercase tracking-wider">
                   {tShop('next')}
                 </button>
               </div>

@@ -69,8 +69,8 @@ export default function OrdersPage() {
 
   if (authLoading || loading) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+      <div className="container mx-auto px-4 py-32 text-center bg-surface min-h-[60vh] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-2 border-primary-container/20 border-t-primary-container mx-auto"></div>
       </div>
     );
   }
@@ -80,30 +80,35 @@ export default function OrdersPage() {
   }
 
   return (
-    <div className="flex flex-col">
-      <div className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-2">{tOrders('title')}</h1>
-          <p className="text-gray-600">{tOrders('subtitle')}</p>
+    <div className="flex flex-col bg-surface text-on-surface min-h-screen">
+      <div className="bg-gradient-to-b from-surface-container-lowest via-surface-container to-surface border-b border-outline-variant/30 py-10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(0,242,254,0.08),rgba(11,19,38,0))] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary-container/30 text-primary-container font-mono text-xs uppercase tracking-widest mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+            <span>ORDER TELEMETRY & TRACKING</span>
+          </div>
+          <h1 className="text-3xl font-extrabold tracking-tight mb-2 text-on-surface font-mono">{tOrders('title')}</h1>
+          <p className="text-on-surface-variant font-mono text-xs">{tOrders('subtitle')}</p>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-8">
         {successOrderNumber && (
-          <div className="mb-6 rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">
-            <h2 className="font-semibold">{tOrders('successTitle')}</h2>
+          <div className="mb-6 rounded-xl border border-emerald-500/40 bg-emerald-950/40 p-4 text-emerald-400 font-mono text-xs">
+            <h2 className="font-bold text-sm mb-1">{tOrders('successTitle')}</h2>
             <p>{tOrders('successMessage', { orderNumber: successOrderNumber })}</p>
           </div>
         )}
 
         {orders.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md py-16 text-center">
-            <i className="fas fa-shopping-bag text-6xl text-gray-300 mb-6"></i>
-            <h2 className="text-2xl font-bold mb-4">{tOrders('empty')}</h2>
-            <p className="text-gray-600 mb-6">{tOrders('emptyMessage')}</p>
+          <div className="bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-xl py-16 text-center">
+            <i className="fas fa-shopping-bag text-5xl text-outline-variant/40 mb-6"></i>
+            <h2 className="text-xl font-bold font-mono mb-2 text-on-surface">{tOrders('empty')}</h2>
+            <p className="text-on-surface-variant font-mono text-xs mb-6 max-w-sm mx-auto">{tOrders('emptyMessage')}</p>
             <Link
               href={`/${locale}/shop`}
-              className="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+              className="inline-block bg-primary-container text-on-primary-container px-8 py-3.5 rounded-lg font-mono font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_20px_rgba(0,242,254,0.35)] transition-all"
             >
               {tOrders('browseProducts')}
             </Link>
@@ -111,32 +116,32 @@ export default function OrdersPage() {
         ) : (
           <div className="space-y-4">
             {orders.map((order) => (
-              <div key={order.id} className="bg-white rounded-lg shadow-md p-6">
+              <div key={order.id} className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 shadow-md hover:border-primary-container/40 transition-colors">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div>
-                    <p className="font-bold text-lg">
-                      {tOrders('orderNumber')} #{order.order_number}
+                    <p className="font-bold font-mono text-base text-on-surface">
+                      {tOrders('orderNumber')} <span className="text-primary-container">#{order.order_number}</span>
                     </p>
-                    <p className="text-gray-600 text-sm mt-1">
+                    <p className="text-on-surface-variant font-mono text-xs mt-1">
                       {tOrders('date')}: {new Date(order.created_at).toLocaleDateString(locale === 'ar' ? 'ar-EG' : 'en-US')}
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 rounded-full text-sm bg-purple-100 text-purple-800">
+                  <div className="flex flex-wrap gap-2 font-mono text-xs">
+                    <span className="px-3 py-1 rounded-full bg-primary-container/15 text-primary-container border border-primary-container/30 uppercase tracking-wider font-semibold">
                       {statusLabel(order.status)}
                     </span>
-                    <span className="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-800">
+                    <span className="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/40 uppercase tracking-wider">
                       {paymentLabel(order.payment_status)}
                     </span>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-4 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <p className="text-gray-600">
-                    {tOrders('items')}: {order.item_count ?? 0}
+                <div className="mt-4 pt-4 border-t border-outline-variant/20 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 font-mono text-xs">
+                  <p className="text-on-surface-variant">
+                    {tOrders('items')}: <span className="text-on-surface font-semibold">{order.item_count ?? 0}</span>
                   </p>
-                  <p className="font-bold text-purple-600 text-lg">
-                    {tOrders('total')}: {Number(order.total_amount).toLocaleString()} {tFooter('currency')}
+                  <p className="font-bold text-base text-primary-container">
+                    {tOrders('total')}: {Number(order.total_amount).toLocaleString()} <span className="text-xs text-on-surface-variant font-sans font-normal">{tFooter('currency')}</span>
                   </p>
                 </div>
               </div>

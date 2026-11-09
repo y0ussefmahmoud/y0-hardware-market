@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container": "#171f33", "tertiary-fixed": "#6ffbbe", "on-error": "#690005", "error": "#ffb4ab", "on-tertiary-fixed": "#002113", "surface-tint": "#00dce6", "on-surface-variant": "#b9cacb", "background": "#0b1326", "primary-container": "#00f2fe", "on-tertiary-fixed-variant": "#005236", "secondary-fixed-dim": "#d2bbff", "outline-variant": "#3a494b", "secondary": "#d2bbff", "surface": "#0b1326", "outline": "#849495", "on-tertiary": "#003824", "on-error-container": "#ffdad6", "tertiary-container": "#67f4b7", "on-secondary": "#3f008e", "primary": "#e0fdff", "on-background": "#dae2fd", "tertiary": "#e1ffec", "secondary-fixed": "#eaddff", "tertiary-fixed-dim": "#4edea3", "inverse-surface": "#dae2fd", "secondary-container": "#6001d1", "primary-fixed-dim": "#00dce6", "on-primary": "#00373a", "surface-container-low": "#131b2e", "surface-container-high": "#222a3d", "on-surface": "#dae2fd", "error-container": "#93000a", "on-primary-container": "#006a70", "on-secondary-container": "#c9aeff", "inverse-primary": "#00696f", "surface-dim": "#0b1326", "on-secondary-fixed": "#25005a", "on-tertiary-container": "#006e4b", "on-primary-fixed-variant": "#004f53", "primary-fixed": "#6ff6ff", "inverse-on-surface": "#283044", "on-primary-fixed": "#002022", "surface-container-lowest": "#060e20", "on-secondary-fixed-variant": "#5a00c6", "surface-container-highest": "#2d3449", "surface-bright": "#31394d", "surface-variant": "#2d3449" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "margin-desktop": "3rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "margin-tablet": "2rem", "space-md": "1rem", "gutter-desktop": "1.5rem", "margin": "1rem", "gutter": "1rem" }, "fontFamily": { "spec-code-lg": [ "JetBrains Mono" ], "body-md": [ "Inter" ], "label-sm": [ "JetBrains Mono" ], "headline-lg-mobile": [ "Inter" ], "label-md": [ "JetBrains Mono" ], "headline-xl": [ "Inter" ], "headline-lg": [ "Inter" ], "body-lg": [ "Inter" ], "spec-code-md": [ "JetBrains Mono" ], "headline-md": [ "Inter" ], "spec-code-sm": [ "JetBrains Mono" ], "headline-sm": [ "Inter" ], "body-sm": [ "Inter" ], "headline-xl-mobile": [ "Inter" ] }, "fontSize": { "spec-code-lg": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-md": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "label-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" } ], "headline-xl": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.025em", "fontWeight": "800" } ], "headline-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "body-lg": [ "16px", { "lineHeight": "26px", "fontWeight": "400" } ], "spec-code-md": [ "14px", { "lineHeight": "20px", "fontWeight": "500" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "spec-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ], "headline-xl-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" } ] } } } };</script></head><body class="bg-surface text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.6)]"><div class="h-28 w-full max-w-[1600px] mx-auto px-margin-desktop flex flex-col justify-between py-space-xs"><div class="h-16 flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md shrink-0"><div class="relative flex items-center"><div class="absolute -inset-1 rounded-lg bg-primary-container/20 blur-sm"></div><img alt="Y0 Hardware Market Logo" class="relative h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrA7nQqAfzvgqeFPQY5PVKiryRbcnUQ6ycjw4jGl9mkyqS1eS-3O-gDfm-qbfr1JunZRJVAEufknatGrkyCxeB78_DzLdSCP_WE5nfK1AL_6Bd0eAJz9EnhJw51Jvgt4nrdWFoIFBMwwe4Vs7r2LUdmShufZmLexrwxE-DI_AtFGYUaB6c-zNiMAyUOe6bjVd0ntnH4FyxxrJhLvhVAVfL913BT_eRVhBmN23xxJEak"/></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-extrabold tracking-tight">Y0<span class="text-primary-container">.MARKET</span></span><div class="flex items-center gap-1.5"><span class="inline-block w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-pulse"></span><span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Cairo Telemetry 99.8% READY</span></div></div></div><div class="flex-1 max-w-2xl"><div class="relative flex items-center rounded bg-surface-container-low focus-within:ring-1 focus-within:ring-primary-container shadow-inner"><div class="relative"><select class="appearance-none bg-surface-container-high py-space-xs pl-space-md pr-space-lg rounded-l font-spec-code-sm text-spec-code-sm text-on-surface-variant focus:outline-none cursor-pointer"><option>All Hardware</option><option>GPUs (RTX 40 / 50)</option><option>Processors</option><option>Motherboards</option><option>RAM &amp; Storage</option><option>PSU &amp; Cooling</option></select><span class="material-symbols-outlined pointer-events-none absolute right-space-xs top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">expand_more</span></div><div class="relative flex-1 flex items-center"><span class="material-symbols-outlined text-outline ml-space-sm text-[20px]">search</span><input class="w-full bg-transparent py-space-xs px-space-sm font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Search GPUs, Core i9, PCIe Gen 5, DDR5 modules..." type="text"/><div class="mr-space-sm flex items-center gap-1 rounded bg-surface-container-highest px-space-xs py-0.5"><kbd class="font-spec-code-sm text-spec-code-sm text-outline">CTRL</kbd><span class="font-spec-code-sm text-spec-code-sm text-outline">+</span><kbd class="font-spec-code-sm text-spec-code-sm text-outline">K</kbd></div></div></div></div><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-1.5 rounded"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed">payments</span><span class="font-spec-code-sm text-spec-code-sm text-on-surface font-semibold">EGP (ج.م)</span><span class="text-outline font-spec-code-sm text-spec-code-sm">|</span><button class="font-spec-code-sm text-spec-code-sm text-on-surface-variant hover:text-on-surface transition-colors">EN / عربي</button></div><button aria-label="Open Cart Drawer" class="relative flex items-center gap-space-sm bg-surface-container-high hover:bg-surface-bright px-space-md py-1.5 rounded transition-all shadow-[0_0_12px_rgba(0,242,254,0.15)] group"><div class="relative"><span class="material-symbols-outlined text-[20px] text-primary-container group-hover:text-surface-tint">shopping_cart</span><span class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary-container font-spec-code-sm text-[10px] font-bold text-on-primary-fixed">3</span></div><div class="flex flex-col text-left"><div class="flex items-center gap-1"><span class="font-spec-code-sm text-[10px] text-outline uppercase">Cart Hold</span><span class="font-spec-code-sm text-[9px] text-error font-bold tracking-wider animate-pulse">09:42</span></div><span class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold">84,200 EGP</span></div></button><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:text-primary-container transition-colors cursor-pointer"><span class="material-symbols-outlined text-[18px]">person</span></div></div></div><div class="h-12 flex items-center justify-between"><nav class="flex items-center gap-space-sm" data-active-classes="bg-surface-container-high text-on-surface font-bold"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-sm py-1 rounded transition-colors" data-path="home" href="#">Home</a><a aria-current="page" class="px-space-sm py-1 rounded transition-colors bg-surface-container-high text-on-surface font-bold" data-path="shop-catalog" href="#">Shop Catalog</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-sm py-1 rounded transition-colors" data-path="pc-builder" href="#">PC Builder</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-sm py-1 rounded transition-colors" data-path="flash-deals-drops" href="#">Flash Deals &amp; Drops</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-sm py-1 rounded transition-colors" data-path="order-telemetry-hud" href="#">Order Telemetry HUD</a></nav><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="inline-block w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00f2fe] animate-ping"></span><span class="font-spec-code-sm text-spec-code-sm text-primary-container font-semibold tracking-wider uppercase">Rig Architect Active</span></div><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed">local_shipping</span><span class="font-spec-code-sm text-spec-code-sm text-on-surface-variant">Express Cairo &amp; Giza Outpost</span></div></div></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
+<!-- System Status Banner Strip -->
+<section class="w-full bg-surface-container-lowest py-space-xs px-margin-desktop">
+<div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-space-sm font-spec-code-sm text-spec-code-sm">
+<div class="flex items-center gap-space-sm">
+<span class="inline-block w-2 h-2 rounded-full bg-primary-container shadow-sm animate-pulse"></span>
+<span class="text-primary-container font-semibold tracking-wider">OUTPOST NODE // CAIRO-EAST-01</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface-variant">SERIAL ALLOCATION ENGINE: ONLINE</span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed">verified</span>
+<span>E-INVOICE TAX ID: 492-881-019</span>
+</div>
+<span class="text-outline">|</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary-container">bolt</span>
+<span>INSTAPAY INSTANT CLEARANCE AVAILABLE</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Checkout Matrix & Ledger Container -->
+<section class="w-full max-w-[1600px] mx-auto px-margin-desktop py-space-lg">
+<div class="flex flex-col lg:flex-row gap-space-lg items-start">
+<!-- ================= LEFT COLUMN: 3-STEP PIPELINE (65%) ================= -->
+<div class="w-full lg:w-[65%] flex flex-col gap-space-lg min-w-0">
+<!-- Pipeline Progress Breadcrumb Strip -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between shadow-md">
+<div class="flex items-center gap-space-md flex-1">
+<div class="flex items-center gap-space-xs text-primary-container">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary-fixed font-spec-code-sm text-spec-code-sm flex items-center justify-center font-bold">01</span>
+<span class="font-spec-code-md text-spec-code-md font-bold tracking-wide">SHIPPING NODE</span>
+</div>
+<div class="h-0.5 flex-1 bg-primary-container/40"></div>
+<div class="flex items-center gap-space-xs text-primary-container">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary-fixed font-spec-code-sm text-spec-code-sm flex items-center justify-center font-bold">02</span>
+<span class="font-spec-code-md text-spec-code-md font-bold tracking-wide">PAYMENT RAIL</span>
+</div>
+<div class="h-0.5 flex-1 bg-surface-container-highest"></div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface-variant font-spec-code-sm text-spec-code-sm flex items-center justify-center font-bold">03</span>
+<span class="font-spec-code-md text-spec-code-md font-semibold tracking-wide">VAT TELEMETRY</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase pl-space-md hidden sm:inline-block">PIPELINE ID: CAI-9402-TX</span>
+</div>
+<!-- STEP 1: SHIPPING & DELIVERY NODE -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[24px]">local_shipping</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">STEP 1: DISPATCH &amp; DELIVERY NODE</h2>
+</div>
+<span class="font-spec-code-sm text-spec-code-sm text-tertiary-fixed bg-tertiary-fixed/10 px-space-xs py-0.5 rounded uppercase">Metro Cairo Validated</span>
+</div>
+<!-- Saved Hub Selector -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-spec-code-sm text-spec-code-sm text-on-surface-variant uppercase tracking-wider">Designated Drop Location / Cairo Hub Address</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- Address 1: Selected -->
+<div class="bg-surface-container-high p-space-md rounded-lg flex flex-col justify-between cursor-pointer relative shadow-sm hover:bg-surface-bright transition-all">
+<div class="absolute top-2 right-2 flex items-center">
+<span class="material-symbols-outlined text-primary-container text-[18px]">check_circle</span>
+</div>
+<div>
+<div class="flex items-center gap-1 mb-1">
+<span class="font-spec-code-sm text-spec-code-sm font-bold text-on-surface">NASR CITY OUTPOST</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Makram Ebeid Tech Complex, Gate 3, Suite 402, Cairo</p>
+</div>
+<div class="mt-space-sm flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary-container font-semibold uppercase">DEFAULT STATION</span>
+<span class="font-spec-code-sm text-spec-code-sm text-outline">PIN: 11765</span>
+</div>
+</div>
+<!-- Address 2 -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between cursor-pointer hover:bg-surface-container-high transition-all">
+<div>
+<div class="flex items-center gap-1 mb-1">
+<span class="font-spec-code-sm text-spec-code-sm font-bold text-on-surface">NEW CAIRO 5TH SETTLEMENT</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Villa 42, South Choueifat, Sector 1, New Cairo</p>
+</div>
+<div class="mt-space-sm flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase">SECONDARY RESIDENCE</span>
+<span class="font-spec-code-sm text-spec-code-sm text-outline">PIN: 11835</span>
+</div>
+</div>
+<!-- Address 3: Add New -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container transition-all min-h-[110px]">
+<span class="material-symbols-outlined text-primary-container text-[26px] mb-1">add_location_alt</span>
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold">+ ADD CAIRO / GIZA ADDRESS</span>
+<span class="font-label-sm text-label-sm text-outline mt-0.5">Zamalek, Maadi, Sheikh Zayed...</span>
+</div>
+</div>
+</div>
+<!-- Dispatch Speed Selector -->
+<div class="flex flex-col gap-space-xs mt-space-xs">
+<label class="font-spec-code-sm text-spec-code-sm text-on-surface-variant uppercase tracking-wider">Select Dispatch Velocity</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- Express Dispatch (SELECTED) -->
+<div class="bg-surface-container-high p-space-md rounded-lg flex flex-col justify-between shadow-md relative overflow-hidden">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-spec-code-sm text-spec-code-sm bg-primary-container text-on-primary-fixed px-space-xs py-0.5 rounded font-bold uppercase">HOT DISPATCH</span>
+<span class="material-symbols-outlined text-primary-container text-[18px]">radio_button_checked</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">CAIRO &amp; GIZA EXPRESS</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Guaranteed courier dispatch within 3 Hours across Ring Road.</p>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-baseline justify-between">
+<span class="font-spec-code-md text-spec-code-md font-bold text-primary-container">FREE</span>
+<span class="font-label-sm text-label-sm text-outline line-through">150 EGP</span>
+</div>
+</div>
+<!-- Standard Metro -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface-variant uppercase">NEXT-DAY</span>
+<span class="material-symbols-outlined text-outline text-[18px]">radio_button_unchecked</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">STANDARD METRO</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Next-day parcel van delivery to residential or commercial hubs.</p>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-baseline justify-between">
+<span class="font-spec-code-md text-spec-code-md font-bold text-on-surface">75 EGP</span>
+<span class="font-label-sm text-label-sm text-outline">Within 24 Hours</span>
+</div>
+</div>
+<!-- Self-Pickup -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-spec-code-sm text-spec-code-sm text-tertiary-fixed uppercase font-semibold">ZERO WAIT</span>
+<span class="material-symbols-outlined text-outline text-[18px]">radio_button_unchecked</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">SELF-PICKUP LAB</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Collect at Nasr City Tech Outpost &amp; Stress Bench Lab directly.</p>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-baseline justify-between">
+<span class="font-spec-code-md text-spec-code-md font-bold text-tertiary-fixed">FREE (0 EGP)</span>
+<span class="font-label-sm text-label-sm text-outline">Ready in 45 Mins</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recipient Contact Terminal -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col md:flex-row items-center gap-space-md mt-space-xs">
+<div class="flex-1 w-full">
+<label class="font-spec-code-sm text-spec-code-sm text-on-surface-variant uppercase tracking-wider block mb-1">Egyptian Mobile Telemetry Link (Courier Coordination)</label>
+<div class="flex items-center bg-surface-container rounded px-space-sm py-1.5 focus-within:bg-surface-container-high">
+<span class="font-spec-code-md text-spec-code-md text-primary-container font-bold mr-space-sm">+20</span>
+<input class="w-full bg-transparent font-spec-code-md text-spec-code-md text-on-surface placeholder:text-outline focus:outline-none" placeholder="102 489 9120" type="tel" value="100 849 2039"/>
+<span class="material-symbols-outlined text-tertiary-fixed text-[18px] ml-space-xs">check_circle</span>
+</div>
+</div>
+<div class="w-full md:w-auto flex items-center gap-space-sm pt-2 md:pt-4">
+<input checked="" class="accent-primary-container w-4 h-4 cursor-pointer" id="sms-telemetry" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface cursor-pointer select-none" for="sms-telemetry">
+                Send sub-second WhatsApp &amp; SMS telemetry updates with live courier GPS coordinates
+              </label>
+</div>
+</div>
+</div>
+<!-- STEP 2: PAYMENT RAIL & VERIFICATION TERMINAL -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary-fixed text-[24px]">account_balance_wallet</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">STEP 2: LOCALIZED PAYMENT RAIL TERMINAL</h2>
+</div>
+<span class="font-spec-code-sm text-spec-code-sm text-secondary-fixed bg-secondary-container/20 px-space-xs py-0.5 rounded uppercase">Instant Clearance Rails</span>
+</div>
+<!-- Payment Tabs Header -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-xs bg-surface-container-lowest p-1 rounded-lg">
+<button class="bg-surface-container-high text-primary-container py-space-sm px-space-xs rounded font-spec-code-sm text-spec-code-sm font-bold flex items-center justify-center gap-1 shadow-sm" id="tab-btn-instapay">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>1. INSTAPAY EGYPT</span>
+</button>
+<button class="bg-transparent text-on-surface-variant hover:text-on-surface py-space-sm px-space-xs rounded font-spec-code-sm text-spec-code-sm font-semibold flex items-center justify-center gap-1 transition-colors" id="tab-btn-vodafone">
+<span class="material-symbols-outlined text-[16px]">phone_iphone</span>
+<span>2. VODAFONE CASH</span>
+</button>
+<button class="bg-transparent text-on-surface-variant hover:text-on-surface py-space-sm px-space-xs rounded font-spec-code-sm text-spec-code-sm font-semibold flex items-center justify-center gap-1 transition-colors" id="tab-btn-valu">
+<span class="material-symbols-outlined text-[16px]">percent</span>
+<span>3. VALU 0% PROMO</span>
+</button>
+<button class="bg-transparent text-on-surface-variant hover:text-on-surface py-space-sm px-space-xs rounded font-spec-code-sm text-spec-code-sm font-semibold flex items-center justify-center gap-1 transition-colors" id="tab-btn-card">
+<span class="material-symbols-outlined text-[16px]">credit_card</span>
+<span>4. VISA / MASTERCARD</span>
+</button>
+</div>
+<!-- TAB CONTENT 1: INSTAPAY (ACTIVE) -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col md:flex-row gap-space-lg items-center" id="tab-content-instapay">
+<!-- QR Code Matrix Box -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col items-center justify-center shrink-0 w-full md:w-56 text-center">
+<!-- Inline SVG QR Code Visual -->
+<div class="w-36 h-36 bg-surface-container-high p-2 rounded-lg flex items-center justify-center shadow-inner">
+<svg class="w-full h-full text-primary-container" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<!-- QR Finder Pattern Top-Left -->
+<rect fill="currentColor" height="24" width="24" x="4" y="4"></rect>
+<rect fill="#060e20" height="16" width="16" x="8" y="8"></rect>
+<rect fill="currentColor" height="8" width="8" x="12" y="12"></rect>
+<!-- QR Finder Pattern Top-Right -->
+<rect fill="currentColor" height="24" width="24" x="72" y="4"></rect>
+<rect fill="#060e20" height="16" width="16" x="76" y="8"></rect>
+<rect fill="currentColor" height="8" width="8" x="80" y="12"></rect>
+<!-- QR Finder Pattern Bottom-Left -->
+<rect fill="currentColor" height="24" width="24" x="4" y="72"></rect>
+<rect fill="#060e20" height="16" width="16" x="8" y="76"></rect>
+<rect fill="currentColor" height="8" width="8" x="12" y="80"></rect>
+<!-- Data Modules Matrix -->
+<rect fill="currentColor" height="4" width="4" x="32" y="8"></rect>
+<rect fill="currentColor" height="4" width="4" x="40" y="8"></rect>
+<rect fill="currentColor" height="4" width="4" x="48" y="8"></rect>
+<rect fill="currentColor" height="4" width="4" x="60" y="8"></rect>
+<rect fill="currentColor" height="4" width="4" x="32" y="16"></rect>
+<rect fill="currentColor" height="4" width="4" x="44" y="16"></rect>
+<rect fill="currentColor" height="4" width="4" x="52" y="16"></rect>
+<rect fill="currentColor" height="4" width="4" x="36" y="24"></rect>
+<rect fill="currentColor" height="4" width="4" x="64" y="24"></rect>
+<rect fill="currentColor" height="4" width="4" x="8" y="36"></rect>
+<rect fill="currentColor" height="4" width="4" x="16" y="36"></rect>
+<rect fill="currentColor" height="4" width="4" x="24" y="40"></rect>
+<rect fill="currentColor" height="4" width="4" x="32" y="36"></rect>
+<rect fill="currentColor" height="4" width="4" x="40" y="44"></rect>
+<rect fill="currentColor" height="4" width="4" x="48" y="36"></rect>
+<rect fill="currentColor" height="4" width="4" x="56" y="40"></rect>
+<rect fill="currentColor" height="4" width="4" x="68" y="36"></rect>
+<rect fill="currentColor" height="4" width="4" x="76" y="44"></rect>
+<rect fill="currentColor" height="4" width="4" x="88" y="36"></rect>
+<rect fill="currentColor" height="4" width="4" x="8" y="48"></rect>
+<rect fill="currentColor" height="4" width="4" x="20" y="48"></rect>
+<rect fill="currentColor" height="4" width="4" x="28" y="52"></rect>
+<rect fill="currentColor" height="4" width="4" x="44" y="52"></rect>
+<rect fill="currentColor" height="4" width="4" x="60" y="48"></rect>
+<rect fill="currentColor" height="4" width="4" x="72" y="52"></rect>
+<rect fill="currentColor" height="4" width="4" x="84" y="48"></rect>
+<rect fill="currentColor" height="4" width="4" x="32" y="68"></rect>
+<rect fill="currentColor" height="4" width="4" x="40" y="68"></rect>
+<rect fill="currentColor" height="4" width="4" x="48" y="68"></rect>
+<rect fill="currentColor" height="4" width="4" x="56" y="68"></rect>
+<rect fill="currentColor" height="4" width="4" x="68" y="68"></rect>
+<rect fill="currentColor" height="4" width="4" x="80" y="68"></rect>
+<rect fill="currentColor" height="4" width="4" x="36" y="76"></rect>
+<rect fill="currentColor" height="4" width="4" x="48" y="76"></rect>
+<rect fill="currentColor" height="4" width="4" x="60" y="76"></rect>
+<rect fill="currentColor" height="4" width="4" x="72" y="76"></rect>
+<rect fill="currentColor" height="4" width="4" x="84" y="84"></rect>
+<rect fill="currentColor" height="4" width="4" x="40" y="88"></rect>
+<rect fill="currentColor" height="4" width="4" x="52" y="88"></rect>
+<rect fill="currentColor" height="4" width="4" x="64" y="88"></rect>
+<rect fill="currentColor" height="4" width="4" x="88" y="88"></rect>
+</svg>
+</div>
+<span class="font-spec-code-sm text-spec-code-sm text-tertiary-fixed font-bold mt-2">SCAN VIA INSTAPAY APP</span>
+<span class="font-label-sm text-label-sm text-outline">Central Bank of Egypt Clearing</span>
+</div>
+<!-- InstaPay Routing Telemetry -->
+<div class="flex-1 flex flex-col gap-space-sm w-full">
+<div class="bg-surface-container-high p-space-sm rounded-lg flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase block">Official InstaPay Address (IPA)</span>
+<span class="font-spec-code-lg text-spec-code-lg text-primary-container font-bold" id="ipa-address">y0market@instapay</span>
+</div>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface px-space-md py-1 rounded font-spec-code-sm text-spec-code-sm flex items-center gap-1 transition-all" onclick="navigator.clipboard.writeText('y0market@instapay')">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>COPY</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div>
+<label class="font-spec-code-sm text-spec-code-sm text-on-surface-variant block mb-1">Bank Reference Code / Reference Number</label>
+<input class="w-full bg-surface-container-lowest px-space-md py-space-sm rounded font-spec-code-md text-spec-code-md text-on-surface placeholder:text-outline focus:outline-none" placeholder="e.g. 9812408129"/>
+</div>
+<div>
+<label class="font-spec-code-sm text-spec-code-sm text-on-surface-variant block mb-1">Transfer Amount Confirmed (EGP)</label>
+<input class="w-full bg-surface-container-lowest px-space-md py-space-sm rounded font-spec-code-md text-spec-code-md text-tertiary-fixed font-bold focus:outline-none" readonly="" value="158,249 EGP"/>
+</div>
+</div>
+<!-- Upload Receipt Dropzone -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-primary-container/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container text-[22px]">cloud_upload</span>
+</div>
+<div>
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold block">ATTACH INSTAPAY SCREENSHOT RECEIPT</span>
+<span class="font-body-sm text-body-sm text-outline">PNG, JPG, PDF up to 10MB for instant automated reconciliation</span>
+</div>
+</div>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-primary-container font-label-md text-label-md px-space-md py-1.5 rounded transition-all font-bold shrink-0">
+                  BROWSE FILE
+                </button>
+</div>
+</div>
+</div>
+<!-- Secondary Payment Rail Notes -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-wrap items-center justify-between gap-space-xs font-spec-code-sm text-spec-code-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary-fixed text-[16px]">lock</span>
+<span>Zero transaction fees applied on Egyptian domestic payment rails.</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-secondary-fixed">ValU ID: 882109</span>
+<span class="text-outline">|</span>
+<span class="text-primary-container">Vodafone Cash Hub: 0102-Y0-WALLET</span>
+</div>
+</div>
+</div>
+<!-- STEP 3: ORDER TELEMETRY & VAT BREAKDOWN -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary-fixed text-[24px]">receipt_long</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">STEP 3: ORDER TELEMETRY &amp; TAX CLEARANCE</h2>
+</div>
+<span class="font-spec-code-sm text-spec-code-sm text-tertiary-fixed bg-tertiary-fixed/10 px-space-xs py-0.5 rounded uppercase">E-Tax Authority Direct Sync</span>
+</div>
+<!-- Itemized Spec Breakdown Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-spec-code-sm text-spec-code-sm">
+<thead>
+<tr class="bg-surface-container-lowest text-outline font-label-sm text-label-sm uppercase">
+<th class="py-space-xs px-space-md">Hardware Part / SKU</th>
+<th class="py-space-xs px-space-sm">Spec Matrix</th>
+<th class="py-space-xs px-space-sm text-center">Qty</th>
+<th class="py-space-xs px-space-sm text-right">Tax Base</th>
+<th class="py-space-xs px-space-md text-right">Unit Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent">
+<tr class="bg-surface-container">
+<td class="py-space-sm px-space-md font-bold text-on-surface">
+                    ASUS ROG Strix GeForce RTX 4090 OC 24GB
+                    <span class="block text-outline font-normal">SKU: ROG-STRIX-RTX4090-O24G // S/N ALLOCATED</span>
+</td>
+<td class="py-space-sm px-space-sm text-on-surface-variant">2640 MHz / 24GB GDDR6X / 450W TDP</td>
+<td class="py-space-sm px-space-sm text-center text-primary-container font-bold">1</td>
+<td class="py-space-sm px-space-sm text-right text-on-surface-variant">100,876 EGP</td>
+<td class="py-space-sm px-space-md text-right font-bold text-on-surface">114,999 EGP</td>
+</tr>
+<tr class="bg-surface-container-high">
+<td class="py-space-sm px-space-md font-bold text-on-surface">
+                    Intel Core i9-14900K Processor (Tray Spec)
+                    <span class="block text-outline font-normal">SKU: BX8071514900K // SP RATING: 104</span>
+</td>
+<td class="py-space-sm px-space-sm text-on-surface-variant">24C / 32T / 6.0 GHz / LGA1700</td>
+<td class="py-space-sm px-space-sm text-center text-primary-container font-bold">1</td>
+<td class="py-space-sm px-space-sm text-right text-on-surface-variant">24,956 EGP</td>
+<td class="py-space-sm px-space-md text-right font-bold text-on-surface">28,450 EGP</td>
+</tr>
+<tr class="bg-surface-container">
+<td class="py-space-sm px-space-md font-bold text-on-surface">
+                    Corsair Dominator Titanium RGB 64GB DDR5
+                    <span class="block text-outline font-normal">SKU: CMP64GX5M2B6000C30 // EXPO &amp; XMP</span>
+</td>
+<td class="py-space-sm px-space-sm text-on-surface-variant">2x32GB / 6000MT/s / CL30-36-36</td>
+<td class="py-space-sm px-space-sm text-center text-primary-container font-bold">1</td>
+<td class="py-space-sm px-space-sm text-right text-on-surface-variant">12,982 EGP</td>
+<td class="py-space-sm px-space-md text-right font-bold text-on-surface">14,800 EGP</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Cairo RMA & Warranty Policy Checkbox -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex items-start gap-space-sm">
+<input checked="" class="accent-primary-container w-4 h-4 mt-0.5 cursor-pointer" id="warranty-rma" type="checkbox"/>
+<div class="flex-1">
+<label class="font-body-sm text-body-sm text-on-surface cursor-pointer select-none font-semibold block" for="warranty-rma">
+                Activate Cairo Immediate 48-Hour Swapped Hardware RMA Warranty
+              </label>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Full hardware serial registration with authorized Egyptian agents (Badr Group / Metra / Gamma). Direct replacement on-site in Nasr City Lab in case of thermal or silicon degradation.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= RIGHT COLUMN: QUICK CART & RESERVATION HUD (35%) ================= -->
+<div class="w-full lg:w-[35%] flex flex-col gap-space-md min-w-0 sticky top-32">
+<!-- RESERVATION LOCK TIMER HUD -->
+<div class="bg-surface-container-high rounded-xl p-space-md shadow-xl overflow-hidden relative">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[20px] animate-pulse">lock_clock</span>
+<span class="font-spec-code-sm text-spec-code-sm text-error font-bold uppercase tracking-wider">SILICON LOCK EXPIRING</span>
+</div>
+<span class="font-spec-code-lg text-spec-code-lg font-bold text-error" id="lock-countdown">14:48</span>
+</div>
+<!-- Animated Progress Rail -->
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden mb-space-xs">
+<div class="bg-primary-container h-full rounded-full transition-all duration-1000" id="progress-bar-fill" style="width: 74%;"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary-fixed text-[16px]">pin_drop</span>
+<span>Allocated at Cairo Central Hub. Silicon dies held for this checkout session.</span>
+</p>
+</div>
+<!-- ALLOCATED HARDWARE ITEMS LIST -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface-variant uppercase tracking-wider">Allocated Inventory (3 Items)</span>
+<span class="font-label-sm text-label-sm text-primary-container font-semibold">EDIT SELECTION</span>
+</div>
+<!-- Item 1: GPU -->
+<div class="bg-surface-container p-space-sm rounded-lg flex items-center gap-space-sm hover:bg-surface-container-high transition-colors">
+<div class="w-16 h-16 rounded bg-surface-container-lowest shrink-0 overflow-hidden relative flex items-center justify-center p-1">
+<img alt="ASUS ROG Strix RTX 4090 OC" class="object-cover w-full h-full rounded" data-alt="High-end ASUS ROG Strix GeForce RTX 4090 OC graphics card studio photograph, massive triple-axial fans, gunmetal alloy chassis, illuminated cyan and violet addressable RGB edges, sharp macro depth of field on dark slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-eBM03M9HdV_Z4wdYgILzzIE7vdP6Hr2X_FNmjTi3_eryDLN9dooMoqLvoUV-L3R-Mtg0QX9KnIzw_7lx5V33_NUL5U5-gcaBvGqeTVhYWBtzLYecuR2wjT5jvUrzNuDSCdF042cr9UITr5khk1cHCdTtdYvJuj2mC3uKEI5OO-mqxT296Ufcw-HflZzODf0jR5yraq8dSHMBvsrLsuXZg1-dxZn3ucfYhO9xkiE"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold truncate">ASUS ROG Strix RTX 4090 OC</h4>
+<span class="font-label-sm text-label-sm text-outline block">24GB GDDR6X // PCIe 4.0</span>
+<div class="flex items-center justify-between mt-1">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface-variant">Qty: 1</span>
+<span class="font-spec-code-md text-spec-code-md text-primary-container font-bold">114,999 EGP</span>
+</div>
+</div>
+</div>
+<!-- Item 2: CPU -->
+<div class="bg-surface-container p-space-sm rounded-lg flex items-center gap-space-sm hover:bg-surface-container-high transition-colors">
+<div class="w-16 h-16 rounded bg-surface-container-lowest shrink-0 overflow-hidden relative flex items-center justify-center p-1">
+<img alt="Intel Core i9-14900K Processor" class="object-cover w-full h-full rounded" data-alt="Intel Core i9-14900K flagship desktop processor silicon die seated on gold contact pins, metallic integrated heat spreader with precision laser etched typography, dramatic rim lighting in cyan and neon purple accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6Pq4P6C069L6xo8sh6mZOTkqEWOM8ul2K4WcUWtINOrfHRFTPKj1hP0nMUJ_MG0gCraB3zaiTKhh0rqxvT4a59htPNnnJiWTsvZgQJyLMRSJGd2VTlrpb17sUnzQM-X7f3EM23SMAQKaolHM18U0R9sQzFPYilzbZSNDOBZ7ZPNwYcMxEsU_iTfPDkOCMocM06JIi1pQ1vTD5c-UL_Lq-FVQvLs-bRi1afy2TFU8"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold truncate">Intel Core i9-14900K Tray</h4>
+<span class="font-label-sm text-label-sm text-outline block">24-Core 6.0 GHz // LGA1700</span>
+<div class="flex items-center justify-between mt-1">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface-variant">Qty: 1</span>
+<span class="font-spec-code-md text-spec-code-md text-primary-container font-bold">28,450 EGP</span>
+</div>
+</div>
+</div>
+<!-- Item 3: RAM -->
+<div class="bg-surface-container p-space-sm rounded-lg flex items-center gap-space-sm hover:bg-surface-container-high transition-colors">
+<div class="w-16 h-16 rounded bg-surface-container-lowest shrink-0 overflow-hidden relative flex items-center justify-center p-1">
+<img alt="Corsair Dominator Titanium DDR5" class="object-cover w-full h-full rounded" data-alt="Corsair Dominator Titanium 64GB DDR5 memory modules dual kit, anodized black aluminum heatspreaders with clean cyber aesthetic, diffused top RGB light bar glowing softly in cyan, dark technical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlQJeS8Z8tBH67fwWvt8kmKi9_7CNPBS9dZ0qAFV8vE0UFhG77uWv8xOEo-cAnlKejXPysn9-5NV57sTZv_8AwCtSXYfkG1-6YXS9BSYlhtHI5BpDonCP8v3ecp7j3XjRxlmaDrjC33rGiUnq6xiLc_Oe9X48ccdrH_nKpxCUwRF6Ts59GBySc9d2N2Yme-lY48DFXYNfX3DudPh6CWIx34ZjIDe-9_sgpq-o6268"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold truncate">Corsair Dominator 64GB DDR5</h4>
+<span class="font-label-sm text-label-sm text-outline block">6000MT/s CL30 // 2x32GB Kit</span>
+<div class="flex items-center justify-between mt-1">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface-variant">Qty: 1</span>
+<span class="font-spec-code-md text-spec-code-md text-primary-container font-bold">14,800 EGP</span>
+</div>
+</div>
+</div>
+<!-- Free Shipping Threshold Achievement -->
+<div class="bg-surface-container-highest p-space-sm rounded-lg flex flex-col gap-1 mt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-spec-code-sm text-spec-code-sm text-tertiary-fixed font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>FREE CAIRO EXPRESS UNLOCKED</span>
+</span>
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface font-semibold">100%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-fixed h-full w-full rounded-full"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Orders above 10,000 EGP qualify for free immediate express delivery.</span>
+</div>
+</div>
+<!-- FINANCIAL LEDGER & TAX CALCULATION -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface-variant uppercase tracking-wider">Financial Clearance Ledger</span>
+<span class="font-label-sm text-label-sm text-outline">EGP CURRENCY</span>
+</div>
+<div class="space-y-space-xs font-spec-code-sm text-spec-code-sm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span>Gross Component Base</span>
+<span class="text-on-surface">138,814.91 EGP</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span>Egyptian Value Added Tax (14% VAT)</span>
+<span class="text-on-surface">19,434.09 EGP</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span>Cairo &amp; Giza 3-Hour Express Courier</span>
+<span class="text-tertiary-fixed font-semibold">FREE (0 EGP)</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span>Hardware Telemetry &amp; Stress Pass</span>
+<span class="text-tertiary-fixed font-semibold">INCLUDED</span>
+</div>
+</div>
+<div class="h-0.5 bg-surface-container-highest my-space-xs"></div>
+<!-- Total Due Row -->
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">TOTAL CLEARANCE</span>
+<span class="block font-label-sm text-label-sm text-outline uppercase">TAX INVOICE ATTACHED</span>
+</div>
+<div class="text-right">
+<span class="font-headline-lg text-headline-lg text-primary-container font-extrabold tracking-tight">158,249</span>
+<span class="font-spec-code-md text-spec-code-md text-primary-container font-bold ml-1">EGP</span>
+</div>
+</div>
+<!-- High-Impact CTA Button -->
+<button class="w-full bg-primary-container hover:bg-surface-tint text-on-primary-fixed py-space-md px-space-lg rounded font-label-md text-label-md font-bold uppercase tracking-wider flex items-center justify-center gap-space-sm shadow-xl transition-all active:scale-[0.98] mt-space-xs group">
+<span class="material-symbols-outlined text-[20px] text-on-primary-fixed group-hover:rotate-12 transition-transform">bolt</span>
+<span>EXECUTE ORDER &amp; LOCK SILICON [⚡ INSTANT AUTHORIZATION]</span>
+</button>
+<!-- Security Rail Badges -->
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs text-center">
+<div class="bg-surface-container p-space-xs rounded flex flex-col items-center">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed mb-0.5">security</span>
+<span class="font-spec-code-sm text-[10px] text-on-surface-variant">256-Bit SSL Safe</span>
+</div>
+<div class="bg-surface-container p-space-xs rounded flex flex-col items-center">
+<span class="material-symbols-outlined text-[18px] text-primary-container mb-0.5">autorenew</span>
+<span class="font-spec-code-sm text-[10px] text-on-surface-variant">48H Cairo RMA</span>
+</div>
+<div class="bg-surface-container p-space-xs rounded flex flex-col items-center">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed mb-0.5">verified_user</span>
+<span class="font-spec-code-sm text-[10px] text-on-surface-variant">Authorized Agent</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Client-side Script for Timer & Tabs -->
+<script>
+    // Countdown Timer Logic
+    (function initTimer() {
+      let secondsRemaining = 14 * 60 + 48;
+      const timerDisplay = document.getElementById('lock-countdown');
+      const progressBar = document.getElementById('progress-bar-fill');
+      const totalSeconds = 20 * 60; // 20 min reference
+
+      if (!timerDisplay || !progressBar) return;
+
+      const interval = setInterval(() => {
+        if (secondsRemaining <= 0) {
+          clearInterval(interval);
+          timerDisplay.innerText = "00:00";
+          progressBar.style.width = "0%";
+          return;
+        }
+        secondsRemaining--;
+        const mins = Math.floor(secondsRemaining / 60);
+        const secs = secondsRemaining % 60;
+        timerDisplay.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        const pct = Math.max(0, (secondsRemaining / totalSeconds) * 100);
+        progressBar.style.width = `${pct}%`;
+      }, 1000);
+    })();
+
+    // Tab Interactive Toggling Demo
+    (function initTabs() {
+      const tabs = [
+        { id: 'tab-btn-instapay', label: '1. INSTAPAY EGYPT' },
+        { id: 'tab-btn-vodafone', label: '2. VODAFONE CASH' },
+        { id: 'tab-btn-valu', label: '3. VALU 0% PROMO' },
+        { id: 'tab-btn-card', label: '4. VISA / MASTERCARD' }
+      ];
+
+      tabs.forEach(tab => {
+        const btn = document.getElementById(tab.id);
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+          tabs.forEach(t => {
+            const otherBtn = document.getElementById(t.id);
+            if (otherBtn) {
+              otherBtn.className = "bg-transparent text-on-surface-variant hover:text-on-surface py-space-sm px-space-xs rounded font-spec-code-sm text-spec-code-sm font-semibold flex items-center justify-center gap-1 transition-colors";
+            }
+          });
+          btn.className = "bg-surface-container-high text-primary-container py-space-sm px-space-xs rounded font-spec-code-sm text-spec-code-sm font-bold flex items-center justify-center gap-1 shadow-sm";
+        });
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest mt-space-xl pt-space-xl pb-space-lg shadow-[0_-1px_12px_rgba(0,0,0,0.5)]"><div class="w-full max-w-[1600px] mx-auto px-margin-desktop"><div class="mb-space-xl bg-surface-container-low p-space-lg rounded-xl flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center"><span class="material-symbols-outlined text-primary-container text-[28px]">notifications_active</span></div><div><h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">HARDWARE TELEMETRY &amp; DROP RADAR</h4><p class="font-body-sm text-body-sm text-on-surface-variant">Sub-second latency alerts for flagship GPU drops, AMD X3D inventory, and enterprise rigs across Greater Cairo.</p></div></div><div class="flex w-full md:w-auto items-center gap-space-sm"><input class="bg-surface-container-highest px-space-md py-space-sm rounded font-spec-code-sm text-spec-code-sm text-on-surface placeholder:text-outline focus:outline-none min-w-[280px]" placeholder="architect@enthusiast-station.eg" type="email"/><button class="bg-primary-container hover:bg-surface-tint text-on-primary-fixed font-label-md text-label-md px-space-lg py-space-sm rounded font-bold transition-all shadow-[0_0_16px_rgba(0,242,254,0.3)]">DEPLOY ALERTS</button></div></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl mb-space-xl"><div><div class="flex items-center gap-space-sm mb-space-md"><span class="material-symbols-outlined text-primary-container text-[20px]">developer_board</span><h5 class="font-label-md text-label-md text-on-surface tracking-wider uppercase font-bold">Silicon &amp; Components</h5></div><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-primary-container transition-colors" href="#">NVIDIA GeForce RTX 50 &amp; 40 Series</a></li><li><a class="hover:text-primary-container transition-colors" href="#">AMD Radeon RX Accelerators</a></li><li><a class="hover:text-primary-container transition-colors" href="#">Intel Core Ultra &amp; 14th Gen</a></li><li><a class="hover:text-primary-container transition-colors" href="#">AMD Ryzen 7000 / 9000 X3D</a></li><li><a class="hover:text-primary-container transition-colors" href="#">High-Frequency DDR5 Overclock Kits</a></li><li><a class="hover:text-primary-container transition-colors" href="#">PCIe Gen 5 NVMe SSDs</a></li></ul></div><div><div class="flex items-center gap-space-sm mb-space-md"><span class="material-symbols-outlined text-secondary-fixed text-[20px]">build_circle</span><h5 class="font-label-md text-label-md text-on-surface tracking-wider uppercase font-bold">Enthusiast Services</h5></div><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-secondary-fixed transition-colors" href="#">Custom Hard-Line Loop Engineering</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">24-Hour Stress &amp; Thermal Burn-In</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">Sub-Zero Delid Tuning Studio</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">Corporate AI &amp; Render Cluster Setup</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">B2B Wholesale Invoicing (Tax ID)</a></li></ul></div><div><div class="flex items-center gap-space-sm mb-space-md"><span class="material-symbols-outlined text-tertiary-fixed text-[20px]">pin_drop</span><h5 class="font-label-md text-label-md text-on-surface tracking-wider uppercase font-bold">Support &amp; Cairo Hubs</h5></div><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li class="text-on-surface font-semibold">Nasr City Express Outpost</li><li class="text-outline font-spec-code-sm text-spec-code-sm">Makram Ebeid Tech Complex, Gate 3</li><li class="text-on-surface font-semibold pt-space-xs">New Cairo Hub &amp; Bench Lab</li><li class="text-outline font-spec-code-sm text-spec-code-sm">North 90th St, Golden Square Silicon Bay</li><li class="pt-space-xs"><a class="text-primary-container font-spec-code-sm text-spec-code-sm hover:underline" href="#">Telemetry Support: +20 (2) 2790-Y000</a></li></ul></div><div><div class="flex items-center gap-space-sm mb-space-md"><span class="material-symbols-outlined text-outline text-[20px]">verified_user</span><h5 class="font-label-md text-label-md text-on-surface tracking-wider uppercase font-bold">Verified Payment Rails</h5></div><p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Instant Cairo clearing with hardware serial token verification.</p><div class="grid grid-cols-2 gap-space-xs font-spec-code-sm text-spec-code-sm text-on-surface"><div class="bg-surface-container-high p-space-xs rounded flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed">bolt</span>InstaPay Egypt</div><div class="bg-surface-container-high p-space-xs rounded flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-error">phone_android</span>Vodafone Cash</div><div class="bg-surface-container-high p-space-xs rounded flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-primary-container">credit_card</span>Visa / MC</div><div class="bg-surface-container-high p-space-xs rounded flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-secondary-fixed">percent</span>ValU 0% Promo</div></div><div class="mt-space-md p-space-xs rounded bg-surface-container-low"><span class="font-label-sm text-label-sm text-outline">OFFICIAL WARRANTY: 3-Year Authorized Distributor Coverage on Silicon.</span></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="font-spec-code-sm text-spec-code-sm text-outline text-center md:text-left"><span>© 2025 Y0 Hardware Market Inc. All rights reserved. High-Performance Computing &amp; Gaming Rig Outpost.</span></div><div class="font-spec-code-md text-spec-code-md text-outline font-semibold tracking-wide text-center md:text-right"><span class="text-on-surface-variant">Designed &amp; Powered by </span><a class="text-primary-container hover:text-surface-tint underline decoration-primary-container/40 underline-offset-4 hover:shadow-[0_0_8px_rgba(0,242,254,0.4)] transition-all font-bold" href="https://y0ussef.com" target="_blank">Y0ussef.com</a></div></div></div></footer></body></html>

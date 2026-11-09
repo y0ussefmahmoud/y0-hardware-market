@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-tint": "#00dce6", "on-secondary-fixed": "#25005a", "secondary-fixed-dim": "#d2bbff", "outline": "#849495", "on-primary-container": "#006a70", "surface-container": "#171f33", "on-primary-fixed": "#002022", "on-surface-variant": "#b9cacb", "primary-container": "#00f2fe", "surface-dim": "#0b1326", "on-error": "#690005", "secondary-fixed": "#eaddff", "secondary": "#d2bbff", "surface-container-low": "#131b2e", "on-error-container": "#ffdad6", "tertiary": "#e1ffec", "on-background": "#dae2fd", "on-tertiary": "#003824", "background": "#0b1326", "inverse-on-surface": "#283044", "surface-container-highest": "#2d3449", "surface-bright": "#31394d", "error-container": "#93000a", "surface-container-lowest": "#060e20", "on-secondary": "#3f008e", "on-secondary-fixed-variant": "#5a00c6", "tertiary-fixed": "#6ffbbe", "outline-variant": "#3a494b", "tertiary-fixed-dim": "#4edea3", "on-primary-fixed-variant": "#004f53", "inverse-surface": "#dae2fd", "on-surface": "#dae2fd", "surface-container-high": "#222a3d", "primary": "#e0fdff", "primary-fixed": "#6ff6ff", "secondary-container": "#6001d1", "on-tertiary-fixed-variant": "#005236", "on-secondary-container": "#c9aeff", "error": "#ffb4ab", "on-tertiary-container": "#006e4b", "primary-fixed-dim": "#00dce6", "on-tertiary-fixed": "#002113", "surface-variant": "#2d3449", "on-primary": "#00373a", "surface": "#0b1326", "inverse-primary": "#00696f", "tertiary-container": "#67f4b7" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xs": "0.25rem", "gutter-desktop": "1.5rem", "space-md": "1rem", "margin": "1rem", "gutter": "1rem", "space-xl": "2.5rem", "margin-tablet": "2rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin-desktop": "3rem" }, "fontFamily": { "label-md": [ "JetBrains Mono" ], "headline-md": [ "Inter" ], "body-lg": [ "Inter" ], "spec-code-sm": [ "JetBrains Mono" ], "spec-code-md": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Inter" ], "headline-lg": [ "Inter" ], "headline-lg-mobile": [ "Inter" ], "label-sm": [ "JetBrains Mono" ], "body-md": [ "Inter" ], "spec-code-lg": [ "JetBrains Mono" ], "body-sm": [ "Inter" ], "headline-xl": [ "Inter" ], "headline-sm": [ "Inter" ] }, "fontSize": { "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "26px", "fontWeight": "400" } ], "spec-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "spec-code-md": [ "14px", { "lineHeight": "20px", "fontWeight": "500" } ], "headline-xl-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" } ], "headline-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "label-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "spec-code-lg": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ], "headline-xl": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.025em", "fontWeight": "800" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="h-28 w-full max-w-[1600px] mx-auto px-margin-desktop flex flex-col justify-between py-space-xs"><div class="h-16 flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md shrink-0"><div class="relative flex items-center"><div class="absolute -inset-1 rounded-lg bg-primary-container/20 blur-sm"></div><img alt="Y0 Hardware Market Official Logo" class="relative h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrA7nQqAfzvgqeFPQY5PVKiryRbcnUQ6ycjw4jGl9mkyqS1eS-3O-gDfm-qbfr1JunZRJVAEufknatGrkyCxeB78_DzLdSCP_WE5nfK1AL_6Bd0eAJz9EnhJw51Jvgt4nrdWFoIFBMwwe4Vs7r2LUdmShufZmLexrwxE-DI_AtFGYUaB6c-zNiMAyUOe6bjVd0ntnH4FyxxrJhLvhVAVfL913BT_eRVhBmN23xxJEak"/></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-extrabold tracking-tight">Y0<span class="text-primary-container">.MARKET</span></span><span class="font-label-sm text-label-sm text-outline tracking-widest uppercase">CAIRO COMPUTING NODE</span></div></div><div class="flex-1 max-w-2xl"><div class="relative flex items-center rounded-lg bg-surface-container-low focus-within:ring-1 focus-within:ring-primary-container"><div class="relative"><select class="appearance-none bg-surface-container-high py-space-xs pl-space-md pr-space-lg rounded-l-lg font-spec-code-sm text-spec-code-sm text-on-surface-variant focus:outline-none cursor-pointer"><option>All Hardware</option><option>GPUs</option><option>CPUs</option><option>Motherboards</option><option>RAM</option><option>Storage</option><option>PSU</option><option>Cases</option><option>Cooling</option></select><span class="material-symbols-outlined pointer-events-none absolute right-space-xs top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">expand_more</span></div><div class="relative flex-1 flex items-center"><span class="material-symbols-outlined text-outline ml-space-sm text-[20px]">search</span><input class="w-full bg-transparent py-space-xs px-space-sm font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Search GPUs, Core i9, PCIe Gen 5, DDR5 modules..." type="text"/><div class="mr-space-sm flex items-center gap-1 rounded bg-surface-container-highest px-space-xs py-0.5"><kbd class="font-spec-code-sm text-spec-code-sm text-outline">CTRL</kbd><span class="font-spec-code-sm text-spec-code-sm text-outline">+</span><kbd class="font-spec-code-sm text-spec-code-sm text-outline">K</kbd></div></div></div></div><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-1 rounded"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed">flag</span><span class="font-spec-code-sm text-spec-code-sm text-on-surface">EGP (ج.م)</span><span class="text-outline font-spec-code-sm text-spec-code-sm">|</span><button class="font-spec-code-sm text-spec-code-sm text-on-surface-variant hover:text-on-surface">EN / عربي</button></div><div class="flex items-center gap-space-sm"><button class="relative flex items-center gap-1 bg-surface-container-low hover:bg-surface-container-high px-space-sm py-1.5 rounded transition-all"><span class="material-symbols-outlined text-[18px] text-primary-container">memory</span><span class="font-spec-code-sm text-spec-code-sm text-primary">RIG CONFIG</span><span class="inline-block w-2 h-2 rounded-full bg-primary-container animate-ping"></span></button><button class="relative p-2 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high"><span class="material-symbols-outlined text-[20px]">compare_arrows</span><span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-surface-container-highest font-spec-code-sm text-[9px] text-on-surface">0</span></button><button class="relative p-2 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high"><span class="material-symbols-outlined text-[20px]">favorite</span></button><button class="flex items-center gap-space-sm bg-surface-container-high hover:bg-surface-bright px-space-md py-1.5 rounded transition-colors"><div class="relative"><span class="material-symbols-outlined text-[20px] text-on-surface">shopping_cart</span><span class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary-container font-spec-code-sm text-[10px] font-bold text-on-primary-fixed">3</span></div><div class="flex flex-col text-left"><span class="font-spec-code-sm text-[10px] text-outline uppercase">Cart Total</span><span class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold">84,200 EGP</span></div></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div><div class="h-12 flex items-center justify-between"><nav class="flex items-center gap-space-md" data-active-classes="bg-surface-container-high text-on-surface font-bold rounded"><a class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="catalog" href="#"><span class="material-symbols-outlined text-[18px] text-primary-container">grid_view</span>Browse All Components</a><a aria-current="page" class="transition-colors bg-surface-container-high text-on-surface font-bold rounded" data-path="gpus" href="#">GPUs &amp; Graphics</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="processors" href="#">Processors (Intel / AMD)</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="motherboards" href="#">Motherboards</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="memory-storage" href="#">Memory &amp; Storage</a><a class="flex items-center gap-1 font-label-md text-label-md text-on-primary-fixed bg-primary-container px-space-sm py-1 rounded font-bold transition-all" data-path="pc-builder" href="#"><span class="material-symbols-outlined text-[16px]">tune</span>PC Builder (Rig Configurator)</a><a class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="flash-deals" href="#">Flash Deals &amp; Daily Drops<span class="rounded bg-error-container px-1.5 py-0.2 font-spec-code-sm text-[9px] text-error font-bold tracking-wider animate-pulse">LIVE</span></a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="warranty-cairo-hub" href="#">Warranty &amp; Cairo Hub</a></nav><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed">local_shipping</span><span class="font-spec-code-sm text-spec-code-sm text-on-surface-variant">Express Same-Day Cairo &amp; Giza Dispatch</span></div></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
+<!-- SYSTEM TELEMETRY STRIP / BREADCRUMB -->
+<section class="w-full max-w-[1600px] mx-auto px-margin-desktop py-space-sm flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<nav class="flex items-center flex-wrap gap-space-xs font-spec-code-sm text-spec-code-sm text-outline">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">home</span>
+        HOME
+      </a>
+<span class="text-outline-variant">/</span>
+<a class="hover:text-primary transition-colors" href="#">GPUS &amp; GRAPHICS</a>
+<span class="text-outline-variant">/</span>
+<a class="hover:text-primary transition-colors" href="#">NVIDIA GEFORCE RTX 40 SERIES</a>
+<span class="text-outline-variant">/</span>
+<span class="text-primary-container font-semibold truncate max-w-xs md:max-w-md">ASUS ROG STRIX RTX 4090 OC 24GB</span>
+</nav>
+<div class="flex items-center gap-space-md font-spec-code-sm text-spec-code-sm">
+<div class="flex items-center gap-1.5 text-tertiary-fixed">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-fixed"></span>
+</span>
+        NODE CAI-01: TELEMETRY SYNCED
+      </div>
+<div class="hidden lg:flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+        CAIRO 14:02:18 GMT+3
+      </div>
+</div>
+</section>
+<!-- PRODUCT HERO SHOWCASE (2-COLUMN ENTHUSIAST SPLIT) -->
+<section class="w-full max-w-[1600px] mx-auto px-margin-desktop py-space-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-start">
+<!-- LEFT COLUMN: HARDWARE STAGING & INSPECTION BAY -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- MAIN VIEWPORT CONTAINER -->
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-2xl p-space-md flex flex-col">
+<!-- TOP METADATA ROW -->
+<div class="flex items-center justify-between z-10">
+<div class="flex items-center gap-space-xs">
+<span class="bg-surface-container-highest text-primary-container font-spec-code-sm text-spec-code-sm px-space-sm py-0.5 rounded uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">memory</span>
+                DIE: AD102-300-A1
+              </span>
+<span class="bg-secondary-container/40 text-secondary-fixed font-spec-code-sm text-spec-code-sm px-space-sm py-0.5 rounded tracking-wide">
+                ADA LOVELACE 4N
+              </span>
+</div>
+<!-- INTERACTIVE 360 BADGE -->
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface font-spec-code-sm text-spec-code-sm px-space-sm py-1 rounded flex items-center gap-1.5 transition-all shadow-sm" id="viewer-360-btn">
+<span class="material-symbols-outlined text-[16px] text-primary-container">360</span>
+<span class="tracking-wide">360° INSPECT</span>
+</button>
+</div>
+<!-- PRIMARY COMPONENT STAGING BAY -->
+<div class="relative w-full h-[460px] md:h-[520px] my-space-sm bg-surface-container-lowest rounded-lg flex items-center justify-center overflow-hidden group">
+<!-- BACKGROUND TECHNICAL GRID WATERMARK -->
+<div class="absolute inset-0 opacity-15 pointer-events-none flex items-center justify-center">
+<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="32" id="grid-pattern" patternunits="userSpaceOnUse" width="32">
+<path class="text-primary-container" d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid-pattern)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<!-- TARGET CROSSHAIRS -->
+<div class="absolute top-4 left-4 w-4 h-4 border-l border-t border-primary-container/40 pointer-events-none"></div>
+<div class="absolute top-4 right-4 w-4 h-4 border-r border-t border-primary-container/40 pointer-events-none"></div>
+<div class="absolute bottom-4 left-4 w-4 h-4 border-l border-b border-primary-container/40 pointer-events-none"></div>
+<div class="absolute bottom-4 right-4 w-4 h-4 border-r border-b border-primary-container/40 pointer-events-none"></div>
+<!-- MAIN HARDWARE IMAGE -->
+<img class="w-full h-full object-contain p-space-lg transition-transform duration-500 group-hover:scale-105 select-none" data-alt="High-resolution, front-facing studio photograph of ASUS ROG Strix GeForce RTX 4090 OC Edition graphics card with brushed gunmetal chassis, illuminated Aura Sync RGB rim, three Axial-tech reverse-rotation fans, and vapor chamber cooling fins on an obsidian cybernetic test workbench with electric cyan lighting reflections." id="main-product-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU720bJH-yJjSUN0m8P6mAZVNGkQkflRzu3HAdjqMJF1AM27RxoxMM1eM4a9KoIDph49phc1D6HELbr0h599QT2Pjj5JBaTkDCWq8yAV6rALhKaLTJV20-r6-yuadkdc3NZowJ5Uw2NClyOpP8rTk9Vy-RF1pidbEuzLt2VBGkM8GNQ4_uY1WNcSfMXyJbXJmCAhM3DD1PW0W-q_tSnDkQvdrvs8arfwPPzXDGxIs"/>
+<!-- AMBIENT VOLTAGE GLOW -->
+<div class="absolute -bottom-10 inset-x-1/4 h-24 bg-primary-container/10 blur-2xl rounded-full pointer-events-none"></div>
+<!-- FLOATING MAGNIFYING LOUPE TRIGGER -->
+<div class="absolute bottom-4 right-4 bg-surface-container-low/80 backdrop-blur-md px-space-sm py-1 rounded flex items-center gap-1.5 font-spec-code-sm text-spec-code-sm text-on-surface-variant pointer-events-none">
+<span class="material-symbols-outlined text-[16px] text-primary-container">zoom_in</span>
+<span>100% DIECUT VIEW</span>
+</div>
+</div>
+<!-- ANGLE SELECTOR THUMBNAILS -->
+<div class="grid grid-cols-5 gap-space-sm pt-space-xs">
+<button class="thumbnail-btn active bg-surface-container-high p-space-xs rounded transition-all hover:bg-surface-bright flex flex-col items-center gap-1" onclick="switchAngle(0)">
+<div class="h-16 w-full rounded overflow-hidden bg-surface-container-lowest flex items-center justify-center">
+<img class="h-full w-full object-cover" data-alt="Front view angle of ASUS ROG Strix RTX 4090 showing triple Axial-tech fan setup, geometric fan blades, and dark obsidian aluminum frame under crisp cyan studio lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG-Hjx24DPg6hiN_FQCIXni9xz-WDLZ31wca4PTbjn54AuzeGCTtuuVba2kddEFalxNAWN9ylWtJOiQhGZW3HBTgETE3nrzl2402et8tr7l742CJ3RPOrQcxkaZKiSnm3uDZDonztahXNl2k1OyB8Yy6bWJ3setw_qNdzQ_28VoVsWzapYWwAo2kuCzRISBtEyzwZm-I6HG0QYNAakGnC3lrdE9E2auURTFMdzYKI"/>
+</div>
+<span class="font-spec-code-sm text-[10px] text-primary-container font-semibold truncate">01. FRONTAL</span>
+</button>
+<button class="thumbnail-btn bg-surface-container-low p-space-xs rounded transition-all hover:bg-surface-bright flex flex-col items-center gap-1" onclick="switchAngle(1)">
+<div class="h-16 w-full rounded overflow-hidden bg-surface-container-lowest flex items-center justify-center">
+<img class="h-full w-full object-cover" data-alt="Rear backplate view of ASUS ROG Strix RTX 4090 graphics card with vented flow-through cutout, brushed titanium finish, and ROG logo silkscreen on cyber table." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXwLDAtom53Z9mLcTxtkHsRFZCMiNmW_iqc36_Tg5ZgNQMqAOw_hD_jyeJ_0v4no5Ci8T1lssMYU4QaUy1D60yHF7OKRXXVqV4PxHu_97yQZ_1jdfHPxF--iaZ8qO0Xpx4XEG7cVA1GQJ0pMXoKBqKmQqnY6gVALarpxB-jl2WwMUUpeprJgnNL5Cwbd2GBtVSsfJfTb2RfkkJGoR-fR-FtuGKj2IK8dzbhE1CvP4"/>
+</div>
+<span class="font-spec-code-sm text-[10px] text-outline truncate">02. BACKPLATE</span>
+</button>
+<button class="thumbnail-btn bg-surface-container-low p-space-xs rounded transition-all hover:bg-surface-bright flex flex-col items-center gap-1" onclick="switchAngle(2)">
+<div class="h-16 w-full rounded overflow-hidden bg-surface-container-lowest flex items-center justify-center">
+<img class="h-full w-full object-cover" data-alt="I/O bracket view of ASUS ROG Strix RTX 4090 showcasing dual HDMI 2.1a ports, triple DisplayPort 1.4a outputs, stainless steel 304 bracket with precision air vents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOCGPKVpBwftlWvdSUgVHF3CFejVuhCRcK33OGDVeM4L4RP9GU2DtFjmLVtHnvbwAQzEVEa7ogxIezjKvoDR2237VyJFlKirY3Bn7tvYTS0b5o9uVfcd2AU_cYEUtayaM4Fl5dCycjTPHUv4bwm37HzS1WoSul-GN8JDeWORJ77juunTAtUQdM_kbbg5o0ZABesuxDybkqFAUx5zpnPlkIAJjf0b-A5P-Ucng28_8"/>
+</div>
+<span class="font-spec-code-sm text-[10px] text-outline truncate">03. I/O PORTS</span>
+</button>
+<button class="thumbnail-btn bg-surface-container-low p-space-xs rounded transition-all hover:bg-surface-bright flex flex-col items-center gap-1" onclick="switchAngle(3)">
+<div class="h-16 w-full rounded overflow-hidden bg-surface-container-lowest flex items-center justify-center">
+<img class="h-full w-full object-cover" data-alt="Side profile view of ASUS ROG Strix RTX 4090 featuring illuminated Aura Sync RGB lightbar, reinforced 16-pin 12VHPWR connector port, and massive 3.5 slot vapor chamber fin stack." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjoPAawhwyhE8gvpTZ6T5q_s2J-yntp0vboqX0e9AvZBt8jwf3E7uFM2JzVG0PLuzJXOwwAtIkH1CP2v_LvFUEo27ztPeSt0O9iZdqCqva3-1hL0pokb-mJqvYxKT8igh2Azp7ptn2W9yYr5CEmqlj3DRSsoyvfaE9yxpkCI4vXWlRJm0NBNKSD-ytLZYZLRQjvmNC2Rxg519rwyDQh3eG8yuwQ9S1rj1NEtV5eOI"/>
+</div>
+<span class="font-spec-code-sm text-[10px] text-outline truncate">04. PROFILE</span>
+</button>
+<button class="thumbnail-btn bg-surface-container-low p-space-xs rounded transition-all hover:bg-surface-bright flex flex-col items-center gap-1" onclick="switchAngle(4)">
+<div class="h-16 w-full rounded overflow-hidden bg-surface-container-lowest flex items-center justify-center">
+<img class="h-full w-full object-cover" data-alt="Exploded technical CAD engineering schematic render of ASUS ROG Strix RTX 4090 separating copper vapor chamber, heatpipes, PCB power phases, and die-cast exoskeleton shroud in electric cyan linework." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAB2_svTJpU0-H2njoUJ0DwEB1LWNLP035iqe8_W3MgUonrPP8eQRwVzFOgXuv8RXQsspcp_H2sL7-CNlrsnXaZ3Hm6A7bQA_Ek0PoJnsupxBz1Qoak3Wa8a995Zg24Sr_dClrHmrZbpyJwaAZ6qj2pAyr47bTm7Kp02iIJ4i-tH_CZzCnPjkDOPVMeA2owq8V0cawmuIsvmo9uhtt8RMSa05KIt1cMp4l4KcIkRc"/>
+</div>
+<span class="font-spec-code-sm text-[10px] text-outline truncate">05. SCHEMATIC</span>
+</button>
+</div>
+</div>
+<!-- KEY FEATURE HARDWARE ACCORDION BADGES -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm">
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1 shadow-sm">
+<div class="flex items-center gap-1.5 text-primary-container">
+<span class="material-symbols-outlined text-[18px]">heat_pump</span>
+<span class="font-spec-code-sm text-spec-code-sm font-bold uppercase">Vapor Chamber</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Milled thermal baseplate with sunken heatpipes reducing junction temps by -8.5°C.</p>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1 shadow-sm">
+<div class="flex items-center gap-1.5 text-primary-container">
+<span class="material-symbols-outlined text-[18px]">shield</span>
+<span class="font-spec-code-sm text-spec-code-sm font-bold uppercase">Die-Cast Shroud</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Rigid frame, backplate, and shroud prevent PCB sag and thermal warp.</p>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1 shadow-sm">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+<span class="font-spec-code-sm text-spec-code-sm font-bold uppercase">Aura Sync ARGB</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Full perimeter ARGB illumination with telemetry load thermal-color sync.</p>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1 shadow-sm">
+<div class="flex items-center gap-1.5 text-tertiary-fixed">
+<span class="material-symbols-outlined text-[18px]">toggle_on</span>
+<span class="font-spec-code-sm text-spec-code-sm font-bold uppercase">Dual BIOS Hub</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Hardware slide switch toggles between Overclock 2,640MHz &amp; 0dB Quiet profiles.</p>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: PRICING, LIVE STOCK, TELEMETRY & PURCHASE -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- TITLE, SKU & BENCHMARK HEADER -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between gap-space-sm">
+<span class="bg-surface-container-high text-primary-container font-spec-code-sm text-spec-code-sm px-space-sm py-0.5 rounded font-bold uppercase">
+              TOP TIER ENTHUSIAST
+            </span>
+<div class="flex items-center gap-2">
+<span class="font-spec-code-sm text-spec-code-sm text-outline">SKU: ROG-STRIX-RTX4090-O24G</span>
+<button class="text-on-surface-variant hover:text-primary-container transition-colors" onclick="navigator.clipboard.writeText('ROG-STRIX-RTX4090-O24G-GAMING')" title="Copy SKU">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight leading-tight">
+            ASUS ROG Strix GeForce RTX 4090 OC Edition 24GB GDDR6X
+          </h1>
+<!-- BENCHMARK TELEMETRY + BUILDER REVIEWS -->
+<div class="flex flex-wrap items-center gap-space-md pt-space-xs font-spec-code-sm text-spec-code-sm">
+<div class="flex items-center gap-1 text-tertiary-container font-bold">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.9 / 5.0</span>
+<span class="text-outline font-normal">(128 Verified Rig Builders)</span>
+</div>
+<div class="h-3 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary-container">speed</span>
+<span>Time Spy Extreme:</span>
+<span class="text-primary font-bold">19,450 pts</span>
+</div>
+</div>
+</div>
+<!-- PRICING & FINANCING CARD -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-xl flex flex-col gap-space-md">
+<div class="flex items-baseline justify-between">
+<div class="flex flex-col">
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-extrabold tracking-tight">114,999</span>
+<span class="font-spec-code-lg text-spec-code-lg text-primary-container font-bold">EGP</span>
+</div>
+<div class="flex items-center gap-space-sm font-spec-code-sm text-spec-code-sm text-outline">
+<span class="line-through">124,000 EGP</span>
+<span class="bg-error-container text-error px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">-7% DROP</span>
+<span>(Save 9,001 EGP)</span>
+</div>
+</div>
+<!-- VAT INCLUSIVE PILL -->
+<div class="text-right">
+<span class="bg-surface-container-high text-on-surface-variant font-spec-code-sm text-[11px] px-2 py-1 rounded">
+                INC. 14% VAT + TAX RECEIPT
+              </span>
+</div>
+</div>
+<!-- VALU FINANCING BANNER -->
+<div class="bg-surface-container-high p-space-sm rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-secondary-container flex items-center justify-center text-secondary-fixed font-bold font-spec-code-sm text-spec-code-sm">
+                %
+              </div>
+<div class="flex flex-col">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface font-semibold">9,583 EGP / month</span>
+<span class="font-body-sm text-[12px] text-outline">12 Months • 0% Interest promo with ValU</span>
+</div>
+</div>
+<button class="font-spec-code-sm text-spec-code-sm text-secondary hover:text-secondary-fixed underline">Calculate</button>
+</div>
+<!-- REAL-TIME STOCK STATUS PILL -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex items-center gap-space-sm shadow-inner">
+<div class="relative flex h-3 w-3 shrink-0">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-tertiary-fixed"></span>
+</div>
+<div class="flex flex-col">
+<div class="font-spec-code-sm text-spec-code-sm text-tertiary-fixed font-bold flex items-center gap-1">
+<span>IN STOCK &amp; ALLOCATED</span>
+<span class="text-on-surface-variant font-normal">• 4 Units Available</span>
+</div>
+<p class="font-body-sm text-[12px] text-outline">Immediate dispatch / Pickup available at Cairo Tech Hub (Nasr City Outpost).</p>
+</div>
+</div>
+<!-- CAIRO EXPRESS DELIVERY DISPATCH ESTIMATOR -->
+<div class="flex items-start gap-space-sm bg-surface-container-high/60 p-space-sm rounded-lg">
+<span class="material-symbols-outlined text-[20px] text-primary-container shrink-0 mt-0.5">bolt</span>
+<div class="flex flex-col font-spec-code-sm text-spec-code-sm">
+<span class="text-on-surface font-semibold">Express Cairo &amp; Giza Dispatch</span>
+<span class="text-outline">Order within <span class="text-primary-container font-bold">2h 47m</span> for Same-Day Delivery. Arrival today by <span class="text-on-surface font-bold">8:00 PM</span>.</span>
+</div>
+</div>
+<!-- HARDWARE COMPATIBILITY ENGINE QUICK-CHECK -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-space-xs shadow-inner">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary-container">tune</span>
+                RIG FIT &amp; CLEARANCE RADAR
+              </span>
+<span class="font-spec-code-sm text-[11px] text-tertiary-fixed font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                PROFILE VERIFIED
+              </span>
+</div>
+<!-- METRIC 1: PSU -->
+<div class="flex items-center justify-between font-spec-code-sm text-spec-code-sm py-1">
+<span class="text-outline">Minimum Recommended PSU:</span>
+<span class="text-on-surface font-bold flex items-center gap-1">
+                1000W (ATX 3.0 / PCIe 5.0 12VHPWR)
+                <span class="material-symbols-outlined text-tertiary-fixed text-[16px]">verified</span>
+</span>
+</div>
+<!-- METRIC 2: DIMENSIONS & SLOTS -->
+<div class="flex items-center justify-between font-spec-code-sm text-spec-code-sm py-1">
+<span class="text-outline">Physical Clearance:</span>
+<span class="text-primary-container font-bold flex items-center gap-1">
+                357.6 mm Length • 3.5 Slots Thick
+                <span class="material-symbols-outlined text-primary-container text-[16px]">straighten</span>
+</span>
+</div>
+</div>
+<!-- ACTION BUTTONS: PURCHASE HUB -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<!-- QUANTITY SELECTOR -->
+<div class="flex items-center bg-surface-container-high rounded h-12 px-space-xs shrink-0">
+<button class="w-8 h-full flex items-center justify-center text-on-surface hover:text-primary-container text-lg font-bold transition-colors" onclick="decrementQty()">-</button>
+<span class="w-8 text-center font-spec-code-md text-spec-code-md text-on-surface font-bold" id="product-qty">1</span>
+<button class="w-8 h-full flex items-center justify-center text-on-surface hover:text-primary-container text-lg font-bold transition-colors" onclick="incrementQty()">+</button>
+</div>
+<!-- ADD TO RIG BUTTON -->
+<button class="flex-1 h-12 bg-primary-container hover:bg-surface-tint text-on-primary-fixed font-label-md text-label-md rounded font-extrabold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,242,254,0.3)] transition-all hover:scale-[1.01] active:scale-[0.99]">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+<span>ADD TO RIG / CART</span>
+</button>
+</div>
+<!-- BUY NOW BUTTON -->
+<button class="w-full h-12 bg-secondary-container hover:bg-secondary-container/80 text-secondary-fixed font-label-md text-label-md rounded font-extrabold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(96,1,209,0.3)] transition-all hover:scale-[1.01] active:scale-[0.99]">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span>BUY NOW • INSTANT EXPRESS CHECKOUT</span>
+</button>
+<!-- RIG BUILDER DEEP LINK -->
+<a class="w-full py-2 bg-surface-container-high hover:bg-surface-bright text-primary text-center font-spec-code-sm text-spec-code-sm rounded flex items-center justify-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px] text-primary-container">memory</span>
+<span>Insert directly into PC Builder Rig Configurator</span>
+</a>
+</div>
+<!-- TRUST & ASSURANCE MATRIX -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-high/40 p-space-xs rounded flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified</span>
+<span class="font-spec-code-sm text-[11px] text-on-surface-variant font-medium">3-Year Egypt Official Warranty</span>
+</div>
+<div class="bg-surface-container-high/40 p-space-xs rounded flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]">published_with_changes</span>
+<span class="font-spec-code-sm text-[11px] text-on-surface-variant font-medium">14-Day Hassle-Free Returns</span>
+</div>
+<div class="bg-surface-container-high/40 p-space-xs rounded flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-[18px]">verified_user</span>
+<span class="font-spec-code-sm text-[11px] text-on-surface-variant font-medium">100% Genuine Silicon Die</span>
+</div>
+<div class="bg-surface-container-high/40 p-space-xs rounded flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">credit_score</span>
+<span class="font-spec-code-sm text-[11px] text-on-surface-variant font-medium">InstaPay / COD / ValU 0%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FREQUENTLY BOUGHT TOGETHER (ENTHUSIAST SYNERGY BUNDLE) -->
+<section class="w-full max-w-[1600px] mx-auto px-margin-desktop py-space-lg">
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-xl flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-secondary-fixed">hub</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-extrabold">ENTHUSIAST SYNERGY RIG BUNDLE</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Validated zero-bottleneck synergy recommended by Cairo bench technicians.</p>
+</div>
+</div>
+<span class="bg-tertiary-container/20 text-tertiary-fixed font-spec-code-sm text-spec-code-sm px-space-sm py-1 rounded font-bold self-start md:self-auto">
+          SAVE 4,500 EGP WITH PACKAGE
+        </span>
+</div>
+<!-- BUNDLE ITEMS MOSAIC -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center">
+<!-- COMPONENT 1 -->
+<div class="lg:col-span-3 bg-surface-container p-space-md rounded-lg flex items-center gap-space-sm">
+<div class="w-16 h-16 bg-surface-container-lowest rounded p-1 shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-contain" data-alt="ASUS ROG Strix RTX 4090 OC graphics card icon pack shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHRepEUPgTSYnCV3XEPXLzfT7VHn7GwRm0Zi_MQApL-LsTYA5_ltZlsRxPzXMR98zuxCer862tsyee79PqttGmyStAeNXqtYe6A-aX0J9HOqGyCqd0orw9kR6ygznkws0eGNT-qoHB1sWOfcDbB3SpgmpA9Y676nysdbRQ92M7OYQhAO4qboSVuJLE3zZ_2zOW0j-Yy3oJ1iV33gxVHsVm9j_p9hKY3EXIUO-zvcQ"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-spec-code-sm text-[11px] text-primary-container font-semibold uppercase">Selected Graphics</span>
+<h5 class="font-body-md text-body-md text-on-surface font-bold truncate">ROG Strix RTX 4090 OC</h5>
+<span class="font-spec-code-sm text-spec-code-sm text-outline">114,999 EGP</span>
+</div>
+</div>
+<div class="lg:col-span-auto hidden lg:flex justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">add</span>
+</div>
+<!-- COMPONENT 2 -->
+<div class="lg:col-span-3 bg-surface-container p-space-md rounded-lg flex items-center gap-space-sm">
+<div class="w-16 h-16 bg-surface-container-lowest rounded p-1 shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-contain" data-alt="Seasonic PRIME TX-1300 ATX 3.0 Titanium power supply with braided black cables on dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCExbesGgOPCwlNiksTat3XPhIdeh6vjUT27BH4srhrZpH-gf62mBohPR7F5gak4fgph14RIqAF4Sr7CnGrcXv5F5159wNkFoWoYX_46_KBxaNNGFaHVyt6yDYAkUrR1i2nawoA_jqC2yArFlLEpVBGutleAJfng5-zY0YEbKxPaniRFlCyariIyP2USDXNrVWRncQkPnm6uqxEEzCvU5B1j2VcYoJd_oX1VimO9Zk"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-spec-code-sm text-[11px] text-secondary font-semibold uppercase">Dedicated Power</span>
+<h5 class="font-body-md text-body-md text-on-surface font-bold truncate">Seasonic PRIME TX-1300 ATX 3.0</h5>
+<span class="font-spec-code-sm text-spec-code-sm text-outline">21,450 EGP</span>
+</div>
+</div>
+<div class="lg:col-span-auto hidden lg:flex justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">add</span>
+</div>
+<!-- COMPONENT 3 -->
+<div class="lg:col-span-3 bg-surface-container p-space-md rounded-lg flex items-center gap-space-sm">
+<div class="w-16 h-16 bg-surface-container-lowest rounded p-1 shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-contain" data-alt="Lian Li O11 Dynamic EVO XL full tower tempered glass computer case showing triple chamber internal layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1i0gOGU_PFJ9xBpntGuHqken7WCehyzP1wJIDIP2eXpG3ilFgRUEoJVdKtETg_vcyaMWhH34z1aelIuilgCPVWAIwWti_U1qadkMAcd-D-b5mZ0qif35Ev0Y204k5UmL0S9rqFjl13u2ZYuDRuvN4nGfrlawEfDKQUrTkG7zXjEMo2DkQGKlyJrtCS9Ooz0XoRNdqNUalUvuNB1FoH1IzkcJF2K65LvR15ipE5-Y"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-spec-code-sm text-[11px] text-tertiary-fixed font-semibold uppercase">Exoskeleton Chassis</span>
+<h5 class="font-body-md text-body-md text-on-surface font-bold truncate">Lian Li O11 Dynamic EVO XL</h5>
+<span class="font-spec-code-sm text-spec-code-sm text-outline">17,750 EGP</span>
+</div>
+</div>
+<!-- BUNDLE TOTALIZER & CTA -->
+<div class="lg:col-span-2 bg-surface-container-high p-space-md rounded-lg flex flex-col justify-between gap-space-xs text-center lg:text-left">
+<div>
+<span class="font-spec-code-sm text-[10px] text-outline uppercase tracking-wider">BUNDLE TOTAL</span>
+<div class="font-spec-code-lg text-spec-code-lg text-on-surface font-extrabold">149,699 <span class="text-primary-container text-xs font-normal">EGP</span></div>
+<span class="font-spec-code-sm text-[11px] text-error line-through">154,199 EGP</span>
+</div>
+<button class="w-full bg-primary-container hover:bg-surface-tint text-on-primary-fixed font-label-md text-label-md py-2 rounded font-bold tracking-wide transition-all shadow-[0_0_12px_rgba(0,242,254,0.25)]">
+            BUY BUNDLE
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- DETAILED TECHNICAL SPECIFICATIONS & BENCHMARK MATRIX -->
+<section class="w-full max-w-[1600px] mx-auto px-margin-desktop py-space-md mb-space-xl">
+<div class="bg-surface-container-low rounded-xl shadow-2xl overflow-hidden flex flex-col">
+<!-- TAB NAVIGATION RAIL -->
+<div class="flex items-center border-b border-surface-container-highest bg-surface-container-lowest px-space-md overflow-x-auto no-scrollbar">
+<button class="tab-btn active px-space-lg py-space-md font-label-md text-label-md text-primary-container border-b-2 border-primary-container font-bold flex items-center gap-2 whitespace-nowrap" id="tab-btn-specs" onclick="switchTab('specs')">
+<span class="material-symbols-outlined text-[18px]">settings_suggest</span>
+<span>TECHNICAL SPECIFICATIONS</span>
+</button>
+<button class="tab-btn px-space-lg py-space-md font-label-md text-label-md text-outline hover:text-on-surface border-b-2 border-transparent font-medium flex items-center gap-2 whitespace-nowrap transition-colors" id="tab-btn-benchmarks" onclick="switchTab('benchmarks')">
+<span class="material-symbols-outlined text-[18px]">monitoring</span>
+<span>4K FPS &amp; BENCHMARKS</span>
+</button>
+<button class="tab-btn px-space-lg py-space-md font-label-md text-label-md text-outline hover:text-on-surface border-b-2 border-transparent font-medium flex items-center gap-2 whitespace-nowrap transition-colors" id="tab-btn-compat" onclick="switchTab('compat')">
+<span class="material-symbols-outlined text-[18px]">aspect_ratio</span>
+<span>CHASSIS COMPATIBILITY GUIDE</span>
+</button>
+<button class="tab-btn px-space-lg py-space-md font-label-md text-label-md text-outline hover:text-on-surface border-b-2 border-transparent font-medium flex items-center gap-2 whitespace-nowrap transition-colors" id="tab-btn-reviews" onclick="switchTab('reviews')">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+<span>VERIFIED RIG PHOTOS (128)</span>
+</button>
+</div>
+<!-- TAB PANEL 1: DETAILED TECHNICAL SPECIFICATIONS -->
+<div class="tab-panel p-space-lg flex flex-col gap-space-lg" id="tab-content-specs">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-extrabold mb-space-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">developer_board</span>
+            SILICON ARCHITECTURE &amp; DIE METRICS
+          </h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-xs font-spec-code-sm text-spec-code-sm">
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">Graphic Processor:</span>
+<span class="text-on-surface font-semibold">NVIDIA Ada Lovelace AD102-300-A1</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">Process Node:</span>
+<span class="text-on-surface font-semibold">TSMC 4N Custom (5nm FinFET)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">CUDA Processing Cores:</span>
+<span class="text-primary-container font-bold">16,384 Cores</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">Tensor Cores (4th Gen):</span>
+<span class="text-on-surface font-semibold">512 Units (FP8 DLSS 3.5 Frame Gen)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">RT Cores (3rd Gen):</span>
+<span class="text-on-surface font-semibold">128 Units (SER Shader Execution)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">Engine Clock (Default Mode):</span>
+<span class="text-on-surface font-semibold">2,610 MHz Boost Clock</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">Engine Clock (OC Mode):</span>
+<span class="text-primary font-bold">2,640 MHz Boost Clock</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">FP32 Compute Throughput:</span>
+<span class="text-tertiary-fixed font-bold">82.58 TFLOPS</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-extrabold mb-space-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">memory</span>
+            VRAM &amp; MEMORY BUS SUB-SYSTEM
+          </h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-xs font-spec-code-sm text-spec-code-sm">
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">Memory Capacity:</span>
+<span class="text-primary-container font-bold">24GB Micron GDDR6X</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">Memory Bus Width:</span>
+<span class="text-on-surface font-semibold">384-Bit High-Bandwidth Array</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">Memory Frequency Speed:</span>
+<span class="text-on-surface font-semibold">21.0 Gbps (1,313 MHz effective)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">Total Memory Bandwidth:</span>
+<span class="text-tertiary-fixed font-bold">1,008.0 GB/s (1.0 TB/s)</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-extrabold mb-space-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">power</span>
+            POWER, THERMAL ENVELOPE &amp; CONNECTIVITY
+          </h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-xs font-spec-code-sm text-spec-code-sm">
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">Total Graphics Power (TGP / TDP):</span>
+<span class="text-on-surface font-bold">450W (Max Power Limit: 600W via GPU Tweak)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">Power Supply Requirement:</span>
+<span class="text-on-surface font-semibold">1000W Min (1200W recommended for heavy OC)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">Power Connector:</span>
+<span class="text-secondary font-bold">1x 16-Pin PCIe 5.0 12VHPWR (4x 8-Pin Adapter Included)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">Display Outputs:</span>
+<span class="text-on-surface font-semibold">2x Native HDMI 2.1a • 3x Native DisplayPort 1.4a</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded">
+<span class="text-outline">Card Dimensions:</span>
+<span class="text-on-surface font-semibold">357.6 x 149.3 x 70.1 mm (14.08 x 5.88 x 2.76 in)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high p-space-sm rounded">
+<span class="text-outline">Chassis Slot Occupancy:</span>
+<span class="text-primary-container font-bold">3.5 Slots Width</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB PANEL 2: FPS BENCHMARKS & TELEMETRY -->
+<div class="tab-panel hidden p-space-lg flex flex-col gap-space-lg" id="tab-content-benchmarks">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container p-space-md rounded-lg">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-extrabold">TEST BENCH RIG TELEMETRY ENVIRONMENT</h4>
+<p class="font-body-sm text-body-sm text-outline">Intel Core i9-14900KS @ 6.0 GHz | 64GB DDR5-7200 CL34 | Samsung 990 PRO 4TB | 4K Ultra Preset (3840x2160)</p>
+</div>
+<span class="bg-surface-container-highest text-primary-container font-spec-code-sm text-spec-code-sm px-space-sm py-1 rounded font-bold uppercase self-start">
+            VERIFIED 4K SUITE
+          </span>
+</div>
+<!-- BENCHMARK BARS -->
+<div class="flex flex-col gap-space-md">
+<!-- GAME 1 -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-spec-code-md text-spec-code-md">
+<span class="text-on-surface font-bold">Cyberpunk 2077: Phantom Liberty (4K Ultra, Ray Tracing Overdrive, DLSS 3.5 Balanced)</span>
+<span class="text-primary-container font-extrabold">84.2 FPS</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-4 rounded-full overflow-hidden flex">
+<div class="bg-primary-container h-full rounded-full transition-all duration-1000 shadow-[0_0_12px_rgba(0,242,254,0.6)]" style="width: 84%;"></div>
+</div>
+<div class="flex justify-between font-spec-code-sm text-[11px] text-outline">
+<span>RTX 4080 Super Baseline: 58.4 FPS</span>
+<span class="text-tertiary-fixed font-bold">+44.1% Gain</span>
+</div>
+</div>
+<!-- GAME 2 -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-spec-code-md text-spec-code-md">
+<span class="text-on-surface font-bold">Black Myth: Wukong (4K Cinematic, Full Path Tracing, TSR 100%)</span>
+<span class="text-primary-container font-extrabold">92.6 FPS</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-4 rounded-full overflow-hidden flex">
+<div class="bg-primary-container h-full rounded-full transition-all duration-1000 shadow-[0_0_12px_rgba(0,242,254,0.6)]" style="width: 92%;"></div>
+</div>
+<div class="flex justify-between font-spec-code-sm text-[11px] text-outline">
+<span>RTX 4080 Super Baseline: 64.1 FPS</span>
+<span class="text-tertiary-fixed font-bold">+44.4% Gain</span>
+</div>
+</div>
+<!-- GAME 3 -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-spec-code-md text-spec-code-md">
+<span class="text-on-surface font-bold">Call of Duty: Modern Warfare III (4K Extreme Preset, Native Resolution TAA)</span>
+<span class="text-primary-container font-extrabold">175.4 FPS</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-4 rounded-full overflow-hidden flex">
+<div class="bg-primary-container h-full rounded-full transition-all duration-1000 shadow-[0_0_12px_rgba(0,242,254,0.6)]" style="width: 100%;"></div>
+</div>
+<div class="flex justify-between font-spec-code-sm text-[11px] text-outline">
+<span>RTX 4080 Super Baseline: 128.0 FPS</span>
+<span class="text-tertiary-fixed font-bold">+37.0% Gain</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB PANEL 3: INSTALLATION & CLEARANCE -->
+<div class="tab-panel hidden p-space-lg flex flex-col gap-space-md" id="tab-content-compat">
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-extrabold">CHASSIS &amp; PSU COMPATIBILITY BLUEPRINT</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary-container text-[28px]">straighten</span>
+<span class="font-spec-code-md text-spec-code-md text-on-surface font-bold">Length Clearance (358mm)</span>
+<p class="font-body-sm text-body-sm text-outline">Ensure minimum internal GPU clearance of 365mm to avoid front radiator collisions. Cases like Lian Li O11 Dynamic EVO XL, Fractal Meshify 2 XL, and Corsair 5000D are verified compatible.</p>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-2">
+<span class="material-symbols-outlined text-secondary-fixed text-[28px]">electrical_services</span>
+<span class="font-spec-code-md text-spec-code-md text-on-surface font-bold">12VHPWR Cable Bending</span>
+<p class="font-body-sm text-body-sm text-outline">Card width requires at least 35mm side clearance between GPU edge and glass side panel to prevent aggressive cable bending on the 16-pin terminal.</p>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-[28px]">vertical_align_bottom</span>
+<span class="font-spec-code-md text-spec-code-md text-on-surface font-bold">Bundled Sag Bracket</span>
+<p class="font-body-sm text-body-sm text-outline">Includes magnetic adjustable anti-sag pillar support that doubles as a precision screwdriver. Required to support the 2.5 kg weight of the card.</p>
+</div>
+</div>
+</div>
+<!-- TAB PANEL 4: VERIFIED BUILDER REVIEWS & RIG PHOTOS -->
+<div class="tab-panel hidden p-space-lg flex flex-col gap-space-md" id="tab-content-reviews">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-extrabold">CAIRO ENTHUSIAST RIGS &amp; BUILDS</h4>
+<button class="bg-surface-container-high hover:bg-surface-bright text-primary font-spec-code-sm text-spec-code-sm px-space-md py-1.5 rounded transition-all">
+            + SUBMIT YOUR RIG
+          </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- BUILD 1 -->
+<div class="bg-surface-container rounded-lg overflow-hidden flex flex-col">
+<div class="h-48 w-full bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="High-end custom liquid loop desktop gaming PC interior featuring ASUS ROG Strix RTX 4090 OC in a black glass case with hardline tubing and cyan coolant glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZDeKjM0wlNK0m7XnlwRpocVn-QbFpr1hoESFNI9A7SlUPY6bUe9vvnaaLPDjvSPL7TlOdI8MxlkVes9O06c7grZuZWDhxo_mTEAmE8ku61MuviC-OYk4fo0g2Uqw5ZfIr9FRmE-BGLyLA-Jg6nF_eekAII2RSKkH64s1axAq7-O8hhWR7jRcqoRFGL2g7FUarPo2Sxz0NqlLD92LhmrMofsgDAQUZJ0FKRySrnG8"/>
+</div>
+<div class="p-space-sm flex flex-col gap-1">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold">Build: 'PROJECT PHARAOH' by Kareem M.</span>
+<span class="font-spec-code-sm text-[11px] text-tertiary-fixed">Verified Buyer • New Cairo</span>
+<p class="font-body-sm text-body-sm text-outline">"Temps never pass 62°C even under 4K Cyberpunk max path tracing. Total beast of a card."</p>
+</div>
+</div>
+<!-- BUILD 2 -->
+<div class="bg-surface-container rounded-lg overflow-hidden flex flex-col">
+<div class="h-48 w-full bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Workstation PC build with dual monitors in an industrial dark room with ASUS ROG Strix RTX 4090 GPU illuminated in purple ARGB aura sync." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp0r_mJzCI4_DOD_9GDXqvwNht67fUwoVI7jYYhioP0ur534ifSXYBWlsoXfxrKuvmJ2Wc7Vr0VSV6xNiqSucP0-O1EWGltYo4k0nWtbXjxWmEikH4l2RUEcO-6nhXsOgkObaxA6tDtAjeIK2MU_tOsG72jNr0Xmzmz3vU0mpYWsy3fNpL36RKazYOKY4FP3JF017E2lXFVKaFv1Gk1TteALcdnIsxZG-0eF0O7jM"/>
+</div>
+<div class="p-space-sm flex flex-col gap-1">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold">Build: 'AI RENDER CORE' by Tarek E.</span>
+<span class="font-spec-code-sm text-[11px] text-tertiary-fixed">Verified Buyer • Maadi</span>
+<p class="font-body-sm text-body-sm text-outline">"24GB VRAM handles my local LLM inference models and Blender viewport rendering effortlessly."</p>
+</div>
+</div>
+<!-- BUILD 3 -->
+<div class="bg-surface-container rounded-lg overflow-hidden flex flex-col">
+<div class="h-48 w-full bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Minimalist all-black stealth PC rig with ASUS ROG Strix 4090 mounted horizontally with aluminum support bracket." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA67ceDq9EqUzI0ROFggfjrrNQmxAkzBdg1UqYGVM9tLlPAJi36Ovq39elsL5Gu_WIKs3uylNIUZAHuC4HMOAvtW21ByBXyhrN7F8mxvYJiL0xeeloMo3zuBUFNTfn6oOjT0W7UXu-V_i49pMw8sr_ut6rowjateL_xEzAQb2LYC5HwKIZa6oHlsLRI90l6SvDF_hsTJfDJUJqaTKgx8TfahrifO_4RCzjNFIFQ1o"/>
+</div>
+<div class="p-space-sm flex flex-col gap-1">
+<span class="font-spec-code-sm text-spec-code-sm text-on-surface font-bold">Build: 'OBSIDIAN TITAN' by Omar S.</span>
+<span class="font-spec-code-sm text-[11px] text-tertiary-fixed">Verified Buyer • Heliopolis</span>
+<p class="font-body-sm text-body-sm text-outline">"Purchased via ValU 0% installment at the Nasr City hub. Delivered and bench-tested in 3 hours."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- INTERACTIVE LOGIC -->
+<script>
+    function incrementQty() {
+      const el = document.getElementById('product-qty');
+      let val = parseInt(el.innerText, 10);
+      if (val < 4) {
+        el.innerText = val + 1;
+      }
+    }
+
+    function decrementQty() {
+      const el = document.getElementById('product-qty');
+      let val = parseInt(el.innerText, 10);
+      if (val > 1) {
+        el.innerText = val - 1;
+      }
+    }
+
+    function switchAngle(index) {
+      const btns = document.querySelectorAll('.thumbnail-btn');
+      btns.forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('bg-surface-container-high', 'border-primary-container');
+          btn.classList.remove('bg-surface-container-low');
+        } else {
+          btn.classList.remove('bg-surface-container-high', 'border-primary-container');
+          btn.classList.add('bg-surface-container-low');
+        }
+      });
+    }
+
+    function switchTab(tabId) {
+      const tabs = ['specs', 'benchmarks', 'compat', 'reviews'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-btn-' + t);
+        const content = document.getElementById('tab-content-' + t);
+        if (t === tabId) {
+          btn.classList.add('text-primary-container', 'border-primary-container', 'font-bold');
+          btn.classList.remove('text-outline', 'border-transparent', 'font-medium');
+          content.classList.remove('hidden');
+        } else {
+          btn.classList.remove('text-primary-container', 'border-primary-container', 'font-bold');
+          btn.classList.add('text-outline', 'border-transparent', 'font-medium');
+          content.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest mt-space-xl pt-space-xl pb-space-lg shadow-[0_-1px_12px_rgba(0,0,0,0.4)]"><div class="w-full max-w-[1600px] mx-auto px-margin-desktop"><div class="mb-space-xl bg-surface-container-low p-space-lg rounded-xl flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center"><span class="material-symbols-outlined text-primary-container text-[28px]">notifications_active</span></div><div><h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">HARDWARE TELEMETRY &amp; DROP RADAR</h4><p class="font-body-sm text-body-sm text-on-surface-variant">Get sub-second alerts on RTX 50-series drops, AMD X3D inventory, and flash component sales across Cairo.</p></div></div><div class="flex w-full md:w-auto items-center gap-space-sm"><input class="bg-surface-container-highest px-space-md py-space-sm rounded font-spec-code-sm text-spec-code-sm text-on-surface placeholder:text-outline focus:outline-none min-w-[280px]" placeholder="architect@enthusiast-station.eg" type="email"/><button class="bg-primary-container hover:bg-surface-tint text-on-primary-fixed font-label-md text-label-md px-space-lg py-space-sm rounded font-bold transition-all shadow-[0_0_16px_rgba(0,242,254,0.3)]">DEPLOY ALERTS</button></div></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl mb-space-xl"><div><div class="flex items-center gap-space-sm mb-space-md"><span class="material-symbols-outlined text-primary-container text-[20px]">developer_board</span><h5 class="font-label-md text-label-md text-on-surface tracking-wider uppercase font-bold">Components &amp; Silicon</h5></div><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-primary-container transition-colors" href="#">NVIDIA GeForce RTX Series</a></li><li><a class="hover:text-primary-container transition-colors" href="#">AMD Radeon RX Accelerators</a></li><li><a class="hover:text-primary-container transition-colors" href="#">Intel Core Ultra &amp; 14th Gen</a></li><li><a class="hover:text-primary-container transition-colors" href="#">AMD Ryzen 7000 / 9000 X3D</a></li><li><a class="hover:text-primary-container transition-colors" href="#">High-Frequency DDR5 Kits</a></li><li><a class="hover:text-primary-container transition-colors" href="#">PCIe Gen 5 NVMe SSDs</a></li><li><a class="hover:text-primary-container transition-colors" href="#">Titanium &amp; Platinum ATX 3.1 PSUs</a></li></ul></div><div><div class="flex items-center gap-space-sm mb-space-md"><span class="material-symbols-outlined text-secondary-fixed text-[20px]">build_circle</span><h5 class="font-label-md text-label-md text-on-surface tracking-wider uppercase font-bold">Enthusiast Services</h5></div><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-secondary-fixed transition-colors" href="#">Custom Liquid Loop Engineering</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">24-Hour Stress &amp; Thermal Burn-In</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">Sub-Zero &amp; Delid Tuning Studio</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">Corporate AI &amp; Render Node Deployment</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">B2B Wholesale Invoicing (Tax ID)</a></li><li><a class="hover:text-secondary-fixed transition-colors" href="#">On-Site Cairo Integration</a></li></ul></div><div><div class="flex items-center gap-space-sm mb-space-md"><span class="material-symbols-outlined text-tertiary-fixed text-[20px]">pin_drop</span><h5 class="font-label-md text-label-md text-on-surface tracking-wider uppercase font-bold">Support &amp; Cairo Hubs</h5></div><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li class="text-on-surface font-semibold">Nasr City Express Outpost</li><li class="text-outline font-spec-code-sm text-spec-code-sm">Makram Ebeid Tech Complex, Gate 3</li><li class="text-on-surface font-semibold pt-space-xs">New Cairo Hub &amp; Bench Lab</li><li class="text-outline font-spec-code-sm text-spec-code-sm">North 90th St, Golden Square Silicon Bay</li><li class="pt-space-xs"><a class="text-primary-container font-spec-code-sm text-spec-code-sm hover:underline" href="#">Telemetry Support: +20 (2) 2790-Y000</a></li><li><a class="text-primary-container font-spec-code-sm text-spec-code-sm hover:underline" href="#">RMA Claim Portal: rma@y0.market</a></li></ul></div><div><div class="flex items-center gap-space-sm mb-space-md"><span class="material-symbols-outlined text-outline text-[20px]">verified_user</span><h5 class="font-label-md text-label-md text-on-surface tracking-wider uppercase font-bold">Verified Payment Rail</h5></div><p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Instant processing with 256-bit bank-grade encryption protocols.</p><div class="grid grid-cols-2 gap-space-xs font-spec-code-sm text-spec-code-sm text-on-surface"><div class="bg-surface-container-high p-space-xs rounded flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed">bolt</span>InstaPay Egypt</div><div class="bg-surface-container-high p-space-xs rounded flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-error">phone_android</span>Vodafone Cash</div><div class="bg-surface-container-high p-space-xs rounded flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-primary-container">credit_card</span>Visa / MC</div><div class="bg-surface-container-high p-space-xs rounded flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-secondary-fixed">percent</span>ValU 0% Promo</div></div><div class="mt-space-md p-space-xs rounded bg-surface-container-low"><span class="font-label-sm text-label-sm text-outline">OFFICIAL WARRANTY: 3-Year Authorized Distributor Coverage on Silicon &amp; Motherboards.</span></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="font-spec-code-sm text-spec-code-sm text-outline text-center md:text-left"><span>© 2025 Y0 Hardware Market Inc. All rights reserved. High-Performance Computing &amp; Gaming Rig Outpost.</span></div><div class="font-spec-code-md text-spec-code-md text-outline font-semibold tracking-wide text-center md:text-right"><span class="text-on-surface-variant">Designed &amp; Powered by </span><a class="text-primary-container hover:text-surface-tint underline decoration-primary-container/40 underline-offset-4 hover:shadow-[0_0_8px_rgba(0,242,254,0.4)] transition-all font-bold" href="https://y0ussef.com" target="_blank">Y0ussef.com</a></div></div></div></footer></body></html>

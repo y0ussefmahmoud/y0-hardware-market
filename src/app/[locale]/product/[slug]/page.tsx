@@ -132,39 +132,40 @@ export default async function ProductPage({
   const productImages = product.images || [];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-surface text-on-surface min-h-screen">
       {/* Breadcrumb */}
-      <div className="bg-gray-50 py-4">
+      <div className="bg-surface-container-lowest/80 border-b border-outline-variant/20 py-4">
         <div className="container mx-auto px-4">
-          <div className="flex items-center space-x-2 rtl:space-x-reverse text-sm text-gray-600">
-            <Link href={`/${locale}`} className="hover:text-purple-600">{tNav('home')}</Link>
-            <i className="fas fa-chevron-left text-xs"></i>
-            <Link href={`/${locale}/shop`} className="hover:text-purple-600">{tNav('products')}</Link>
-            <i className="fas fa-chevron-left text-xs"></i>
-            <span className="text-gray-900">{locale === 'ar' ? product.name_ar : product.name}</span>
+          <div className="flex items-center space-x-2 rtl:space-x-reverse text-xs font-mono text-on-surface-variant">
+            <Link href={`/${locale}`} className="hover:text-primary-container transition-colors">{tNav('home')}</Link>
+            <i className="fas fa-chevron-left rtl:rotate-180 text-[10px] text-outline-variant/50"></i>
+            <Link href={`/${locale}/shop`} className="hover:text-primary-container transition-colors">{tNav('products')}</Link>
+            <i className="fas fa-chevron-left rtl:rotate-180 text-[10px] text-outline-variant/50"></i>
+            <span className="text-primary-container truncate max-w-xs">{locale === 'ar' ? product.name_ar : product.name}</span>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Images */}
           <div>
-            <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
+            <div className="aspect-square bg-surface-container-low border border-outline-variant/30 rounded-2xl overflow-hidden mb-4 p-4 flex items-center justify-center relative group">
               <img
                 src={mainImage}
                 alt={locale === 'ar' ? product.name_ar : product.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/40 via-transparent to-transparent pointer-events-none" />
             </div>
             {productImages.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 gap-3">
                 {productImages.map((image, index) => (
-                  <div key={index} className="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer">
+                  <div key={index} className="aspect-square bg-surface-container-low border border-outline-variant/30 hover:border-primary-container rounded-xl overflow-hidden cursor-pointer p-2 transition-all">
                     <img
                       src={image}
                       alt={`${locale === 'ar' ? product.name_ar : product.name} ${index + 1}`}
-                      className="w-full h-full object-cover hover:opacity-75"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                 ))}
@@ -173,37 +174,44 @@ export default async function ProductPage({
           </div>
 
           {/* Product Info */}
-          <div>
-            <h1 className="text-3xl font-bold mb-4">{locale === 'ar' ? product.name_ar : product.name}</h1>
+          <div className="flex flex-col justify-start">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary-container/30 text-primary-container font-mono text-xs uppercase tracking-widest mb-4 w-fit">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+              <span>HARDWARE SPEC SHEET</span>
+            </div>
+
+            <h1 className="text-2xl md:text-3xl font-extrabold mb-4 text-on-surface tracking-tight leading-snug">
+              {locale === 'ar' ? product.name_ar : product.name}
+            </h1>
             
             {/* Rating */}
-            <div className="flex items-center space-x-2 rtl:space-x-reverse mb-4">
-              <div className="flex text-yellow-400">
+            <div className="flex items-center space-x-2 rtl:space-x-reverse mb-6">
+              <div className="flex text-amber-400 text-sm">
                 {[...Array(5)].map((_, i) => (
                   <i
                     key={i}
                     className={`fas fa-star ${
-                      i < Math.floor(product.rating) ? '' : 'text-gray-300'
+                      i < Math.floor(product.rating) ? 'text-amber-400' : 'text-outline-variant/30'
                     }`}
                   ></i>
                 ))}
               </div>
-              <span className="text-gray-600">({product.review_count} {tProduct('ratings')})</span>
+              <span className="text-on-surface-variant font-mono text-xs">({product.review_count} {tProduct('ratings')})</span>
             </div>
 
             {/* Price */}
-            <div className="flex items-center space-x-4 rtl:space-x-reverse mb-6">
-              <span className="text-4xl font-bold text-purple-600">
-                {product.price.toLocaleString()} {tFooter('currency')}
+            <div className="flex items-baseline space-x-4 rtl:space-x-reverse mb-6 bg-surface-container-low border border-outline-variant/30 rounded-xl p-4">
+              <span className="text-3xl md:text-4xl font-extrabold font-mono text-primary-container">
+                {product.price.toLocaleString()} <span className="text-sm font-sans font-normal text-on-surface-variant">{tFooter('currency')}</span>
               </span>
               {product.old_price && (
                 <>
-                  <span className="text-2xl text-gray-400 line-through">
+                  <span className="text-lg text-on-surface-variant/50 line-through font-mono">
                     {product.old_price.toLocaleString()} {tFooter('currency')}
                   </span>
                   {discount > 0 && (
-                    <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm">
-                      {discount}% {tProduct('discount')}
+                    <span className="bg-tertiary-container/90 text-on-tertiary-container border border-tertiary/40 font-mono text-xs font-bold px-2.5 py-0.5 rounded-full">
+                      -{discount}% {tProduct('discount')}
                     </span>
                   )}
                 </>
@@ -212,83 +220,91 @@ export default async function ProductPage({
 
             {/* Description */}
             <div className="mb-6">
-              <h3 className="font-semibold mb-2">{tProduct('description')}</h3>
-              <p className="text-gray-600">{locale === 'ar' ? product.description_ar : product.description}</p>
+              <h3 className="font-mono text-xs uppercase tracking-wider text-primary-container font-semibold mb-2">
+                // {tProduct('description')}
+              </h3>
+              <p className="text-on-surface-variant text-sm leading-relaxed">{locale === 'ar' ? product.description_ar : product.description}</p>
             </div>
 
             {/* Stock Status */}
             <div className="mb-6">
-              <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm ${
+              <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold ${
                 product.stock_quantity > 0
-                  ? 'bg-green-100 text-green-800'
-                  : 'bg-red-100 text-red-800'
+                  ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-500/40'
+                  : 'bg-red-950/60 text-red-400 border border-red-500/40'
               }`}>
-                {product.stock_quantity > 0 ? tProduct('inStock') : tProduct('outOfStock')}
+                <span className={`w-1.5 h-1.5 rounded-full ${product.stock_quantity > 0 ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`}></span>
+                <span>{product.stock_quantity > 0 ? tProduct('inStock') : tProduct('outOfStock')}</span>
               </span>
             </div>
 
             {/* Quantity and Add to Cart */}
-            <div className="flex items-center space-x-4 rtl:space-x-reverse mb-6">
-              <div className="flex items-center border rounded-lg">
-                <button className="px-4 py-2 hover:bg-gray-100">-</button>
-                <span className="px-4 py-2 border-x">1</span>
-                <button className="px-4 py-2 hover:bg-gray-100">+</button>
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-4 mb-6">
+              <div className="flex items-center bg-surface-container border border-outline-variant/40 rounded-lg font-mono">
+                <button className="px-3.5 py-2 hover:bg-surface-container-high text-on-surface transition-colors">-</button>
+                <span className="px-4 py-2 border-x border-outline-variant/30 text-on-surface text-sm">1</span>
+                <button className="px-3.5 py-2 hover:bg-surface-container-high text-on-surface transition-colors">+</button>
               </div>
-              <button className="flex-1 bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">
-                <i className="fas fa-cart-plus ml-2 rtl:ml-0 rtl:mr-2"></i>
-                {tProduct('addToCart')}
+              <button className="flex-1 bg-primary-container text-on-primary-container py-3 rounded-lg font-mono font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_20px_rgba(0,242,254,0.35)] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                <i className="fas fa-cart-plus text-xs"></i>
+                <span>{tProduct('addToCart')}</span>
               </button>
             </div>
 
             {/* Additional Actions */}
-            <div className="flex space-x-4 rtl:space-x-reverse">
-              <button className="flex-1 border border-purple-600 text-purple-600 py-3 rounded-lg hover:bg-purple-50 transition-colors">
-                <i className="fas fa-heart ml-2 rtl:ml-0 rtl:mr-2"></i>
-                {tProduct('addToWishlist')}
+            <div className="flex space-x-3 rtl:space-x-reverse font-mono text-xs">
+              <button className="flex-1 border border-outline-variant/40 hover:border-primary-container text-on-surface hover:text-primary-container py-2.5 rounded-lg bg-surface-container-low transition-colors flex items-center justify-center gap-2 uppercase tracking-wider">
+                <i className="fas fa-heart text-xs text-primary-container"></i>
+                <span>{tProduct('addToWishlist')}</span>
               </button>
-              <button className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <i className="fas fa-share-alt ml-2 rtl:ml-0 rtl:mr-2"></i>
-                {tProduct('share')}
+              <button className="flex-1 border border-outline-variant/40 hover:border-primary-container text-on-surface hover:text-primary-container py-2.5 rounded-lg bg-surface-container-low transition-colors flex items-center justify-center gap-2 uppercase tracking-wider">
+                <i className="fas fa-share-alt text-xs text-primary-container"></i>
+                <span>{tProduct('share')}</span>
               </button>
             </div>
           </div>
         </div>
 
         {/* Product Tabs */}
-        <div className="mt-12">
-          <div className="border-b mb-6">
+        <div className="mt-16">
+          <div className="border-b border-outline-variant/30 mb-6 font-mono text-xs">
             <div className="flex space-x-8 rtl:space-x-reverse">
-              <button className="pb-4 border-b-2 border-purple-600 text-purple-600 font-semibold">
-                {tProduct('specifications')}
+              <button className="pb-3 border-b-2 border-primary-container text-primary-container font-bold uppercase tracking-wider">
+                // {tProduct('specifications')}
               </button>
-              <button className="pb-4 text-gray-600 hover:text-purple-600">
-                {tProduct('description')}
+              <button className="pb-3 text-on-surface-variant hover:text-primary-container transition-colors uppercase tracking-wider">
+                // {tProduct('description')}
               </button>
-              <button className="pb-4 text-gray-600 hover:text-purple-600">
-                {tProduct('reviews')}
+              <button className="pb-3 text-on-surface-variant hover:text-primary-container transition-colors uppercase tracking-wider">
+                // {tProduct('reviews')}
               </button>
             </div>
           </div>
-          <div className="bg-gray-50 rounded-lg p-6">
+          <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6">
             {product.specifications ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
                 {Object.entries(product.specifications).map(([key, value]) => (
-                  <div key={key} className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600">{key}</span>
-                    <span className="font-semibold">{String(value)}</span>
+                  <div key={key} className="flex justify-between py-2.5 border-b border-outline-variant/20">
+                    <span className="text-on-surface-variant uppercase tracking-wider">{key}</span>
+                    <span className="font-semibold text-primary-container">{String(value)}</span>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-gray-600">{tProduct('noSpecs')}</p>
+              <p className="text-on-surface-variant font-mono text-xs">{tProduct('noSpecs')}</p>
             )}
           </div>
         </div>
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold mb-6">{tProduct('related')}</h2>
+          <div className="mt-16">
+            <div className="mb-6">
+              <span className="text-primary-container font-mono text-xs uppercase tracking-widest block mb-1">
+                // COMPATIBLE HARDWARE
+              </span>
+              <h2 className="text-2xl font-bold tracking-tight text-on-surface">{tProduct('related')}</h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <ProductCard key={relatedProduct.id} product={relatedProduct} />

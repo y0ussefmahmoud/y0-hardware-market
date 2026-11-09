@@ -20,7 +20,7 @@ export default function LoadingSpinner({ size = 'md' }: { size?: 'sm' | 'md' | '
 
   return (
     <div className="flex items-center justify-center">
-      <div className={`${sizeClasses[size]} border-4 border-gray-200 border-t-purple-600 rounded-full animate-spin`}></div>
+      <div className={`${sizeClasses[size]} border-2 border-primary-container/20 border-t-primary-container rounded-full animate-spin`}></div>
     </div>
   );
 }
@@ -29,11 +29,11 @@ export function FullPageLoading() {
   const locale = useLocale();
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-surface">
       <div className="text-center">
         <LoadingSpinner size="lg" />
-        <p className="mt-4 text-gray-600">
-          {locale === 'en' ? 'Loading...' : 'جاري التحميل...'}
+        <p className="mt-4 text-on-surface-variant font-mono text-xs">
+          {locale === 'en' ? 'INITIALIZING SILICON RUNTIME...' : 'جاري تشغيل النظام...'}
         </p>
       </div>
     </div>

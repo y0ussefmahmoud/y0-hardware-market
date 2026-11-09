@@ -92,92 +92,96 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="bg-surface-container-low border border-outline-variant/30 hover:border-primary-container/50 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,242,254,0.12)] group flex flex-col justify-between">
       {/* Product Image */}
-      <Link href={`/${locale}/product/${product.slug}`}>
-        <div className="relative aspect-square">
-          <Image
-            src={imageUrl || ''}
-            alt={name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-          />
-          {product.badge && (
-            <span className="absolute top-2 right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded">
-              {product.badge === 'new' && tProduct('badgeNew')}
-              {product.badge === 'sale' && tProduct('badgeSale')}
-              {product.badge === 'bestseller' && tProduct('badgeBestseller')}
-              {product.badge === 'featured' && tProduct('badgeFeatured')}
-            </span>
-          )}
-          {discount > 0 && (
-            <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-              {discount}%
-            </span>
-          )}
-        </div>
+      <Link href={`/${locale}/product/${product.slug}`} className="block relative aspect-square bg-surface-container-lowest overflow-hidden">
+        <Image
+          src={imageUrl || ''}
+          alt={name}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low/80 via-transparent to-transparent pointer-events-none" />
+        
+        {product.badge && (
+          <span className="absolute top-2.5 right-2.5 bg-primary-container/90 text-on-primary-container text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-[0_0_10px_rgba(0,242,254,0.4)] backdrop-blur-sm border border-primary-container">
+            {product.badge === 'new' && tProduct('badgeNew')}
+            {product.badge === 'sale' && tProduct('badgeSale')}
+            {product.badge === 'bestseller' && tProduct('badgeBestseller')}
+            {product.badge === 'featured' && tProduct('badgeFeatured')}
+          </span>
+        )}
+        {discount > 0 && (
+          <span className="absolute top-2.5 left-2.5 bg-tertiary-container/90 text-on-tertiary-container text-[11px] font-mono font-bold px-2 py-0.5 rounded border border-tertiary/40 shadow-sm backdrop-blur-sm">
+            -{discount}%
+          </span>
+        )}
       </Link>
 
       {/* Product Info */}
-      <div className="p-4">
-        <Link href={`/${locale}/product/${product.slug}`}>
-          <h3 className="font-semibold text-gray-800 mb-2 hover:text-purple-600 transition-colors line-clamp-2">
-            {name}
-          </h3>
-        </Link>
+      <div className="p-4 flex flex-col flex-1 justify-between gap-3">
+        <div>
+          <Link href={`/${locale}/product/${product.slug}`}>
+            <h3 className="font-semibold text-on-surface group-hover:text-primary-container transition-colors line-clamp-2 text-sm leading-snug">
+              {name}
+            </h3>
+          </Link>
 
-        {/* Rating */}
-        <div className="flex items-center space-x-1 rtl:space-x-reverse mb-2">
-          <div className="flex text-yellow-400">
-            {[...Array(5)].map((_, i) => (
-              <i
-                key={i}
-                className={`fas fa-star text-xs ${
-                  i < Math.floor(product.rating) ? '' : 'text-gray-300'
-                }`}
-              ></i>
-            ))}
+          {/* Rating */}
+          <div className="flex items-center space-x-1 rtl:space-x-reverse mt-2">
+            <div className="flex text-amber-400 text-xs">
+              {[...Array(5)].map((_, i) => (
+                <i
+                  key={i}
+                  className={`fas fa-star ${
+                    i < Math.floor(product.rating) ? 'text-amber-400' : 'text-outline-variant/30'
+                  }`}
+                ></i>
+              ))}
+            </div>
+            <span className="text-xs text-on-surface-variant/70 font-mono">({product.review_count})</span>
           </div>
-          <span className="text-xs text-gray-500">({product.review_count})</span>
         </div>
 
-        {/* Price */}
-        <div className="flex items-center space-x-2 rtl:space-x-reverse mb-3">
-          <span className="text-lg font-bold text-purple-600">
-            {product.price.toLocaleString()} {currency}
-          </span>
-          {product.old_price && (
-            <span className="text-sm text-gray-400 line-through">
-              {product.old_price.toLocaleString()} {currency}
+        <div>
+          {/* Price */}
+          <div className="flex items-baseline space-x-2 rtl:space-x-reverse mb-3">
+            <span className="text-lg font-bold font-mono text-primary-container">
+              {product.price.toLocaleString()} <span className="text-xs text-on-surface-variant font-sans font-normal">{currency}</span>
             </span>
+            {product.old_price && (
+              <span className="text-xs text-on-surface-variant/50 font-mono line-through">
+                {product.old_price.toLocaleString()} {currency}
+              </span>
+            )}
+          </div>
+
+          {/* Add to Cart Button */}
+          <button 
+            onClick={addToCart}
+            disabled={loading}
+            className="w-full bg-surface-container hover:bg-primary-container text-on-surface hover:text-on-primary-container border border-outline-variant/40 hover:border-primary-container py-2.5 rounded-lg font-medium text-xs font-mono uppercase tracking-wider transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.98]"
+          >
+            {loading ? (
+              <span>{tCart('adding')}</span>
+            ) : (
+              <>
+                <i className="fas fa-cart-plus text-xs"></i>
+                <span>{tProduct('addToCart')}</span>
+              </>
+            )}
+          </button>
+          {message && (
+            <div className={`mt-2 text-xs font-mono text-center py-1 px-2 rounded ${
+              message.includes(tCart('error')) || message.includes(tCart('loginFirst')) 
+                ? 'text-red-400 bg-red-950/40 border border-red-500/30' 
+                : 'text-emerald-400 bg-emerald-950/40 border border-emerald-500/30'
+            }`}>
+              {message}
+            </div>
           )}
         </div>
-
-        {/* Add to Cart Button */}
-        <button 
-          onClick={addToCart}
-          disabled={loading}
-          className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? (
-            <span>{tCart('adding')}</span>
-          ) : (
-            <>
-              <i className="fas fa-cart-plus ml-2 rtl:ml-0 rtl:mr-2"></i>
-              {tProduct('addToCart')}
-            </>
-          )}
-        </button>
-        {message && (
-          <div className={`mt-2 text-sm text-center ${
-            message.includes(tCart('error')) || message.includes(tCart('loginFirst')) 
-              ? 'text-red-600' 
-              : 'text-green-600'
-          }`}>
-            {message}
-          </div>
-        )}
       </div>
     </div>
   );

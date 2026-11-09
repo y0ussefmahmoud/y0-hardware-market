@@ -87,13 +87,16 @@ export default function ShopFilters({ categories }: ShopFiltersProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 sticky top-20">
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="font-bold text-lg">{tFilters('title')}</h3>
+    <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 sticky top-24 backdrop-blur-md shadow-lg">
+      <div className="flex justify-between items-center mb-6 pb-3 border-b border-outline-variant/20">
+        <h3 className="font-mono font-bold text-sm tracking-wider uppercase text-on-surface flex items-center gap-2">
+          <i className="fas fa-filter text-primary-container text-xs"></i>
+          <span>{tFilters('title')}</span>
+        </h3>
         {(selectedCategory || selectedBrand || maxPrice < 500000) && (
           <button 
             onClick={handleClear}
-            className="text-sm text-red-500 hover:text-red-700 transition-colors"
+            className="text-xs font-mono text-red-400 hover:text-red-300 transition-colors uppercase tracking-wider"
           >
             {tFilters('clearAll')}
           </button>
@@ -102,29 +105,31 @@ export default function ShopFilters({ categories }: ShopFiltersProps) {
       
       {/* Categories */}
       <div className="mb-6">
-        <h4 className="font-semibold mb-3">{tCategories('title')}</h4>
-        <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
-          <label className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer">
+        <h4 className="font-mono text-xs uppercase tracking-wider text-primary-container font-semibold mb-3">
+          // {tCategories('title')}
+        </h4>
+        <div className="space-y-2.5 max-h-48 overflow-y-auto pr-1">
+          <label className="flex items-center space-x-2.5 rtl:space-x-reverse cursor-pointer group">
             <input 
               type="radio" 
               name="category"
               checked={selectedCategory === ''}
               onChange={() => setSelectedCategory('')}
-              className="rounded-full text-purple-600 focus:ring-purple-500" 
+              className="accent-cyan-400 w-4 h-4 bg-surface-container border-outline-variant/50 focus:ring-0 cursor-pointer" 
             />
-            <span className="text-gray-700 text-sm">{tFilters('allCategories')}</span>
+            <span className="text-on-surface-variant group-hover:text-on-surface text-sm transition-colors">{tFilters('allCategories')}</span>
           </label>
           {categories.map((category) => (
-            <label key={category.id} className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer">
+            <label key={category.id} className="flex items-center space-x-2.5 rtl:space-x-reverse cursor-pointer group">
               <input 
                 type="radio" 
                 name="category"
                 value={category.id}
                 checked={selectedCategory === category.id.toString()}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="rounded-full text-purple-600 focus:ring-purple-500" 
+                className="accent-cyan-400 w-4 h-4 bg-surface-container border-outline-variant/50 focus:ring-0 cursor-pointer" 
               />
-              <span className="text-gray-700 text-sm">{locale === 'ar' ? category.name_ar : category.name}</span>
+              <span className="text-on-surface-variant group-hover:text-on-surface text-sm transition-colors">{locale === 'ar' ? category.name_ar : category.name}</span>
             </label>
           ))}
         </div>
@@ -133,9 +138,11 @@ export default function ShopFilters({ categories }: ShopFiltersProps) {
       {/* Price Range */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-3">
-          <h4 className="font-semibold">{tFilters('priceRange')}</h4>
-          <span className="text-sm font-bold text-purple-600">
-            {tFilters('upTo')} {maxPrice.toLocaleString()} {tFooter('currency')}
+          <h4 className="font-mono text-xs uppercase tracking-wider text-primary-container font-semibold">
+            // {tFilters('priceRange')}
+          </h4>
+          <span className="text-xs font-mono font-bold text-primary-container">
+            &le; {maxPrice.toLocaleString()} {tFooter('currency')}
           </span>
         </div>
         <div className="space-y-2">
@@ -146,40 +153,42 @@ export default function ShopFilters({ categories }: ShopFiltersProps) {
             step="500"
             value={maxPrice}
             onChange={(e) => setMaxPrice(parseInt(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600" 
+            className="w-full h-1.5 bg-surface-container rounded-lg appearance-none cursor-pointer accent-cyan-400" 
           />
-          <div className="flex justify-between text-xs text-gray-500">
+          <div className="flex justify-between text-[11px] font-mono text-on-surface-variant/60">
             <span>0 {tFooter('currency')}</span>
-            <span>500,000 {tFooter('currency')}</span>
+            <span>500k {tFooter('currency')}</span>
           </div>
         </div>
       </div>
 
       {/* Brand */}
       <div className="mb-6">
-        <h4 className="font-semibold mb-3">{tFilters('brand')}</h4>
-        <div className="space-y-2">
-          <label className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer">
+        <h4 className="font-mono text-xs uppercase tracking-wider text-primary-container font-semibold mb-3">
+          // {tFilters('brand')}
+        </h4>
+        <div className="space-y-2.5">
+          <label className="flex items-center space-x-2.5 rtl:space-x-reverse cursor-pointer group">
             <input 
               type="radio" 
               name="brand"
               checked={selectedBrand === ''}
               onChange={() => setSelectedBrand('')}
-              className="rounded-full text-purple-600 focus:ring-purple-500" 
+              className="accent-cyan-400 w-4 h-4 bg-surface-container border-outline-variant/50 focus:ring-0 cursor-pointer" 
             />
-            <span className="text-gray-700 text-sm">{tFilters('allBrands')}</span>
+            <span className="text-on-surface-variant group-hover:text-on-surface text-sm transition-colors">{tFilters('allBrands')}</span>
           </label>
           {['Intel', 'AMD', 'NVIDIA', 'ASUS', 'MSI'].map((brand) => (
-            <label key={brand} className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer">
+            <label key={brand} className="flex items-center space-x-2.5 rtl:space-x-reverse cursor-pointer group">
               <input 
                 type="radio" 
                 name="brand"
                 value={brand}
                 checked={selectedBrand === brand}
                 onChange={(e) => setSelectedBrand(e.target.value)}
-                className="rounded-full text-purple-600 focus:ring-purple-500" 
+                className="accent-cyan-400 w-4 h-4 bg-surface-container border-outline-variant/50 focus:ring-0 cursor-pointer" 
               />
-              <span className="text-gray-700 text-sm">{brand}</span>
+              <span className="text-on-surface-variant group-hover:text-on-surface text-sm transition-colors">{brand}</span>
             </label>
           ))}
         </div>
@@ -187,7 +196,7 @@ export default function ShopFilters({ categories }: ShopFiltersProps) {
 
       <button 
         onClick={handleApply}
-        className="w-full bg-purple-600 text-white py-2.5 rounded-lg hover:bg-purple-700 transition-colors font-semibold shadow-sm"
+        className="w-full bg-primary-container text-on-primary-container py-2.5 rounded-lg hover:shadow-[0_0_20px_rgba(0,242,254,0.35)] transition-all font-mono font-bold text-xs uppercase tracking-wider active:scale-[0.98]"
       >
         {tFilters('apply')}
       </button>

@@ -126,7 +126,12 @@ function getAllowedOrigins(): string[] {
   ) as string[];
 
   if (process.env.NODE_ENV !== 'production') {
-    origins.push('http://localhost:3200', 'http://127.0.0.1:3200');
+    origins.push(
+      'http://localhost:3200',
+      'http://127.0.0.1:3200',
+      'http://10.20.0.1:3200',
+      'http://10.20.0.1'
+    );
   }
 
   return origins;

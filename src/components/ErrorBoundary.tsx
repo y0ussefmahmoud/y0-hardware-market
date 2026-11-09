@@ -42,22 +42,24 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-          <div className="text-center p-8">
-            <div className="text-6xl mb-4">⚠️</div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        <div className="min-h-screen flex items-center justify-center bg-surface text-on-surface">
+          <div className="text-center p-8 bg-surface-container-low border border-outline-variant/30 rounded-2xl max-w-md shadow-2xl">
+            <div className="w-16 h-16 rounded-2xl bg-red-950/40 border border-red-500/30 flex items-center justify-center text-red-400 text-2xl mx-auto mb-4">
+              <i className="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 className="text-xl font-bold font-mono text-on-surface mb-3">
               {typeof window !== 'undefined' && window.location.pathname.startsWith('/en')
-                ? 'Something went wrong'
-                : 'حدث خطأ ما'}
+                ? 'CRITICAL SYSTEM FAULT'
+                : 'حدث خطأ في النظام'}
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-on-surface-variant font-mono text-xs mb-6">
               {typeof window !== 'undefined' && window.location.pathname.startsWith('/en')
-                ? 'An unexpected error occurred. Please try again.'
-                : 'نأسف، حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.'}
+                ? 'An unexpected error occurred during execution. Please reset the runtime.'
+                : 'نأسف، حدث خطأ غير متوقع. يرجى إعادة تحميل الصفحة.'}
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+              className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-mono font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_20px_rgba(0,242,254,0.35)] transition-all"
             >
               {typeof window !== 'undefined' && window.location.pathname.startsWith('/en')
                 ? 'Reload Page'

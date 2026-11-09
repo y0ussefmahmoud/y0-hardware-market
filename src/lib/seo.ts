@@ -83,5 +83,15 @@ export function generateMetadata({
     verification: {
       google: process.env.GOOGLE_VERIFICATION,
     },
+    icons: {
+      icon: [
+        { url: '/favicon.ico' },
+        { url: '/y0-icon-only.ico' },
+        { url: '/assets/y0-icon-only.ico' },
+        { url: '/assets/y0-cyber-logo.svg', type: 'image/svg+xml' },
+      ],
+      shortcut: '/favicon.ico',
+      apple: '/assets/y0-cyber-logo.png',
+    },
   };
 }

@@ -42,25 +42,58 @@ export default function CartPage() {
       const res = await fetch('/api/cart', {
         credentials: 'include'
       });
+      
+      if (!res.ok) {
+        // If 401 Unauthorized or guest session, handle gracefully without endless spinning
+        if (res.status === 401) {
+          try {
+            const hold = typeof window !== 'undefined' ? localStorage.getItem('y0_silicon_lock') : null;
+            if (hold) {
+              const parsed = JSON.parse(hold);
+              if (parsed.expiresAt > Date.now()) {
+                setCartItems([{
+                  cart_id: 999999,
+                  quantity: 1,
+                  id: parsed.productId || 1,
+                  name: parsed.name || 'Silicon Deal Hold',
+                  name_ar: parsed.name_ar || 'حجز عتاد سيليكون حصري',
+                  price: parsed.price || 114999,
+                  old_price: null,
+                  images: parsed.image ? JSON.stringify([parsed.image]) : '[]',
+                  stock_quantity: 1,
+                  total_price: parsed.price || 114999,
+                }]);
+                setSubtotal(parsed.price || 114999);
+                return;
+              }
+            }
+          } catch (e) {}
+          setCartItems([]);
+          setSubtotal(0);
+          return;
+        }
+      }
+
       const data = await res.json();
       
-      console.log('Cart API response:', data);
-      
-      if (data.status === 'success') {
-        setCartItems(data.data.items);
-        setSubtotal(data.data.subtotal);
+      if (data.status === 'success' && data.data) {
+        setCartItems(data.data.items || []);
+        setSubtotal(data.data.subtotal || 0);
       } else {
-        console.error('Cart API error:', data.message);
+        setCartItems([]);
+        setSubtotal(0);
       }
     } catch (error) {
-      console.error('Error fetching cart:', error);
+      console.warn('Cart data unavailable (offline or guest):', error);
+      setCartItems([]);
+      setSubtotal(0);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    setTimeout(() => { fetchCart(); }, 0);
+    fetchCart();
   }, []);
 
   const updateQuantity = async (productId: number, newQuantity: number) => {
@@ -105,21 +138,23 @@ export default function CartPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+      <div className="container mx-auto px-4 py-32 text-center bg-surface min-h-[60vh] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-2 border-primary-container/20 border-t-primary-container mx-auto"></div>
       </div>
     );
   }
 
   if (cartItems.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center">
-        <i className="fas fa-shopping-cart text-6xl text-gray-300 mb-6"></i>
-        <h1 className="text-2xl font-bold mb-4">{tCart('empty')}</h1>
-        <p className="text-gray-600 mb-6">{tCart('emptyMessage')}</p>
+      <div className="container mx-auto px-4 py-32 text-center bg-surface text-on-surface min-h-[60vh] flex flex-col items-center justify-center">
+        <div className="w-20 h-20 rounded-2xl bg-surface-container border border-outline-variant/40 flex items-center justify-center text-primary-container text-3xl mb-6 shadow-lg">
+          <i className="fas fa-shopping-cart"></i>
+        </div>
+        <h1 className="text-2xl font-bold font-mono mb-2 text-on-surface">{tCart('empty')}</h1>
+        <p className="text-on-surface-variant font-mono text-xs max-w-sm mb-8">{tCart('emptyMessage')}</p>
         <Link
           href={`/${locale}/shop`}
-          className="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+          className="inline-block bg-primary-container text-on-primary-container px-8 py-3.5 rounded-lg font-mono font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_25px_rgba(0,242,254,0.4)] transition-all"
         >
           {tCart('browseProducts')}
         </Link>
@@ -128,12 +163,17 @@ export default function CartPage() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-surface text-on-surface min-h-screen">
       {/* Page Header */}
-      <div className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-2">{tCart('title')}</h1>
-          <p className="text-gray-600">{cartItems.length} {tCart('items')}</p>
+      <div className="bg-gradient-to-b from-surface-container-lowest via-surface-container to-surface border-b border-outline-variant/30 py-10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(0,242,254,0.08),rgba(11,19,38,0))] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary-container/30 text-primary-container font-mono text-xs uppercase tracking-widest mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+            <span>DISPATCH QUEUE</span>
+          </div>
+          <h1 className="text-3xl font-extrabold tracking-tight mb-2 text-on-surface">{tCart('title')}</h1>
+          <p className="text-on-surface-variant font-mono text-xs">{cartItems.length} {tCart('items')}</p>
         </div>
       </div>
 
@@ -141,9 +181,8 @@ export default function CartPage() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Cart Items */}
           <div className="flex-1">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl overflow-hidden shadow-lg">
               {cartItems.map((item) => {
-                // Parse images JSON string to get first image
                 let imageUrl = '';
                 if (item.images) {
                   try {
@@ -159,59 +198,60 @@ export default function CartPage() {
                 }
 
                 return (
-                <div key={item.cart_id} className="flex items-center p-6 border-b last:border-b-0">
+                <div key={item.cart_id} className="flex flex-wrap sm:flex-nowrap items-center p-6 border-b border-outline-variant/20 last:border-b-0 gap-4">
                   {/* Product Image */}
-                  <div className="w-24 h-24 flex-shrink-0">
+                  <div className="w-20 h-20 bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-1 flex-shrink-0 flex items-center justify-center overflow-hidden">
                     {imageUrl ? (
                       <img
                         src={imageUrl}
                         alt={item.name_ar}
-                        className="w-full h-full object-cover rounded"
+                        className="w-full h-full object-contain"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gray-200 rounded flex items-center justify-center">
-                        <span className="text-gray-400 text-xs">No image</span>
+                      <div className="w-full h-full bg-surface-container flex items-center justify-center">
+                        <span className="text-outline-variant/60 font-mono text-[10px]">No image</span>
                       </div>
                     )}
                   </div>
 
                   {/* Product Info */}
-                  <div className="flex-1 mr-4 rtl:mr-0 rtl:ml-4">
-                    <Link href={`/${locale}/product/${item.id}`} className="font-semibold hover:text-purple-600">
+                  <div className="flex-1 min-w-[200px]">
+                    <Link href={`/${locale}/product/${item.id}`} className="font-semibold text-sm text-on-surface hover:text-primary-container transition-colors line-clamp-2">
                       {locale === 'ar' ? item.name_ar : item.name}
                     </Link>
-                    <p className="text-gray-600 text-sm mt-1">{item.price.toLocaleString()} {tFooter('currency')}</p>
+                    <p className="text-on-surface-variant/80 font-mono text-xs mt-1">{item.price.toLocaleString()} {tFooter('currency')}</p>
                   </div>
 
                   {/* Quantity */}
-                  <div className="flex items-center border rounded">
+                  <div className="flex items-center bg-surface-container border border-outline-variant/40 rounded-lg font-mono text-xs">
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      className="px-3 py-2 hover:bg-gray-100"
+                      className="px-3 py-1.5 hover:bg-surface-container-high text-on-surface transition-colors disabled:opacity-30"
                       disabled={item.quantity <= 1}
                     >
                       -
                     </button>
-                    <span className="px-4 py-2 border-x">{item.quantity}</span>
+                    <span className="px-3 py-1.5 border-x border-outline-variant/30 text-on-surface font-semibold">{item.quantity}</span>
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="px-3 py-2 hover:bg-gray-100"
+                      className="px-3 py-1.5 hover:bg-surface-container-high text-on-surface transition-colors"
                     >
                       +
                     </button>
                   </div>
 
                   {/* Price */}
-                  <div className="mr-4 rtl:mr-0 rtl:ml-4 text-right">
-                    <p className="font-bold text-purple-600">
-                      {item.total_price.toLocaleString()} {tFooter('currency')}
+                  <div className="text-right font-mono min-w-[100px]">
+                    <p className="font-bold text-sm text-primary-container">
+                      {item.total_price.toLocaleString()} <span className="text-[10px] text-on-surface-variant font-sans">{tFooter('currency')}</span>
                     </p>
                   </div>
 
                   {/* Remove */}
                   <button 
                     onClick={() => removeItem(item.id)}
-                    className="text-red-500 hover:text-red-700"
+                    className="w-8 h-8 rounded-lg bg-surface-container hover:bg-red-950/40 text-on-surface-variant hover:text-red-400 border border-outline-variant/30 hover:border-red-500/30 transition-all flex items-center justify-center text-xs"
+                    title="Remove item"
                   >
                     <i className="fas fa-trash"></i>
                   </button>
@@ -221,14 +261,14 @@ export default function CartPage() {
             </div>
 
             {/* Coupon Code */}
-            <div className="bg-white rounded-lg shadow-md p-6 mt-6">
-              <div className="flex space-x-4 rtl:space-x-reverse">
+            <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-5 mt-6 shadow-md">
+              <div className="flex space-x-3 rtl:space-x-reverse">
                 <input
                   type="text"
                   placeholder={tCart('couponPlaceholder')}
-                  className="flex-1 border rounded-lg px-4 py-2"
+                  className="flex-1 bg-surface-container border border-outline-variant/40 rounded-lg px-4 py-2.5 text-on-surface font-mono text-xs uppercase tracking-wider focus:border-primary-container focus:outline-none"
                 />
-                <button className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                <button className="bg-surface-container hover:bg-primary-container text-on-surface hover:text-on-primary-container border border-outline-variant/40 hover:border-primary-container px-6 py-2.5 rounded-lg font-mono font-bold text-xs uppercase tracking-wider transition-all">
                   {tCart('apply')}
                 </button>
               </div>
@@ -237,40 +277,43 @@ export default function CartPage() {
 
           {/* Cart Summary */}
           <div className="lg:w-96">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-20">
-              <h3 className="font-bold text-lg mb-6">{tCart('title')}</h3>
+            <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 sticky top-24 shadow-xl">
+              <h3 className="font-mono font-bold text-sm uppercase tracking-wider mb-6 text-on-surface pb-3 border-b border-outline-variant/20 flex items-center gap-2">
+                <i className="fas fa-receipt text-primary-container text-xs"></i>
+                <span>{tCart('title')} Summary</span>
+              </h3>
               
-              <div className="space-y-4 mb-6">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">{tCart('subtotal')}</span>
-                  <span className="font-semibold">{subtotal.toLocaleString()} {tFooter('currency')}</span>
+              <div className="space-y-3.5 mb-6 font-mono text-xs">
+                <div className="flex justify-between text-on-surface-variant">
+                  <span>{tCart('subtotal')}</span>
+                  <span className="font-semibold text-on-surface">{subtotal.toLocaleString()} {tFooter('currency')}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">{tCart('shipping')}</span>
-                  <span className="font-semibold">{locale === 'ar' ? 'مجاني' : 'Free'}</span>
+                <div className="flex justify-between text-on-surface-variant">
+                  <span>{tCart('shipping')}</span>
+                  <span className="text-emerald-400 font-semibold">{locale === 'ar' ? 'مجاني' : 'Free'}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">{tCart('discount')}</span>
-                  <span className="font-semibold text-red-500">0 {tFooter('currency')}</span>
+                <div className="flex justify-between text-on-surface-variant">
+                  <span>{tCart('discount')}</span>
+                  <span className="text-on-surface-variant/70">0 {tFooter('currency')}</span>
                 </div>
-                <div className="border-t pt-4 flex justify-between">
-                  <span className="font-bold text-lg">{tCart('total')}</span>
-                  <span className="font-bold text-lg text-purple-600">{subtotal.toLocaleString()} {tFooter('currency')}</span>
+                <div className="border-t border-outline-variant/30 pt-4 flex justify-between items-baseline">
+                  <span className="font-bold text-sm uppercase text-on-surface">{tCart('total')}</span>
+                  <span className="font-bold text-xl text-primary-container">{subtotal.toLocaleString()} <span className="text-xs text-on-surface-variant font-sans font-normal">{tFooter('currency')}</span></span>
                 </div>
               </div>
 
               <Link
                 href={`/${locale}/checkout`}
-                className="block w-full bg-purple-600 text-white py-3 rounded-lg text-center font-semibold hover:bg-purple-700 transition-colors"
+                className="block w-full bg-primary-container text-on-primary-container py-3.5 rounded-lg text-center font-mono font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_20px_rgba(0,242,254,0.35)] active:scale-[0.98] transition-all"
               >
                 {tCart('checkout')}
               </Link>
 
               <Link
                 href={`/${locale}/shop`}
-                className="block w-full mt-4 text-center text-purple-600 hover:text-purple-700"
+                className="block w-full mt-4 text-center text-xs font-mono uppercase tracking-wider text-primary-container hover:underline"
               >
-                {tCart('continueShopping')}
+                &larr; {tCart('continueShopping')}
               </Link>
             </div>
           </div>

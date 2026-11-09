@@ -60,7 +60,7 @@ export function getUserFromCookie(request: Request): any {
 }
 
 export function getUserFromNextRequest(request: NextRequest): any {
-  const token = request.cookies.get('token')?.value;
+  const token = getTokenFromRequest(request);
   if (!token) return null;
   return verifyToken(token);
 }
