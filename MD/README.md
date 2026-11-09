@@ -584,3 +584,33 @@ export async function GET() {
    - `npm run build` compiled with Exit Code 0 across all 39 static and dynamic routes.
 
 ---
+
+## 🚀 Release Log: Admin Redesign & Multi-Vendor Seller Role Integration (v1.1.25)
+**Timestamp:** 2026-11-10 00:15:00 (UTC+2 Cairo)
+**Status:** Completed (Database Migrated, Multi-Vendor Architecture & Seller Portal Implemented)
+
+### 📌 Summary of Changes:
+1. **Database Schema & Multi-Vendor Support:**
+   - Modified `users.role` enum to include `'seller'`: `ENUM('user', 'seller', 'admin')`.
+   - Added `seller_id INT(11) NULL DEFAULT NULL` foreign key column with index to `products` table.
+2. **Authentication & Authorization Core (`src/lib/auth.ts`):**
+   - Added `requireSellerOrAdmin(request)` helper to guard multi-vendor endpoints.
+   - Added `requireAuth(request)` standard helper for verified user sessions.
+3. **Products API Multi-Vendor Ownership:**
+   - `POST /api/admin/products`: Automatically binds `seller_id` to the authenticated seller user ID.
+   - `PUT /api/admin/products/[id]`: Enforces ownership check; sellers can only mutate their own inventory.
+   - `DELETE /api/admin/products/[id]`: Restricts product deletion to owner sellers or system admins.
+4. **Seller Portal & Dedicated Dashboard:**
+   - Created `src/app/[locale]/seller/page.tsx` for sellers with isolated inventory control.
+   - Created `src/app/api/seller/products/route.ts` to fetch seller-owned listings strictly.
+   - Added guard redirecting non-seller accounts away from vendor views.
+5. **Admin Operations Command Center & User Role Management:**
+   - Integrated full cyber-industrial telemetry and Command Center tab.
+   - Enhanced `UsersTable` in `src/app/[locale]/admin/page.tsx` with dynamic role selector (`user` <-> `seller` <-> `admin`).
+   - Updated `PUT /api/admin/users` to support promoting/demoting users to `seller`.
+6. **Safety & Verification:**
+   - Brand footer preserved: "Designed & Powered by Y0ussef.com" and hotline +20 1129334173 (01129334173).
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Compiled successfully with Exit Code 0 across 40 dynamic and static routes.
+
+---

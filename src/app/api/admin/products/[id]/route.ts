@@ -9,7 +9,7 @@
 
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
-import { requireAdmin, unauthorizedAdminResponse } from '@/lib/auth';
+import { requireAdmin, requireSellerOrAdmin, unauthorizedAdminResponse } from '@/lib/auth';
 import { rejectIfUnsafeMutation } from '@/lib/security-http';
 import { revalidateTag, revalidatePath } from 'next/cache';
 
@@ -22,13 +22,21 @@ export async function PUT(
     const unsafe = rejectIfUnsafeMutation(request);
     if (unsafe) return unsafe;
 
-    const admin = await requireAdmin(request);
-    if (!admin) {
+    const user = await requireSellerOrAdmin(request);
+    if (!user) {
       return unauthorizedAdminResponse();
     }
 
     const body = await request.json();
     const { id } = await params;
+
+    // Sellers can only edit their own products
+    if (user.role === 'seller') {
+      const [owned] = await pool.query('SELECT seller_id FROM products WHERE id = ?', [id]) as any;
+      if (!owned || owned.length === 0 || owned[0].seller_id !== user.id) {
+        return NextResponse.json({ error: 'Access denied: not your product' }, { status: 403 });
+      }
+    }
 
     // Get previous slug for revalidation if slug changed
     let previousSlug: string | null = null;
@@ -115,12 +123,20 @@ export async function DELETE(
     const unsafe = rejectIfUnsafeMutation(request);
     if (unsafe) return unsafe;
 
-    const admin = await requireAdmin(request);
-    if (!admin) {
+    const user = await requireSellerOrAdmin(request);
+    if (!user) {
       return unauthorizedAdminResponse();
     }
 
     const { id } = await params;
+
+    // Sellers can only delete their own products
+    if (user.role === 'seller') {
+      const [owned] = await pool.query('SELECT seller_id FROM products WHERE id = ?', [id]) as any;
+      if (!owned || owned.length === 0 || owned[0].seller_id !== user.id) {
+        return NextResponse.json({ error: 'Access denied: not your product' }, { status: 403 });
+      }
+    }
 
     // Get slug before deletion for revalidation
     let slugToDelete: string | null = null;

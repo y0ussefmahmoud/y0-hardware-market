@@ -927,18 +927,25 @@ function UsersTable() {
               <td className="px-4 py-3">{user.email}</td>
               <td className="px-4 py-3">{user.phone || '-'}</td>
               <td className="px-4 py-3">
-                <span className={`px-2 py-1 rounded text-xs ${user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-800'}`}>
-                  {user.role === 'admin' ? tAdmin('roles.admin') : tAdmin('roles.user')}
+                <span className={`px-2 py-1 rounded text-xs ${
+                  user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 
+                  user.role === 'seller' ? 'bg-blue-100 text-blue-800' : 
+                  'bg-gray-100 text-gray-800'
+                }`}>
+                  {user.role === 'admin' ? tAdmin('roles.admin') : user.role === 'seller' ? (tAdmin('roles.seller', { defaultValue: 'Seller' })) : tAdmin('roles.user')}
                 </span>
               </td>
               <td className="px-4 py-3">{new Date(user.created_at).toLocaleDateString('ar-EG')}</td>
               <td className="px-4 py-3">
-                <button 
-                  onClick={() => updateUserRole(user.id, user.role === 'user' ? 'admin' : 'user')}
-                  className="text-purple-600 hover:text-purple-800"
+                <select
+                  value={user.role}
+                  onChange={(e) => updateUserRole(user.id, e.target.value)}
+                  className="px-2 py-1 border rounded text-sm bg-white"
                 >
-                  {user.role === 'user' ? tAdmin('roles.admin') : tAdmin('roles.user')}
-                </button>
+                  <option value="user">{tAdmin('roles.user')}</option>
+                  <option value="seller">{tAdmin('roles.seller', { defaultValue: 'Seller' })}</option>
+                  <option value="admin">{tAdmin('roles.admin')}</option>
+                </select>
               </td>
             </tr>
           ))}

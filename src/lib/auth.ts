@@ -105,6 +105,36 @@ export async function requireAdmin(
   return user;
 }
 
+export async function requireSellerOrAdmin(
+  request: Request | NextRequest
+): Promise<AuthUser | null> {
+  const token = getTokenFromRequest(request);
+  if (!token) return null;
+
+  const decoded = verifyToken(token);
+  if (!decoded?.id) return null;
+
+  const user = await getUserFromDb(decoded.id);
+  if (!user || (user.role !== 'admin' && user.role !== 'seller')) return null;
+
+  return user;
+}
+
+export async function requireAuth(
+  request: Request | NextRequest
+): Promise<AuthUser | null> {
+  const token = getTokenFromRequest(request);
+  if (!token) return null;
+
+  const decoded = verifyToken(token);
+  if (!decoded?.id) return null;
+
+  const user = await getUserFromDb(decoded.id);
+  if (!user) return null;
+
+  return user;
+}
+
 export function unauthorizedAdminResponse(): NextResponse {
   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 }

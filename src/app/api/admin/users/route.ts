@@ -44,7 +44,7 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
     const { id, role } = body;
 
-    if (!id || !role || !['user', 'admin'].includes(role)) {
+    if (!id || !role || !['user', 'seller', 'admin'].includes(role)) {
       return NextResponse.json(
         { status: 'error', message: 'Invalid request' },
         { status: 400 }

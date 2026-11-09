@@ -9,15 +9,15 @@
 
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
-import { requireAdmin, unauthorizedAdminResponse } from '@/lib/auth';
+import { requireAdmin, requireSellerOrAdmin, unauthorizedAdminResponse } from '@/lib/auth';
 import { rejectIfUnsafeMutation } from '@/lib/security-http';
 import { revalidateTag, revalidatePath } from 'next/cache';
 
 // GET all products
 export async function GET(request: Request) {
   try {
-    const admin = await requireAdmin(request);
-    if (!admin) {
+    const user = await requireSellerOrAdmin(request);
+    if (!user) {
       return unauthorizedAdminResponse();
     }
 
@@ -99,8 +99,8 @@ export async function POST(request: Request) {
     const unsafe = rejectIfUnsafeMutation(request);
     if (unsafe) return unsafe;
 
-    const admin = await requireAdmin(request);
-    if (!admin) {
+    const user = await requireSellerOrAdmin(request);
+    if (!user) {
       return unauthorizedAdminResponse();
     }
 
@@ -127,8 +127,8 @@ export async function POST(request: Request) {
       `INSERT INTO products (
         name, name_ar, slug, description, description_ar,
         price, old_price, category_id, stock_quantity, brand,
-        images, specifications, badge, is_active
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        images, specifications, badge, is_active, seller_id
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         name,
         name_ar,
@@ -144,6 +144,7 @@ export async function POST(request: Request) {
         specifications ? JSON.stringify(specifications) : null,
         badge || null,
         is_active !== false,
+        user.role === 'seller' ? user.id : null,
       ]
     ) as any;
 
