@@ -200,3 +200,23 @@ RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
 - ✅ يضمن التوافق مع بيئة السيرفر
 - ❌ يستهلك موارد السيرفر أثناء البناء
 - ❌ قد يستغرق وقتاً إذا كان السيرفر بطيئاً
+
+
+---
+
+## 🚀 Production Deployment & Architecture Update (v1.3.6)
+**Timestamp:** 2026-11-10 15:10:00 (UTC+2 Cairo)  
+**Status:** Verification Completed (0 Errors, 40 Routes Generated)
+
+### 📌 Summary of Updates:
+1. **Webpack Build Enforce:**
+   - Switched production build to `next build --webpack` in `package.json` to prevent Turbopack CSS internal errors with Tailwind CSS v4 on remote hosting servers.
+2. **Direct DB Calls for Server Components:**
+   - Refactored `src/app/[locale]/shop/page.tsx` and `src/app/[locale]/product/[slug]/page.tsx` to read data directly from MySQL using `pool.query`, resolving SSR `fetch failed` loopback errors.
+3. **Multi-Vendor Seller Engine:**
+   - Database migrated to support `role ENUM('user', 'seller', 'admin')` and `products.seller_id` foreign key.
+   - Dedicated seller portal active at `/[locale]/seller` with isolated CRUD inventory management.
+4. **Universal Account Hub & Header Navigation:**
+   - All authenticated users navigate to `/[locale]/account` from the top header avatar, with distinct badges and direct dashboard launcher buttons.
+5. **Brand Continuity:**
+   - Retained hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.

@@ -677,3 +677,24 @@ export async function GET() {
    - `npm run build` (`next build --webpack`): Compiled successfully with Exit Code 0 across all 40 dynamic and static routes.
 
 ---
+
+## 📚 Architecture & Documentation Overhaul Log (v1.3.6)
+**Timestamp:** 2026-11-10 15:10:00 (UTC+2 Cairo)
+**Status:** Completed (Complete Architecture Blueprint, System Route Map & Multi-Vendor Permissions Matrix Documented)
+
+### 📌 Architecture Summary (v1.3.6):
+1. **System Route Architecture (40 Routes Audited):**
+   - Documented all 15 page routes and 25 API/static endpoints in `MD/ARCHITECTURE.md` including App Router structures and dynamic parameters.
+2. **Multi-Vendor Role Matrix:**
+   - Documented explicit feature privileges across `Guest`, `User`, `Seller`, and `Admin`.
+3. **Database Relational Schema:**
+   - Visualized MySQL 8.0 schema with Mermaid diagrams covering `users` (with `role ENUM('user', 'seller', 'admin')`), `products` (with `seller_id`), `orders`, `order_items`, and `categories`.
+4. **Production Deployment Standards:**
+   - Documented Webpack compilation parameters (`next build --webpack`), direct database SSR querying, and SameSite=Lax cookie preservation.
+5. **Brand Continuity:**
+   - Retained hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+6. **Safety & Verification:**
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Compiled successfully with Exit Code 0 across all 40 dynamic and static routes.
+
+---
