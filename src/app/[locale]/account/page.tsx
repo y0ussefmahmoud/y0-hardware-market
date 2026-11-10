@@ -128,7 +128,7 @@ export default function AccountPage() {
                       <label className="block text-xs font-mono uppercase tracking-wider text-on-surface-variant mb-1.5">{tAccount('role')}</label>
                       <input
                         type="text"
-                        defaultValue={user?.role === 'admin' ? tAccount('admin') : tAccount('user')}
+                        defaultValue={user?.role === 'admin' ? tAccount('admin') : user?.role === 'seller' ? (tAccount('seller', { defaultValue: 'Seller' })) : tAccount('user')}
                         className="w-full bg-surface-container border border-outline-variant/40 rounded-lg px-4 py-2.5 text-primary-container font-mono text-sm uppercase opacity-90 cursor-not-allowed"
                         disabled
                       />
@@ -138,7 +138,7 @@ export default function AccountPage() {
                   <div className="mt-8 pt-6 border-t border-outline-variant/20 flex flex-wrap gap-4">
                     <button
                       onClick={logout}
-                      className="bg-red-950/40 hover:bg-red-900/60 text-red-400 border border-red-500/30 px-6 py-2.5 rounded-lg font-mono font-bold text-xs uppercase tracking-wider transition-colors"
+                      className="bg-red-950/40 hover:bg-red-900/60 text-red-400 border border-red-500/30 px-6 py-2.5 rounded-lg font-mono font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
                     >
                       {tAuth('logout')}
                     </button>
@@ -148,7 +148,16 @@ export default function AccountPage() {
                         className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-mono font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_20px_rgba(0,242,254,0.35)] transition-all flex items-center gap-2"
                       >
                         <i className="fas fa-gauge text-xs"></i>
-                        <span>{tAccount('dashboard')}</span>
+                        <span>{tAccount('dashboard')} (ADMIN)</span>
+                      </Link>
+                    )}
+                    {user?.role === 'seller' && (
+                      <Link
+                        href={`/${locale}/seller`}
+                        className="bg-amber-500 text-black px-6 py-2.5 rounded-lg font-mono font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_20px_rgba(245,158,11,0.35)] transition-all flex items-center gap-2"
+                      >
+                        <i className="fas fa-store text-xs"></i>
+                        <span>{tAccount('dashboard')} (SELLER)</span>
                       </Link>
                     )}
                   </div>

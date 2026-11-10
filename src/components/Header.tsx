@@ -178,7 +178,7 @@ export default function Header() {
                 /* Authenticated User State */
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <Link
-                    href={user?.role === 'admin' ? `/${locale}/admin` : `/${locale}/account`}
+                    href={`/${locale}/account`}
                     className="group flex items-center gap-1.5 bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/30 hover:border-primary-container px-2 sm:px-2.5 py-1.5 rounded transition-all text-on-surface z-20"
                     title={user?.first_name ? `${user.first_name} (${user?.role})` : 'Account'}
                     aria-label="User Account"
@@ -193,6 +193,16 @@ export default function Header() {
                     <span className="hidden lg:inline text-xs font-bold truncate max-w-[80px]">
                       {user?.first_name || 'User'}
                     </span>
+                    {user?.role === 'admin' && (
+                      <span className="bg-cyan-500/20 text-cyan-400 text-[10px] px-1.5 py-0.2 rounded uppercase border border-cyan-500/30 font-mono">
+                        Admin
+                      </span>
+                    )}
+                    {user?.role === 'seller' && (
+                      <span className="bg-amber-500/20 text-amber-400 text-[10px] px-1.5 py-0.2 rounded uppercase border border-amber-500/30 font-mono">
+                        Seller
+                      </span>
+                    )}
                   </Link>
 
                   {user?.role === 'admin' && (
@@ -206,6 +216,19 @@ export default function Header() {
                         <line x1="12" y1="19" x2="20" y2="19"></line>
                       </svg>
                       <span>ADMIN</span>
+                    </Link>
+                  )}
+                  {user?.role === 'seller' && (
+                    <Link
+                      href={`/${locale}/seller`}
+                      className="hidden md:flex items-center gap-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-2 py-1 rounded text-[10px] font-bold uppercase hover:bg-amber-500 hover:text-black transition-all"
+                      title="Seller Dashboard"
+                    >
+                      <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                      </svg>
+                      <span>SELLER</span>
                     </Link>
                   )}
                 </div>
@@ -456,7 +479,16 @@ export default function Header() {
                         className="text-tertiary-fixed font-bold py-2 px-3 rounded bg-surface-container-high"
                         onClick={closeMobileMenu}
                       >
-                        {tAccount('dashboard')}
+                        {tAccount('dashboard')} (Admin)
+                      </Link>
+                    )}
+                    {user?.role === 'seller' && (
+                      <Link
+                        href={`/${locale}/seller`}
+                        className="text-amber-400 font-bold py-2 px-3 rounded bg-surface-container-high"
+                        onClick={closeMobileMenu}
+                      >
+                        {tAccount('dashboard')} (Seller)
                       </Link>
                     )}
                     <button

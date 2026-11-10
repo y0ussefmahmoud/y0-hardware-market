@@ -654,3 +654,26 @@ export async function GET() {
    - `npm run build` (`next build --webpack`): Compiled successfully with Exit Code 0 across all 40 dynamic and static routes.
 
 ---
+
+## ⚡ Frontend Navigation Log: Unified Account Routing & Role Dashboards (v1.3.4)
+**Timestamp:** 2026-11-10 14:28:00 (UTC+2 Cairo)
+**Status:** Completed (Unified Account Routing in Header & Multi-Role Dashboards Linked)
+
+### 📌 Summary of Changes:
+1. **Universal Profile Link in Header (`src/components/Header.tsx`):**
+   - Main user profile badge/button in the top header now always routes to `/${locale}/account` for all authenticated users (User, Seller, Admin) instead of forcing admins directly into the admin panel.
+   - Added visual role indicator pills (`Admin` in cyan, `Seller` in amber) directly on the header profile badge.
+   - Maintained dedicated secondary quick-action buttons (`ADMIN` -> `/${locale}/admin`, `SELLER` -> `/${locale}/seller`).
+   - Updated mobile drawer navigation to display respective dashboard links.
+2. **Account Page Multi-Role Support (`src/app/[locale]/account/page.tsx`):**
+   - Added support for displaying the `seller` role in the profile information.
+   - Profile card now renders direct quick-launch buttons:
+     - Admin: `DASHBOARD (ADMIN)` -> `/${locale}/admin`
+     - Seller: `DASHBOARD (SELLER)` -> `/${locale}/seller`
+3. **Safety & Verification:**
+   - 0 Database / API mutations.
+   - Retained hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Compiled successfully with Exit Code 0 across all 40 dynamic and static routes.
+
+---
