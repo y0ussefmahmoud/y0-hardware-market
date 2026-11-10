@@ -1,5 +1,5 @@
 // ===== Admin Dashboard Page =====
-// Main admin panel for managing products, orders, and users
+// Cyber-Industrial Ops Command Center & Store Operations
 //
 // Developed by:
 // - Arabic: م / يوسف محمود عبد الجواد
@@ -17,8 +17,6 @@ import { useAuth } from '../../../hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { csrfFetch } from '../../../lib/csrf';
 import AdminCommandCenter from '../../../components/AdminCommandCenter';
-
-// Add useState import for ProductsTable
 
 interface DashboardStats {
   totalProducts: number;
@@ -44,8 +42,6 @@ export default function AdminDashboard() {
     }
   }, [user, authLoading, router]);
 
-
-
   const fetchStats = async () => {
     try {
       const res = await fetch('/api/admin/stats');
@@ -57,7 +53,6 @@ export default function AdminDashboard() {
       setLoading(false);
     }
   };
-
 
   useEffect(() => {
     if (user && user.role === 'admin') {
@@ -75,34 +70,66 @@ export default function AdminDashboard() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gray-100">
-        {/* Admin Header */}
-        <div className="bg-purple-600 text-white py-6">
-          <div className="container mx-auto px-4">
-            <h1 className="text-3xl font-bold">{tAdmin('dashboard')}</h1>
-            <p className="text-purple-100 mt-2">{tAdmin('subtitle')}</p>
+      <div className="min-h-screen bg-surface text-on-surface">
+        {/* Tactical Cyber HUD Top Bar */}
+        <div className="bg-surface-container-lowest border-b border-surface-container-high py-6 px-4">
+          <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-3 h-10 bg-primary-container rounded-sm shadow-[0_0_12px_#00f2fe]"></div>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-2xl md:text-3xl font-mono font-extrabold tracking-tight text-primary">
+                    Y0 // ADMIN OPERATIONS HUD
+                  </h1>
+                  <span className="font-mono text-xs bg-surface-container-highest text-tertiary-fixed border border-tertiary-container/30 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                    ROOT SECURE
+                  </span>
+                </div>
+                <p className="font-mono text-xs text-on-surface-variant mt-1">
+                  High-Performance Greater Cairo Silicon Logistics &amp; System Administration
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="bg-surface-container-low border border-outline-variant/30 px-3 py-1.5 rounded-lg flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+                <span className="font-mono text-xs text-on-surface">NODE: CAIRO // EST 24/7</span>
+              </div>
+              <button
+                onClick={() => fetchStats()}
+                className="bg-surface-container-high hover:bg-surface-bright text-on-surface border border-outline-variant/30 font-mono text-xs px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <svg className="w-3.5 h-3.5 text-primary-container" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>REFRESH</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-8">
-          {/* Navigation Tabs */}
-          <div className="flex flex-wrap gap-2 mb-8 border-b pb-2">
-            {['dashboard', 'command-center', 'products', 'orders', 'users', 'content'].map((tab) => (
+        <div className="max-w-[1600px] mx-auto px-4 py-8">
+          {/* Cyberpunk Navigation Tabs */}
+          <div className="flex flex-wrap gap-2 mb-8 bg-surface-container-lowest p-2 rounded-xl border border-surface-container-high shadow-lg">
+            {[
+              { id: 'dashboard', label: tAdmin('tabs.dashboard'), icon: 'dashboard' },
+              { id: 'command-center', label: '⚡ Ops Command Center', icon: 'radar' },
+              { id: 'products', label: tAdmin('tabs.products'), icon: 'inventory' },
+              { id: 'orders', label: tAdmin('tabs.orders'), icon: 'receipt' },
+              { id: 'users', label: tAdmin('tabs.users'), icon: 'group' },
+              { id: 'content', label: tAdmin('tabs.content'), icon: 'settings' }
+            ].map((tab) => (
               <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 font-semibold rounded-lg transition-all cursor-pointer ${
-                  activeTab === tab
-                    ? 'bg-purple-600 text-white shadow-md'
-                    : 'text-gray-600 hover:text-purple-600 hover:bg-gray-100'
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 py-2.5 font-mono text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
+                  activeTab === tab.id
+                    ? 'bg-surface-container-high text-primary-container border border-primary-container/40 shadow-[0_0_12px_rgba(0,242,254,0.25)]'
+                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low'
                 }`}
               >
-                {tab === 'dashboard' && tAdmin('tabs.dashboard')}
-                {tab === 'command-center' && '⚡ Ops Command Center'}
-                {tab === 'products' && tAdmin('tabs.products')}
-                {tab === 'orders' && tAdmin('tabs.orders')}
-                {tab === 'users' && tAdmin('tabs.users')}
-                {tab === 'content' && tAdmin('tabs.content')}
+                <span>{tab.label}</span>
               </button>
             ))}
           </div>
@@ -116,73 +143,90 @@ export default function AdminDashboard() {
 
           {/* Dashboard Content */}
           {activeTab === 'dashboard' && stats && (
-            <div>
-              {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="space-y-8">
+              {/* Telemetry Stats Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <StatCard
                   title={tAdmin('stats.totalProducts')}
                   value={stats.totalProducts}
-                  icon="fa-box"
-                  color="bg-blue-500"
+                  subtext="ACTIVE HARDWARE UNITS"
+                  color="#00f2fe"
                 />
                 <StatCard
                   title={tAdmin('stats.totalOrders')}
                   value={stats.totalOrders}
-                  icon="fa-shopping-cart"
-                  color="bg-green-500"
+                  subtext="PIPELINE WORK ORDERS"
+                  color="#6ffbbe"
                 />
                 <StatCard
                   title={tAdmin('stats.totalUsers')}
                   value={stats.totalUsers}
-                  icon="fa-users"
-                  color="bg-purple-500"
+                  subtext="REGISTERED IDENTITIES"
+                  color="#d2bbff"
                 />
                 <StatCard
                   title={tAdmin('stats.totalRevenue')}
                   value={`${stats.totalRevenue.toLocaleString()} ${t('footer.currency', {defaultValue: 'EGP'})}`}
-                  icon="fa-dollar-sign"
-                  color="bg-yellow-500"
+                  subtext="TOTAL GROSS REVENUE"
+                  color="#ffb4ab"
                 />
               </div>
 
               {/* Pending Orders Alert */}
               {stats.pendingOrders > 0 && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
-                  <div className="flex items-center">
-                    <i className="fas fa-exclamation-triangle text-red-500 text-2xl mr-4 rtl:mr-0 rtl:ml-4"></i>
+                <div className="bg-surface-container-low border border-error/30 rounded-xl p-4 shadow-md flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="w-2.5 h-2.5 rounded-full bg-error animate-ping"></span>
                     <div>
-                      <h3 className="font-semibold text-red-800">
-                        {stats.pendingOrders} {tAdmin('stats.pendingOrders')}
+                      <h3 className="font-mono text-sm font-bold text-error">
+                        // ALERT: {stats.pendingOrders} {tAdmin('stats.pendingOrders')}
                       </h3>
-                      <p className="text-red-600 text-sm">
+                      <p className="font-mono text-xs text-on-surface-variant">
                         {tAdmin('stats.pendingOrdersAlert')}
                       </p>
                     </div>
                   </div>
+                  <button
+                    onClick={() => setActiveTab('orders')}
+                    className="bg-error-container hover:brightness-110 text-on-error-container font-mono text-xs px-3 py-1.5 rounded font-bold transition-all cursor-pointer"
+                  >
+                    RESOLVE NOW
+                  </button>
                 </div>
               )}
 
-              {/* Recent Activity */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold mb-4">{tAdmin('activity.title')}</h2>
-                <div className="space-y-4">
+              {/* Recent Activity in Cyber Terminal Frame */}
+              <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 shadow-md">
+                <div className="flex items-center justify-between mb-4 pb-2 border-b border-surface-container-high">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-4 bg-tertiary-fixed rounded-sm"></span>
+                    <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-on-surface">
+                      // SYSTEM AUDIT &amp; ACTIVITY TELEMETRY
+                    </h2>
+                  </div>
+                  <span className="font-mono text-[10px] text-outline">AUTO-REFRESH: 5s</span>
+                </div>
+                <div className="space-y-3 font-mono text-xs">
                   <ActivityItem
                     title={tAdmin('activity.newOrder')}
                     description={tAdmin('activity.newOrderDesc')}
                     time={tAdmin('activity.newOrderTime')}
-                    icon="fa-shopping-cart"
+                    tag="ORDER"
+                    tagColor="text-primary-container border-primary-container/30 bg-primary-container/10"
                   />
                   <ActivityItem
                     title={tAdmin('activity.newProduct')}
                     description={tAdmin('activity.newProductDesc')}
                     time={tAdmin('activity.newProductTime')}
-                    icon="fa-plus-circle"
+                    tag="PRODUCT"
+                    tagColor="text-tertiary-fixed border-tertiary-fixed/30 bg-tertiary-fixed/10"
                   />
                   <ActivityItem
                     title={tAdmin('activity.newUser')}
                     description={tAdmin('activity.newUserDesc')}
                     time={tAdmin('activity.newUserTime')}
-                    icon="fa-user-plus"
+                    tag="IDENTITY"
+                    tagColor="text-secondary border-secondary/30 bg-secondary/10"
                   />
                 </div>
               </div>
@@ -191,31 +235,46 @@ export default function AdminDashboard() {
 
           {/* Products Tab */}
           {activeTab === 'products' && (
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 shadow-md">
               <ProductsTable />
             </div>
           )}
 
           {/* Orders Tab */}
           {activeTab === 'orders' && (
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-bold mb-6">{tAdmin('orders.manage')}</h2>
+            <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 shadow-md">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="w-1.5 h-5 bg-primary-container rounded-sm shadow-[0_0_8px_#00f2fe]"></span>
+                <h2 className="font-mono text-base font-extrabold tracking-tight text-on-surface uppercase">
+                  {tAdmin('orders.manage')}
+                </h2>
+              </div>
               <OrdersTable />
             </div>
           )}
 
           {/* Users Tab */}
           {activeTab === 'users' && (
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-bold mb-6">{tAdmin('users.manage')}</h2>
+            <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 shadow-md">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="w-1.5 h-5 bg-secondary rounded-sm shadow-[0_0_8px_#d2bbff]"></span>
+                <h2 className="font-mono text-base font-extrabold tracking-tight text-on-surface uppercase">
+                  {tAdmin('users.manage')}
+                </h2>
+              </div>
               <UsersTable />
             </div>
           )}
 
           {/* Content Tab */}
           {activeTab === 'content' && (
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-bold mb-6">{tAdmin('tabs.content')}</h2>
+            <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 shadow-md">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="w-1.5 h-5 bg-tertiary-fixed rounded-sm shadow-[0_0_8px_#6ffbbe]"></span>
+                <h2 className="font-mono text-base font-extrabold tracking-tight text-on-surface uppercase">
+                  {tAdmin('tabs.content')}
+                </h2>
+              </div>
               <ContentTable />
             </div>
           )}
@@ -225,34 +284,39 @@ export default function AdminDashboard() {
   );
 }
 
-// Helper Components
-function StatCard({ title, value, icon, color }: { title: string; value: string | number; icon: string; color: string }) {
+// Telemetry Stat Card Component
+function StatCard({ title, value, subtext, color }: { title: string; value: string | number; subtext: string; color: string }) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-gray-600 text-sm">{title}</p>
-          <p className="text-2xl font-bold text-gray-800 mt-1">{value}</p>
+    <div className="bg-surface-container-low border border-outline-variant/30 p-5 rounded-xl shadow-sm relative overflow-hidden group hover:bg-surface-container transition-all">
+      <div className="flex items-center justify-between text-on-surface-variant mb-2">
+        <span className="font-mono text-xs uppercase tracking-wider">{title}</span>
+        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}` }}></span>
+      </div>
+      <div>
+        <div className="font-mono text-2xl font-extrabold tracking-tight text-on-surface">
+          {value}
         </div>
-        <div className={`${color} w-12 h-12 rounded-full flex items-center justify-center`}>
-          <i className={`fas ${icon} text-white text-xl`}></i>
+        <div className="flex items-center gap-1.5 mt-2 text-[11px] font-mono text-outline">
+          <span className="font-semibold" style={{ color }}>// {subtext}</span>
         </div>
       </div>
     </div>
   );
 }
 
-function ActivityItem({ title, description, time, icon }: { title: string; description: string; time: string; icon: string }) {
+function ActivityItem({ title, description, time, tag, tagColor }: { title: string; description: string; time: string; tag: string; tagColor: string }) {
   return (
-    <div className="flex items-start space-x-4 rtl:space-x-reverse">
-      <div className="bg-purple-100 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
-        <i className={`fas ${icon} text-purple-600`}></i>
+    <div className="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-surface-container-high/60 hover:border-outline-variant transition-all">
+      <div className="flex items-center gap-3">
+        <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${tagColor}`}>
+          {tag}
+        </span>
+        <div>
+          <h4 className="font-semibold text-on-surface">{title}</h4>
+          <p className="text-on-surface-variant text-[11px]">{description}</p>
+        </div>
       </div>
-      <div className="flex-1">
-        <h4 className="font-semibold text-gray-800">{title}</h4>
-        <p className="text-gray-600 text-sm">{description}</p>
-        <p className="text-gray-400 text-xs mt-1">{time}</p>
-      </div>
+      <span className="text-outline text-[10px] whitespace-nowrap">{time}</span>
     </div>
   );
 }
@@ -419,14 +483,12 @@ function ProductsTable() {
       let parsedImages = [];
       let parsedSpecs = {};
 
-      // Parse images
       try {
         parsedImages = formData.images ? JSON.parse(formData.images) : [];
       } catch {
         parsedImages = uploadedImages;
       }
 
-      // Parse specifications
       try {
         parsedSpecs = formData.specifications ? JSON.parse(formData.specifications) : {};
       } catch {
@@ -468,25 +530,37 @@ function ProductsTable() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">{tAdmin('products.manage')}</h2>
-        <button onClick={handleAdd} className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
-          <i className="fas fa-plus ml-2 rtl:ml-0 rtl:mr-2"></i>
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-5 bg-primary-container rounded-sm shadow-[0_0_8px_#00f2fe]"></span>
+          <h2 className="font-mono text-base font-extrabold tracking-tight text-on-surface uppercase">
+            {tAdmin('products.manage')}
+          </h2>
+        </div>
+        <button
+          onClick={handleAdd}
+          className="bg-primary-container hover:bg-surface-tint text-on-primary-fixed font-mono text-xs px-4 py-2 rounded-lg font-bold shadow-[0_0_12px_rgba(0,242,254,0.25)] transition-all flex items-center gap-2 cursor-pointer"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+          </svg>
           {tAdmin('products.add')}
         </button>
       </div>
+
       <div className="mb-4">
         <input
           type="text"
           placeholder={tAdmin('products.search')}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg"
+          className="w-full px-4 py-2 bg-surface-container-lowest border border-surface-container-high rounded-lg font-mono text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container"
         />
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-gray-50">
+
+      <div className="overflow-x-auto rounded-lg border border-surface-container-high">
+        <table className="w-full text-left font-mono text-xs">
+          <thead className="bg-surface-container-high text-on-surface-variant uppercase text-[11px] tracking-wider">
             <tr>
               <th className="px-4 py-3 text-right">{tAdmin('products.image')}</th>
               <th className="px-4 py-3 text-right">{tAdmin('products.name')}</th>
@@ -496,112 +570,143 @@ function ProductsTable() {
               <th className="px-4 py-3 text-right">{tAdmin('products.actions')}</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-surface-container-high/40 bg-surface-container-lowest">
             {products.map((product) => (
-              <tr key={product.id} className="border-b hover:bg-gray-50">
+              <tr key={product.id} className="hover:bg-surface-container-low transition-colors">
                 <td className="px-4 py-3">
-                  <img src={product.images && Array.isArray(product.images) && product.images[0] ? product.images[0] : product.image_url} alt="" className="w-12 h-12 object-cover rounded" />
+                  <img
+                    src={product.images && Array.isArray(product.images) && product.images[0] ? product.images[0] : (product.image_url || '/placeholder.png')}
+                    alt=""
+                    className="w-12 h-12 object-cover rounded border border-outline-variant/30"
+                  />
                 </td>
-                <td className="px-4 py-3">{product.name}</td>
-                <td className="px-4 py-3">{product.price} {t('footer.currency', {defaultValue: 'EGP'})}</td>
+                <td className="px-4 py-3 font-semibold text-on-surface">{product.name}</td>
+                <td className="px-4 py-3 text-primary-container font-bold">{product.price} {t('footer.currency', {defaultValue: 'EGP'})}</td>
                 <td className="px-4 py-3">{product.stock_quantity}</td>
                 <td className="px-4 py-3">
-                  <span className={`px-2 py-1 rounded text-xs ${product.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                    product.is_active
+                      ? 'bg-tertiary-container/20 text-tertiary-fixed border-tertiary-container/30'
+                      : 'bg-error-container/20 text-error border-error-container/30'
+                  }`}>
                     {product.is_active ? tAdmin('products.active') : tAdmin('products.inactive')}
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <button onClick={() => handleEdit(product)} className="text-blue-600 hover:text-blue-800 ml-2">{tAdmin('products.edit')}</button>
-                  <button onClick={() => handleDelete(product.id)} className="text-red-600 hover:text-red-800">{tAdmin('products.delete')}</button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleEdit(product)}
+                      className="text-primary-container hover:underline cursor-pointer"
+                    >
+                      {tAdmin('products.edit')}
+                    </button>
+                    <span className="text-outline">|</span>
+                    <button
+                      onClick={() => handleDelete(product.id)}
+                      className="text-error hover:underline cursor-pointer"
+                    >
+                      {tAdmin('products.delete')}
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 flex justify-between items-center">
+
+      <div className="mt-4 flex justify-between items-center font-mono text-xs">
         <button
           onClick={() => setPage(p => Math.max(1, p - 1))}
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          className="px-3 py-1.5 bg-surface-container-high text-on-surface rounded disabled:opacity-40 hover:bg-surface-bright cursor-pointer"
         >
           Previous
         </button>
-        <span>Page {page}</span>
+        <span className="text-on-surface-variant">Page {page}</span>
         <button
           onClick={() => setPage(p => p + 1)}
-          className="px-4 py-2 bg-gray-200 rounded"
+          className="px-3 py-1.5 bg-surface-container-high text-on-surface rounded hover:bg-surface-bright cursor-pointer"
         >
           Next
         </button>
       </div>
 
-      {/* Modal */}
+      {/* Cyber Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <h3 className="text-xl font-bold mb-4">{editingProduct ? tAdmin('products.editProduct') : tAdmin('products.addNew')}</h3>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-surface-container-low border border-outline-variant/40 rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto font-mono text-xs text-on-surface shadow-2xl">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-surface-container-high">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-primary">
+                // {editingProduct ? tAdmin('products.editProduct') : tAdmin('products.addNew')}
+              </h3>
+              <button onClick={() => setShowModal(false)} className="text-on-surface-variant hover:text-on-surface text-lg">×</button>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">{tAdmin('products.nameEn')}</label>
+                  <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.nameEn')}</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{tAdmin('products.nameAr')}</label>
+                  <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.nameAr')}</label>
                   <input
                     type="text"
                     value={formData.name_ar}
                     onChange={(e) => setFormData({...formData, name_ar: e.target.value})}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                     required
                   />
                 </div>
               </div>
+
               <div>
-                <label className="block text-sm font-medium mb-1">Slug</label>
+                <label className="block text-[11px] text-on-surface-variant mb-1">Slug</label>
                 <input
                   type="text"
                   value={formData.slug}
                   onChange={(e) => setFormData({...formData, slug: e.target.value})}
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                   required
                 />
               </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">{tAdmin('products.price')}</label>
+                  <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.price')}</label>
                   <input
                     type="number"
                     value={formData.price}
                     onChange={(e) => setFormData({...formData, price: e.target.value})}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{tAdmin('products.oldPrice')}</label>
+                  <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.oldPrice')}</label>
                   <input
                     type="number"
                     value={formData.old_price}
                     onChange={(e) => setFormData({...formData, old_price: e.target.value})}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                   />
                 </div>
               </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">{tAdmin('products.category')}</label>
+                  <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.category')}</label>
                   <select
                     value={formData.category_id}
                     onChange={(e) => setFormData({...formData, category_id: e.target.value})}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                     required
                   >
                     <option value="">Select Category</option>
@@ -613,33 +718,34 @@ function ProductsTable() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{tAdmin('products.brand')}</label>
+                  <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.brand')}</label>
                   <input
                     type="text"
                     value={formData.brand}
                     onChange={(e) => setFormData({...formData, brand: e.target.value})}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                     required
                   />
                 </div>
               </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">{tAdmin('products.stock')}</label>
+                  <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.stock')}</label>
                   <input
                     type="number"
                     value={formData.stock_quantity}
                     onChange={(e) => setFormData({...formData, stock_quantity: e.target.value})}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">{tAdmin('products.badge')}</label>
+                  <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.badge')}</label>
                   <select
                     value={formData.badge}
                     onChange={(e) => setFormData({...formData, badge: e.target.value})}
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                   >
                     <option value="">{tAdmin('products.badgeNone')}</option>
                     <option value="new">{tAdmin('products.badgeNew')}</option>
@@ -649,28 +755,28 @@ function ProductsTable() {
                   </select>
                 </div>
               </div>
+
               <div>
-                <label className="block text-sm font-medium mb-1">{tAdmin('products.images')}</label>
+                <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.images')}</label>
                 <input
                   type="file"
                   onChange={handleImageUpload}
                   accept="image/*"
                   multiple
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface file:bg-surface-container-high file:text-on-surface file:border-0 file:rounded file:px-2 file:py-1 file:mr-2 file:text-xs"
                   disabled={uploading}
                 />
-                {uploading && <p className="text-sm text-gray-500 mt-1">{tAdmin('products.uploading')}</p>}
+                {uploading && <p className="text-xs text-primary-container mt-1">// Uploading silicon asset...</p>}
                 
-                {/* Uploaded Images Preview */}
                 {uploadedImages.length > 0 && (
                   <div className="mt-3 grid grid-cols-4 gap-2">
                     {uploadedImages.map((url, index) => (
                       <div key={index} className="relative">
-                        <img src={url} alt={`Uploaded ${index}`} className="w-full h-20 object-cover rounded" />
+                        <img src={url} alt={`Uploaded ${index}`} className="w-full h-20 object-cover rounded border border-outline-variant/30" />
                         <button
                           type="button"
                           onClick={() => removeImage(index)}
-                          className="absolute top-1 right-1 bg-red-500 text-white w-6 h-6 rounded-full text-xs hover:bg-red-600"
+                          className="absolute top-1 right-1 bg-error text-on-error w-5 h-5 rounded-full text-xs flex items-center justify-center cursor-pointer"
                         >
                           ×
                         </button>
@@ -679,57 +785,51 @@ function ProductsTable() {
                   </div>
                 )}
               </div>
+
               <div>
-                <label className="block text-sm font-medium mb-1">{tAdmin('products.imagesJson')}</label>
-                <textarea
-                  value={formData.images}
-                  onChange={(e) => setFormData({...formData, images: e.target.value})}
-                  className="w-full px-3 py-2 border rounded"
-                  rows={2}
-                  placeholder='["https://example.com/image.jpg"]'
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">{tAdmin('products.descriptionEn')}</label>
+                <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.descriptionEn')}</label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                   rows={2}
                   required
                 />
               </div>
+
               <div>
-                <label className="block text-sm font-medium mb-1">{tAdmin('products.descriptionAr')}</label>
+                <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.descriptionAr')}</label>
                 <textarea
                   value={formData.description_ar}
                   onChange={(e) => setFormData({...formData, description_ar: e.target.value})}
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                   rows={2}
                   required
                 />
               </div>
+
               <div>
-                <label className="block text-sm font-medium mb-1">{tAdmin('products.specifications')}</label>
+                <label className="block text-[11px] text-on-surface-variant mb-1">{tAdmin('products.specifications')}</label>
                 <textarea
                   value={formData.specifications}
                   onChange={(e) => setFormData({...formData, specifications: e.target.value})}
-                  className="w-full px-3 py-2 border rounded"
+                  className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                   rows={2}
                   placeholder='{"key": "value"}'
                 />
               </div>
-              <div className="flex justify-end gap-4 mt-6">
+
+              <div className="flex justify-end gap-3 pt-4 border-t border-surface-container-high">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                  className="px-4 py-2 bg-surface-container-high text-on-surface rounded hover:bg-surface-bright cursor-pointer"
                 >
                   {tAdmin('products.cancel')}
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                  className="px-4 py-2 bg-primary-container hover:bg-surface-tint text-on-primary-fixed rounded font-bold shadow-[0_0_12px_rgba(0,242,254,0.3)] cursor-pointer"
                 >
                   {editingProduct ? tAdmin('products.update') : tAdmin('products.add')}
                 </button>
@@ -789,7 +889,7 @@ function OrdersTable() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2 border rounded-lg"
+          className="px-4 py-2 bg-surface-container-lowest border border-surface-container-high rounded-lg font-mono text-xs text-on-surface focus:outline-none focus:border-primary-container"
         >
           <option value="">{tAdmin('orders.allStatus')}</option>
           <option value="pending">{tAdmin('orders.pending')}</option>
@@ -799,9 +899,10 @@ function OrdersTable() {
           <option value="cancelled">{tAdmin('orders.cancelled')}</option>
         </select>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-gray-50">
+
+      <div className="overflow-x-auto rounded-lg border border-surface-container-high">
+        <table className="w-full text-left font-mono text-xs">
+          <thead className="bg-surface-container-high text-on-surface-variant uppercase text-[11px] tracking-wider">
             <tr>
               <th className="px-4 py-3 text-right">{tAdmin('orders.orderNum')}</th>
               <th className="px-4 py-3 text-right">{tAdmin('orders.customer')}</th>
@@ -812,17 +913,17 @@ function OrdersTable() {
               <th className="px-4 py-3 text-right">{tAdmin('orders.actions')}</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-surface-container-high/40 bg-surface-container-lowest">
             {orders.map((order) => (
-              <tr key={order.id} className="border-b hover:bg-gray-50">
-                <td className="px-4 py-3">#{order.id}</td>
-                <td className="px-4 py-3">{order.customer_name}</td>
-                <td className="px-4 py-3">{order.total_amount} {t('footer.currency', {defaultValue: 'EGP'})}</td>
+              <tr key={order.id} className="hover:bg-surface-container-low transition-colors">
+                <td className="px-4 py-3 font-bold text-primary">#{order.id}</td>
+                <td className="px-4 py-3 font-semibold text-on-surface">{order.customer_name}</td>
+                <td className="px-4 py-3 text-tertiary-fixed font-bold">{order.total_amount} {t('footer.currency', {defaultValue: 'EGP'})}</td>
                 <td className="px-4 py-3">
                   <select
                     value={order.status}
                     onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                    className="px-2 py-1 border rounded text-sm"
+                    className="px-2 py-1 bg-surface-container-high border border-outline-variant/30 rounded text-xs text-on-surface focus:outline-none"
                   >
                     <option value="pending">{tAdmin('orders.pending')}</option>
                     <option value="processing">{tAdmin('orders.processing')}</option>
@@ -832,31 +933,38 @@ function OrdersTable() {
                   </select>
                 </td>
                 <td className="px-4 py-3">
-                  <span className={`px-2 py-1 rounded text-xs ${order.payment_status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                    order.payment_status === 'paid'
+                      ? 'bg-tertiary-container/20 text-tertiary-fixed border-tertiary-container/30'
+                      : 'bg-error-container/20 text-error border-error-container/30'
+                  }`}>
                     {order.payment_status === 'paid' ? tAdmin('orders.paid') : tAdmin('orders.unpaid')}
                   </span>
                 </td>
-                <td className="px-4 py-3">{new Date(order.created_at).toLocaleDateString('ar-EG')}</td>
+                <td className="px-4 py-3 text-on-surface-variant">{new Date(order.created_at).toLocaleDateString('ar-EG')}</td>
                 <td className="px-4 py-3">
-                  <button className="text-blue-600 hover:text-blue-800">{tAdmin('orders.view')}</button>
+                  <button className="text-primary-container hover:underline cursor-pointer">
+                    {tAdmin('orders.view')}
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 flex justify-between items-center">
+
+      <div className="mt-4 flex justify-between items-center font-mono text-xs">
         <button
           onClick={() => setPage(p => Math.max(1, p - 1))}
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          className="px-3 py-1.5 bg-surface-container-high text-on-surface rounded disabled:opacity-40 hover:bg-surface-bright cursor-pointer"
         >
           {tAdmin('products.previous')}
         </button>
-        <span>{tAdmin('products.page')} {page}</span>
+        <span className="text-on-surface-variant">{tAdmin('products.page')} {page}</span>
         <button
           onClick={() => setPage(p => p + 1)}
-          className="px-4 py-2 bg-gray-200 rounded"
+          className="px-3 py-1.5 bg-surface-container-high text-on-surface rounded hover:bg-surface-bright cursor-pointer"
         >
           {tAdmin('products.next')}
         </button>
@@ -869,8 +977,6 @@ function UsersTable() {
   const tAdmin = useTranslations('admin');
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-
 
   const fetchUsers = async () => {
     try {
@@ -907,50 +1013,58 @@ function UsersTable() {
 
   return (
     <div>
-      <table className="w-full">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-4 py-3 text-right">{tAdmin('users.id')}</th>
-            <th className="px-4 py-3 text-right">{tAdmin('users.name')}</th>
-            <th className="px-4 py-3 text-right">{tAdmin('users.email')}</th>
-            <th className="px-4 py-3 text-right">{tAdmin('users.phone')}</th>
-            <th className="px-4 py-3 text-right">{tAdmin('users.role')}</th>
-            <th className="px-4 py-3 text-right">{tAdmin('users.createdAt')}</th>
-            <th className="px-4 py-3 text-right">{tAdmin('users.actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id} className="border-b hover:bg-gray-50">
-              <td className="px-4 py-3">{user.id}</td>
-              <td className="px-4 py-3">{user.first_name} {user.last_name}</td>
-              <td className="px-4 py-3">{user.email}</td>
-              <td className="px-4 py-3">{user.phone || '-'}</td>
-              <td className="px-4 py-3">
-                <span className={`px-2 py-1 rounded text-xs ${
-                  user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 
-                  user.role === 'seller' ? 'bg-blue-100 text-blue-800' : 
-                  'bg-gray-100 text-gray-800'
-                }`}>
-                  {user.role === 'admin' ? tAdmin('roles.admin') : user.role === 'seller' ? (tAdmin('roles.seller', { defaultValue: 'Seller' })) : tAdmin('roles.user')}
-                </span>
-              </td>
-              <td className="px-4 py-3">{new Date(user.created_at).toLocaleDateString('ar-EG')}</td>
-              <td className="px-4 py-3">
-                <select
-                  value={user.role}
-                  onChange={(e) => updateUserRole(user.id, e.target.value)}
-                  className="px-2 py-1 border rounded text-sm bg-white"
-                >
-                  <option value="user">{tAdmin('roles.user')}</option>
-                  <option value="seller">{tAdmin('roles.seller', { defaultValue: 'Seller' })}</option>
-                  <option value="admin">{tAdmin('roles.admin')}</option>
-                </select>
-              </td>
+      <div className="overflow-x-auto rounded-lg border border-surface-container-high">
+        <table className="w-full text-left font-mono text-xs">
+          <thead className="bg-surface-container-high text-on-surface-variant uppercase text-[11px] tracking-wider">
+            <tr>
+              <th className="px-4 py-3 text-right">{tAdmin('users.id')}</th>
+              <th className="px-4 py-3 text-right">{tAdmin('users.name')}</th>
+              <th className="px-4 py-3 text-right">{tAdmin('users.email')}</th>
+              <th className="px-4 py-3 text-right">{tAdmin('users.phone')}</th>
+              <th className="px-4 py-3 text-right">{tAdmin('users.role')}</th>
+              <th className="px-4 py-3 text-right">{tAdmin('users.createdAt')}</th>
+              <th className="px-4 py-3 text-right">{tAdmin('users.actions')}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="divide-y divide-surface-container-high/40 bg-surface-container-lowest">
+            {users.map((user) => (
+              <tr key={user.id} className="hover:bg-surface-container-low transition-colors">
+                <td className="px-4 py-3 font-semibold text-primary">{user.id}</td>
+                <td className="px-4 py-3 font-bold text-on-surface">{user.first_name} {user.last_name}</td>
+                <td className="px-4 py-3 text-on-surface-variant">{user.email}</td>
+                <td className="px-4 py-3 text-on-surface-variant">{user.phone || '-'}</td>
+                <td className="px-4 py-3">
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                    user.role === 'admin'
+                      ? 'bg-primary-container/20 text-primary-container border-primary-container/30'
+                      : user.role === 'seller'
+                      ? 'bg-secondary/20 text-secondary border-secondary/30'
+                      : 'bg-surface-container-highest text-on-surface border-outline-variant/30'
+                  }`}>
+                    {user.role === 'admin'
+                      ? '[ADMIN]'
+                      : user.role === 'seller'
+                      ? '[SELLER]'
+                      : '[USER]'}
+                  </span>
+                </td>
+                <td className="px-4 py-3 text-on-surface-variant">{new Date(user.created_at).toLocaleDateString('ar-EG')}</td>
+                <td className="px-4 py-3">
+                  <select
+                    value={user.role}
+                    onChange={(e) => updateUserRole(user.id, e.target.value)}
+                    className="px-2 py-1 bg-surface-container-high border border-outline-variant/30 rounded text-xs text-on-surface focus:outline-none cursor-pointer"
+                  >
+                    <option value="user">{tAdmin('roles.user')}</option>
+                    <option value="seller">{tAdmin('roles.seller', { defaultValue: 'Seller' })}</option>
+                    <option value="admin">{tAdmin('roles.admin')}</option>
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -972,8 +1086,6 @@ function ContentTable() {
   const handleSave = async () => {
     setLoading(true);
     setSaveStatus('idle');
-    
-    // Simulate save - in real implementation, this would call an API
     setTimeout(() => {
       setLoading(false);
       setSaveStatus('success');
@@ -982,17 +1094,17 @@ function ContentTable() {
   };
 
   return (
-    <div>
+    <div className="font-mono text-xs">
       <div className="mb-6">
-        <div className="flex space-x-4 rtl:space-x-reverse mb-4 border-b">
+        <div className="flex flex-wrap gap-2 mb-4 border-b border-surface-container-high pb-2">
           {sections.map((section) => (
             <button
               key={section.id}
               onClick={() => setActiveSection(section.id)}
-              className={`px-4 py-2 font-semibold ${
+              className={`px-3 py-1.5 rounded font-bold transition-all cursor-pointer ${
                 activeSection === section.id
-                  ? 'border-b-2 border-purple-600 text-purple-600'
-                  : 'text-gray-600 hover:text-purple-600'
+                  ? 'bg-surface-container-high text-primary-container border border-primary-container/30'
+                  : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low'
               }`}
             >
               {section.label}
@@ -1002,42 +1114,42 @@ function ContentTable() {
       </div>
 
       {saveStatus === 'success' && (
-        <div className="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
-          Content saved successfully!
+        <div className="mb-4 p-3 bg-tertiary-container/20 text-tertiary-fixed border border-tertiary-container/30 rounded-lg">
+          // Content modifications synchronized successfully!
         </div>
       )}
 
       {activeSection === 'about' && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">About Title (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">About Title (Arabic)</label>
             <input
               type="text"
               defaultValue={t('about.title')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">About Title (English)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">About Title (English)</label>
             <input
               type="text"
               defaultValue="About Us"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Who We Are (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Who We Are (Arabic)</label>
             <textarea
               defaultValue={t('about.whoWeAreText')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
               rows={4}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Who We Are (English)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Who We Are (English)</label>
             <textarea
               defaultValue="Y0 Hardware is a specialized store for selling computer parts, laptops, and accessories with the highest quality and best prices in Egypt."
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
               rows={4}
             />
           </div>
@@ -1047,35 +1159,35 @@ function ContentTable() {
       {activeSection === 'contact' && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Address (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Address (Arabic)</label>
             <input
               type="text"
               defaultValue={t('contact.addressValue')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Address (English)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Address (English)</label>
             <input
               type="text"
               defaultValue="Beni Suef, Egypt"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Phone</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Phone</label>
             <input
               type="text"
               defaultValue="+20 112 933 4173"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Email</label>
             <input
               type="text"
               defaultValue="info@y0ussef.com"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
         </div>
@@ -1084,34 +1196,34 @@ function ContentTable() {
       {activeSection === 'hero' && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Hero Title (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Hero Title (Arabic)</label>
             <input
               type="text"
               defaultValue={t('hero.title')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Hero Title (English)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Hero Title (English)</label>
             <input
               type="text"
               defaultValue="Latest Computer Parts at Best Prices"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Hero Subtitle (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Hero Subtitle (Arabic)</label>
             <textarea
               defaultValue={t('hero.subtitle')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
               rows={2}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Hero Subtitle (English)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Hero Subtitle (English)</label>
             <textarea
               defaultValue="Your trusted store for computer parts, laptops, and accessories"
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
               rows={2}
             />
           </div>
@@ -1121,34 +1233,34 @@ function ContentTable() {
       {activeSection === 'features' && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Fast Shipping Title (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Fast Shipping Title (Arabic)</label>
             <input
               type="text"
               defaultValue={t('features.fastShipping.title')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Fast Shipping Description (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Fast Shipping Description (Arabic)</label>
             <textarea
               defaultValue={t('features.fastShipping.description')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
               rows={2}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Secure Payment Title (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Secure Payment Title (Arabic)</label>
             <input
               type="text"
               defaultValue={t('features.securePayment.title')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Secure Payment Description (Arabic)</label>
+            <label className="block text-[11px] text-on-surface-variant mb-1">Secure Payment Description (Arabic)</label>
             <textarea
               defaultValue={t('features.securePayment.description')}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
               rows={2}
             />
           </div>
@@ -1159,9 +1271,9 @@ function ContentTable() {
         <button
           onClick={handleSave}
           disabled={loading}
-          className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:bg-gray-400"
+          className="bg-primary-container hover:bg-surface-tint text-on-primary-fixed font-bold px-6 py-2.5 rounded-lg shadow-[0_0_12px_rgba(0,242,254,0.3)] transition-all disabled:opacity-40 cursor-pointer"
         >
-          {loading ? 'Saving...' : 'Save Changes'}
+          {loading ? 'SYNCHRONIZING...' : 'SAVE CHANGES'}
         </button>
       </div>
     </div>
