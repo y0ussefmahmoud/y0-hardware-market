@@ -11,42 +11,112 @@ import ProductCard from '@/components/ProductCard';
 import ShopFilters from '@/components/ShopFilters';
 import { Product } from '@/types';
 import { getTranslations } from 'next-intl/server';
+import pool from '@/lib/db';
 
 async function getProducts(searchParams: { [key: string]: string | string[] | undefined }): Promise<{ data: Product[], pagination: any }> {
   try {
-    const params = new URLSearchParams();
+    const category = typeof searchParams.category === 'string' ? searchParams.category : undefined;
+    const brand = typeof searchParams.brand === 'string' ? searchParams.brand : undefined;
+    const minPrice = typeof searchParams.minPrice === 'string' ? searchParams.minPrice : undefined;
+    const maxPrice = typeof searchParams.maxPrice === 'string' ? searchParams.maxPrice : undefined;
+    const search = typeof searchParams.search === 'string' ? searchParams.search : undefined;
+    const sort = typeof searchParams.sort === 'string' ? searchParams.sort : 'created_at';
+    const order = typeof searchParams.order === 'string' ? searchParams.order : 'DESC';
+    const page = parseInt((typeof searchParams.page === 'string' ? searchParams.page : undefined) || '1');
+    const limit = parseInt((typeof searchParams.limit === 'string' ? searchParams.limit : undefined) || '12');
+
+    const offset = (page - 1) * limit;
+
+    let whereClause = 'WHERE p.is_active = true';
+    const params: any[] = [];
+
+    if (category) {
+      whereClause += ' AND p.category_id = ?';
+      params.push(category);
+    }
+
+    if (brand) {
+      whereClause += ' AND p.brand = ?';
+      params.push(brand);
+    }
+
+    if (minPrice) {
+      whereClause += ' AND p.price >= ?';
+      params.push(minPrice);
+    }
+
+    if (maxPrice) {
+      whereClause += ' AND p.price <= ?';
+      params.push(maxPrice);
+    }
+
+    if (search) {
+      whereClause += ' AND (p.name LIKE ? OR p.name_ar LIKE ? OR p.description LIKE ?)';
+      const searchTerm = `%${search}%`;
+      params.push(searchTerm, searchTerm, searchTerm);
+    }
+
+    const allowedSortFields = ['price', 'rating', 'created_at', 'name'];
+    const sortField = allowedSortFields.includes(sort || '') ? sort : 'created_at';
+    const sortOrder = order?.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
+
+    const countQuery = `
+      SELECT COUNT(*) as total
+      FROM products p
+      ${whereClause}
+    `;
+    const [countResult] = await pool.query(countQuery, params);
+    const total = (countResult as any)[0].total;
+
+    const query = `
+      SELECT 
+        p.*,
+        c.name as category_name,
+        c.name_ar as category_name_ar
+      FROM products p
+      LEFT JOIN categories c ON p.category_id = c.id
+      ${whereClause}
+      ORDER BY p.${sortField} ${sortOrder}
+      LIMIT ? OFFSET ?
+    `;
     
-    if (searchParams.category) params.append('category', searchParams.category as string);
-    if (searchParams.brand) params.append('brand', searchParams.brand as string);
-    if (searchParams.minPrice) params.append('minPrice', searchParams.minPrice as string);
-    if (searchParams.maxPrice) params.append('maxPrice', searchParams.maxPrice as string);
-    if (searchParams.search) params.append('search', searchParams.search as string);
-    if (searchParams.page) params.append('page', searchParams.page as string);
-    
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3200';
-    const res = await fetch(`${baseUrl}/api/products?${params.toString()}`, {
-      cache: 'no-store'
-    });
-    const data = await res.json();
-    console.log('Products API response:', data);
-    return data;
+    const [products] = await pool.query(query, [...params, limit, offset]);
+
+    const parsedProducts = (products as any[]).map((product: any) => ({
+      ...product,
+      images: product.images ? (typeof product.images === 'string' ? JSON.parse(product.images) : product.images) : [],
+      specifications: product.specifications ? (typeof product.specifications === 'string' ? JSON.parse(product.specifications) : product.specifications) : {}
+    }));
+
+    return {
+      data: parsedProducts,
+      pagination: {
+        current_page: page,
+        per_page: limit,
+        total: total,
+        total_pages: Math.ceil(total / limit)
+      }
+    };
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Error fetching products directly from DB:', error);
     return { data: [], pagination: {} };
   }
 }
 
 async function getCategories() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3200';
-    const res = await fetch(`${baseUrl}/api/products/categories`, {
-      cache: 'no-store'
-    });
-    const data = await res.json();
-    console.log('Categories API response:', data);
-    return data.data || [];
+    const query = `
+      SELECT c.*,
+        (SELECT COUNT(*) FROM products p WHERE p.category_id = c.id AND p.is_active = true) as product_count
+      FROM categories c
+      WHERE c.parent_id IS NULL
+      ORDER BY c.name
+    `;
+
+    const [categories] = await pool.query(query);
+    return (categories as any[]) || [];
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    console.error('Error fetching categories directly from DB:', error);
     return [];
   }
 }
@@ -64,10 +134,6 @@ export default async function ShopPage({
   const resolvedSearchParams = await searchParams;
   const { data: products, pagination } = await getProducts(resolvedSearchParams);
   const categories = await getCategories();
-
-  console.log('Shop page - products:', products);
-  console.log('Shop page - pagination:', pagination);
-  console.log('Shop page - categories:', categories);
 
   return (
     <div className="flex flex-col bg-surface text-on-surface min-h-screen">
@@ -98,56 +164,21 @@ export default async function ShopPage({
           {/* Products Grid */}
           <div className="flex-1">
             <div className="flex flex-wrap justify-between items-center mb-6 gap-4 bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3">
-              <p className="text-on-surface-variant font-mono text-xs uppercase tracking-wider">
-                {products ? tShop('showingProducts', { count: products.length }) : tShop('loading')}
-              </p>
-              <select className="bg-surface-container border border-outline-variant/40 rounded-lg px-3 py-1.5 text-xs font-mono text-on-surface focus:border-primary-container focus:outline-none">
-                <option>{tShop('sortNewest')}</option>
-                <option>{tShop('sortPriceLowHigh')}</option>
-                <option>{tShop('sortPriceHighLow')}</option>
-                <option>{tShop('sortBestSelling')}</option>
-              </select>
+              <span className="font-mono text-xs text-on-surface-variant">
+                SHOWING {products.length} OF {pagination.total || products.length} HARDWARE ITEMS
+              </span>
             </div>
 
-            {!products ? (
-              <div className="text-center py-16 bg-surface-container-low border border-outline-variant/20 rounded-xl">
-                <i className="fas fa-spinner fa-spin text-3xl text-primary-container mb-4"></i>
-                <p className="text-on-surface-variant font-mono text-xs uppercase tracking-wider">{tShop('loading')}</p>
-              </div>
-            ) : products.length === 0 ? (
-              <div className="text-center py-16 bg-surface-container-low border border-outline-variant/20 rounded-xl">
-                <i className="fas fa-search text-3xl text-outline-variant/50 mb-4"></i>
-                <p className="text-on-surface-variant font-mono text-xs uppercase tracking-wider">{tShop('noProducts')}</p>
+            {products.length === 0 ? (
+              <div className="text-center py-16 bg-surface-container-low border border-outline-variant/30 rounded-xl">
+                <p className="font-mono text-base text-on-surface mb-2">{tShop('noProducts')}</p>
+                <p className="font-mono text-xs text-outline">{tShop('tryAdjustingFilters')}</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.map((product: Product) => (
+                {products.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
-              </div>
-            )}
-
-            {/* Pagination */}
-            {pagination && pagination.total_pages > 1 && (
-              <div className="flex justify-center mt-10 space-x-2 rtl:space-x-reverse font-mono text-xs">
-                <button className="px-4 py-2 border border-outline-variant/40 rounded-lg bg-surface-container-low text-on-surface hover:border-primary-container hover:text-primary-container transition-colors uppercase tracking-wider">
-                  {tShop('prev')}
-                </button>
-                {[...Array(pagination.total_pages)].map((_, i) => (
-                  <button
-                    key={i}
-                    className={`px-4 py-2 border rounded-lg transition-all ${
-                      i + 1 === pagination.current_page
-                        ? 'bg-primary-container text-on-primary-container border-primary-container font-bold shadow-[0_0_15px_rgba(0,242,254,0.3)]'
-                        : 'bg-surface-container-low border-outline-variant/40 text-on-surface hover:border-primary-container hover:text-primary-container'
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-                <button className="px-4 py-2 border border-outline-variant/40 rounded-lg bg-surface-container-low text-on-surface hover:border-primary-container hover:text-primary-container transition-colors uppercase tracking-wider">
-                  {tShop('next')}
-                </button>
               </div>
             )}
           </div>

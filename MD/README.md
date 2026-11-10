@@ -636,3 +636,21 @@ export async function GET() {
    - `npm run build` (`next build --webpack`): Exit Code 0 across all 40 dynamic and static routes.
 
 ---
+
+## ⚡ Urgent Fix Log: Server-Side Fetch Failed Error on Production (v1.3.3)
+**Timestamp:** 2026-11-10 14:07:00 (UTC+2 Cairo)
+**Status:** Completed (Direct Database Calling Implemented in Server Components & Production Base URL Configured)
+
+### 📌 Summary of Changes:
+1. **Server-Side Fetch Elimination in Server Components:**
+   - **Shop Page (`src/app/[locale]/shop/page.tsx`):** Refactored `getProducts()` and `getCategories()` from internal self-HTTP `fetch()` (which relied on fragile loopback `localhost:3200`) to direct MySQL pool queries (`pool.query`).
+   - **Product Detail Page (`src/app/[locale]/product/[slug]/page.tsx`):** Refactored `getProduct()` and `getRelatedProducts()` to query database tables directly, eliminating `fetch failed` and connection timeouts in standalone hosting environments.
+2. **Production Environment Configuration (`.env.production`):**
+   - Configured `NEXT_PUBLIC_BASE_URL=https://y0-hardwaremarket.y0ussef.com` and `NEXT_PUBLIC_API_URL=https://y0-hardwaremarket.y0ussef.com` for consistent client/server URL resolution.
+3. **Safety & Verification:**
+   - 0 Destructive database mutations.
+   - Retained hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Compiled successfully with Exit Code 0 across all 40 dynamic and static routes.
+
+---
