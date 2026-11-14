@@ -49,6 +49,6 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  // Match only internationalized pathnames (exclude api, _next, _vercel, uploads, and static files with extensions)
+  matcher: ['/((?!api|_next|_vercel|uploads|.*\\..*).*)']
 };

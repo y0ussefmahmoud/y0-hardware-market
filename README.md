@@ -786,3 +786,23 @@ export async function GET() {
    - `npm run build` (`next build --webpack`): Exit Code 0 across all 40 dynamic and static routes.
 
 ---
+
+## ⚡ Dedicated Uploads Route Handler for Production Log (v1.3.12)
+**Timestamp:** 2026-11-14 19:25:00 (UTC+2 Cairo)
+**Status:** Completed (Direct Image Serving Route Handler Configured)
+
+### 📌 Summary of Changes:
+1. **Dedicated Uploads Route Handler (`src/app/uploads/[filename]/route.ts`):**
+   - Implemented direct asset serving route handler reading from persistent directory (`process.env.UPLOAD_DIR` or `/home/u732920986/domains/hardwaremarket.y0ussef.com/uploads`).
+   - Integrated local development fallback to `public/uploads`.
+   - Sanitized paths with `path.basename` to prevent directory traversal attacks.
+   - Added automatic MIME resolution (`.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.svg`, `.avif`) and aggressive cache headers (`public, max-age=31536000, immutable`).
+2. **Middleware Compatibility (`src/proxy.ts`):**
+   - Excluded `/uploads/*` explicitly from `next-intl` localization middleware path matching.
+3. **Safety & Verification:**
+   - 0 Destructive database mutations.
+   - Preserved hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Exit Code 0 across all 41 dynamic and static routes.
+
+---

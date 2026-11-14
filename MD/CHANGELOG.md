@@ -4,6 +4,18 @@ All notable changes to this project are documented in this file.
 
 ---
 
+## [1.3.12] - 2026-11-14
+### Added
+- Created dedicated Next.js App Router Route Handler (`src/app/uploads/[filename]/route.ts`) to serve uploaded product images directly from persistent storage (`process.env.UPLOAD_DIR` or `/home/u732920986/domains/hardwaremarket.y0ussef.com/uploads/`) with local development fallback to `public/uploads`.
+- Added directory traversal sanitation using `path.basename` and automatic MIME type inference for `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.svg`, and `.avif`.
+- Set aggressive immutable caching headers (`public, max-age=31536000, immutable`) for served upload assets.
+
+### Changed
+- Updated proxy middleware (`src/proxy.ts`) matcher to explicitly exclude `uploads` from internationalization path rewrites.
+- Bumped application and documentation version to **v1.3.12**.
+
+---
+
 ## [1.3.11] - 2026-11-14
 ### Changed
 - Bumped application and documentation version to **v1.3.11**.
