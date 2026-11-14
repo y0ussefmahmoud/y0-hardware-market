@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { csrfFetch } from '@/lib/csrf';
+import { getProductMainImage } from '@/lib/image';
 
 interface CartItem {
   cart_id: number;
@@ -183,19 +184,7 @@ export default function CartPage() {
           <div className="flex-1">
             <div className="bg-surface-container-low border border-outline-variant/30 rounded-xl overflow-hidden shadow-lg">
               {cartItems.map((item) => {
-                let imageUrl = '';
-                if (item.images) {
-                  try {
-                    const imagesArray = typeof item.images === 'string' 
-                      ? JSON.parse(item.images) 
-                      : item.images;
-                    if (Array.isArray(imagesArray) && imagesArray.length > 0) {
-                      imageUrl = imagesArray[0];
-                    }
-                  } catch (error) {
-                    console.error('Error parsing images:', error);
-                  }
-                }
+                const imageUrl = getProductMainImage(item);
 
                 return (
                 <div key={item.cart_id} className="flex flex-wrap sm:flex-nowrap items-center p-6 border-b border-outline-variant/20 last:border-b-0 gap-4">

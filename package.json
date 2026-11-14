@@ -1,6 +1,6 @@
 {
   "name": "Y0 Hardware Market",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3200",

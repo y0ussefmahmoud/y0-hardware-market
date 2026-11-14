@@ -4,6 +4,23 @@ All notable changes to this project are documented in this file.
 
 ---
 
+## [1.3.10] - 2026-11-14
+### Added
+- Created centralized image URL resolution utility (`src/lib/image.ts`) with `getImageUrl` and `getProductMainImage` helpers.
+- Added automated Hostinger VPS symbolic link deployment script (`scripts/setup-symlink.sh`).
+- Added cyber-industrial dark placeholder assets (`public/placeholder.svg`, `public/placeholder.jpg`, `public/placeholder.png`).
+
+### Changed
+- Hardened upload API (`src/app/api/upload/route.ts`) with strict file extension validation, MIME type checks, filename sanitization, and clean relative `/uploads/...` URL returns.
+- Standardized product image rendering and preview thumbnails across `ProductCard`, `product/[slug]`, `cart`, `checkout`, `admin`, and `seller` dashboards.
+- Bumped application and documentation version to **v1.3.10**.
+
+### Fixed
+- Fixed image preview rendering issues and broken thumbnail paths in admin and seller modals.
+- Fixed 404 Not Found on missing `/placeholder.jpg` by providing valid static placeholder assets.
+
+---
+
 ## [1.3.9] - 2026-11-14
 ### Added
 - Added `is_featured BOOLEAN DEFAULT FALSE` column to MySQL `products` table schema and indexes.

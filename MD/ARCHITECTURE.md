@@ -1,4 +1,4 @@
-# 🏛️ Y0 Hardware Market - System Architecture & Route Blueprint (v1.3.9)
+# 🏛️ Y0 Hardware Market - System Architecture & Route Blueprint (v1.3.10)
 
 ## 📌 Architectural Overview
 
@@ -190,6 +190,7 @@ erDiagram
 4. **Webpack Production Flag:** Production build is strictly compiled with `next build --webpack` to avoid Turbopack CSS processing panics with Tailwind CSS v4.
 5. **Persistent Asset Storage & Symlink Architecture (v1.3.8):** File uploads (`public/uploads`) are symbolically linked to `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` on Hostinger VPS, decoupling persistent product media from versioned application builds (`hbuilds/versions/<version-id>/`). Handlers in `/api/upload` respect `process.env.UPLOAD_DIR` and authorize verified multi-vendor seller uploads.
 6. **Automated Slugification & Featured Taxonomy (v1.3.9):** Product slugs are generated and sanitized with UTF-8 bilingual support (`src/lib/slug.ts`), eliminating dynamic route 404s. Showcase queries filter with index-accelerated `is_featured` boolean flags.
+7. **Unified Image Asset Resolution (v1.3.10):** Universal image URL resolver (`src/lib/image.ts`) normalizes paths across local and production environments, standardizing relative `/uploads/...` paths and providing high-contrast dark placeholder assets.
 
 ---
 *Designed & Powered by Y0ussef.com — Hotline: +20 1129334173*

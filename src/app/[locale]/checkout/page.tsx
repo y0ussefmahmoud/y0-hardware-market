@@ -6,6 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { csrfFetch } from '@/lib/csrf';
 import { useAuth } from '@/hooks/useAuth';
+import { getProductMainImage } from '@/lib/image';
 
 interface CartItem {
   cart_id: number;
@@ -303,30 +304,17 @@ export default function CheckoutPage() {
 
               <div className="space-y-4 mb-6">
                 {cartItems.map((item) => {
-                  let imageUrl = '';
-                  if (item.images) {
-                    try {
-                      const imagesArray =
-                        typeof item.images === 'string' ? JSON.parse(item.images) : item.images;
-                      if (Array.isArray(imagesArray) && imagesArray.length > 0) {
-                        imageUrl = imagesArray[0];
-                      }
-                    } catch {
-                      // ignore invalid image JSON
-                    }
-                  }
+                  const imageUrl = getProductMainImage(item);
 
                   return (
                     <div key={item.cart_id} className="flex items-center gap-3">
-                      {imageUrl && (
-                        <div className="w-14 h-14 bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-1 flex-shrink-0 flex items-center justify-center">
-                          <img
-                            src={imageUrl}
-                            alt={locale === 'ar' ? item.name_ar : item.name}
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                      )}
+                      <div className="w-14 h-14 bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-1 flex-shrink-0 flex items-center justify-center">
+                        <img
+                          src={imageUrl}
+                          alt={locale === 'ar' ? item.name_ar : item.name}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-xs text-on-surface truncate">
                           {locale === 'ar' ? item.name_ar : item.name}

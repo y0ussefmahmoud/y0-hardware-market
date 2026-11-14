@@ -17,6 +17,7 @@ import { useAuth } from '../../../hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { csrfFetch } from '../../../lib/csrf';
 import AdminCommandCenter from '../../../components/AdminCommandCenter';
+import { getImageUrl, getProductMainImage } from '../../../lib/image';
 
 interface DashboardStats {
   totalProducts: number;
@@ -420,15 +421,15 @@ function ProductsTable() {
         });
         
         const data = await res.json();
-        return data.url;
+        return getImageUrl(data.url || data.path);
       });
 
       const urls = await Promise.all(uploadPromises);
-      setUploadedImages(prev => [...prev, ...urls]);
-      setFormData(prev => ({
-        ...prev,
-        images: JSON.stringify([...uploadedImages, ...urls])
-      }));
+      setUploadedImages(prev => {
+        const updated = [...prev, ...urls];
+        setFormData(f => ({ ...f, images: JSON.stringify(updated) }));
+        return updated;
+      });
     } catch (error) {
       console.error('Error uploading images:', error);
     } finally {
@@ -437,17 +438,19 @@ function ProductsTable() {
   };
 
   const removeImage = (index: number) => {
-    const newImages = uploadedImages.filter((_, i) => i !== index);
-    setUploadedImages(newImages);
-    setFormData(prev => ({
-      ...prev,
-      images: JSON.stringify(newImages)
-    }));
+    setUploadedImages(prev => {
+      const updated = prev.filter((_, i) => i !== index);
+      setFormData(f => ({ ...f, images: JSON.stringify(updated) }));
+      return updated;
+    });
   };
 
   const handleEdit = (product: any) => {
     setEditingProduct(product);
-    const images = Array.isArray(product.images) ? product.images : (product.images ? JSON.parse(product.images) : []);
+    const rawImages = Array.isArray(product.images)
+      ? product.images
+      : (product.images ? JSON.parse(product.images) : (product.image_url ? [product.image_url] : []));
+    const images = rawImages.map((img: string) => getImageUrl(img));
     setUploadedImages(images);
     setFormData({
       name: product.name,
@@ -579,7 +582,7 @@ function ProductsTable() {
               <tr key={product.id} className="hover:bg-surface-container-low transition-colors">
                 <td className="px-4 py-3">
                   <img
-                    src={product.images && Array.isArray(product.images) && product.images[0] ? product.images[0] : (product.image_url || '/placeholder.png')}
+                    src={getProductMainImage(product)}
                     alt=""
                     className="w-12 h-12 object-cover rounded border border-outline-variant/30"
                   />
@@ -800,7 +803,7 @@ function ProductsTable() {
                   <div className="mt-3 grid grid-cols-4 gap-2">
                     {uploadedImages.map((url, index) => (
                       <div key={index} className="relative">
-                        <img src={url} alt={`Uploaded ${index}`} className="w-full h-20 object-cover rounded border border-outline-variant/30" />
+                        <img src={getImageUrl(url)} alt={`Uploaded ${index}`} className="w-full h-20 object-cover rounded border border-outline-variant/30" />
                         <button
                           type="button"
                           onClick={() => removeImage(index)}

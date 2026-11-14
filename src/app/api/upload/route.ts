@@ -6,7 +6,15 @@ import { requireSellerOrAdmin, unauthorizedAdminResponse } from '@/lib/auth';
 import { rejectIfUnsafeMutation } from '@/lib/security-http';
 
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
-const VALID_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+const VALID_MIME_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/svg+xml',
+  'image/avif',
+];
+const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', '.avif'];
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,8 +37,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'File too large (max 5MB)' }, { status: 400 });
     }
 
-    if (!VALID_MIME_TYPES.includes(file.type)) {
-      return NextResponse.json({ error: 'Invalid file type' }, { status: 400 });
+    const fileExt = path.extname(file.name || '').toLowerCase();
+    if (!ALLOWED_EXTENSIONS.includes(fileExt)) {
+      return NextResponse.json(
+        { error: `Invalid file extension. Allowed extensions: ${ALLOWED_EXTENSIONS.join(', ')}` },
+        { status: 400 }
+      );
+    }
+
+    if (!VALID_MIME_TYPES.includes(file.type) && file.type !== 'application/octet-stream') {
+      return NextResponse.json({ error: 'Invalid file MIME type' }, { status: 400 });
     }
 
     // Resolves upload target directory: respects process.env.UPLOAD_DIR or defaults to public/uploads
@@ -40,18 +56,28 @@ export async function POST(request: NextRequest) {
       await mkdir(uploadsDir, { recursive: true });
     }
 
+    const rawBase = path.basename(file.name || 'asset', fileExt).replace(/[^a-zA-Z0-9_-]/g, '') || 'silicon-asset';
     const timestamp = Date.now();
-    const filename = `${timestamp}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '')}`;
+    const filename = `${timestamp}-${rawBase}${fileExt}`;
     const filepath = path.join(uploadsDir, filename);
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     await writeFile(filepath, buffer);
 
+    // Guaranteed relative URL starting with /uploads/
     const url = `/uploads/${filename}`;
-    return NextResponse.json({ url });
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      url,
+      path: url,
+      filename
+    });
+  } catch (error: any) {
+    console.error('Error uploading file to storage:', error);
+    return NextResponse.json(
+      { error: error?.message || 'Failed to upload file to storage' },
+      { status: 500 }
+    );
   }
 }

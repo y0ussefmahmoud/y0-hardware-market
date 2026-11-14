@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { Product } from '@/types';
 import { getTranslations } from 'next-intl/server';
 import pool from '@/lib/db';
+import { getImageUrl, getProductMainImage } from '@/lib/image';
 
 export const dynamicParams = true;
 
@@ -139,9 +140,12 @@ export default async function ProductPage({
     ? Math.round(((parseFloat(String(product.old_price)) - parseFloat(String(product.price))) / parseFloat(String(product.old_price))) * 100)
     : 0;
 
-  // Handle images - use first image as main image
-  const mainImage = product.images && product.images.length > 0 ? product.images[0] : '/placeholder.jpg';
-  const productImages = product.images || [];
+  // Handle images with centralized URL resolution
+  const mainImage = getProductMainImage(product);
+  const rawImages: string[] = Array.isArray(product.images)
+    ? product.images
+    : (product.images ? [product.images] : (product.image_url ? [product.image_url] : []));
+  const productImages = rawImages.map((img) => getImageUrl(img));
 
   return (
     <div className="flex flex-col bg-surface text-on-surface min-h-screen">

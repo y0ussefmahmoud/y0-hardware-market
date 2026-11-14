@@ -16,6 +16,7 @@ import ErrorBoundary from '../../../components/ErrorBoundary';
 import { useAuth } from '../../../hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { csrfFetch } from '../../../lib/csrf';
+import { getImageUrl, getProductMainImage } from '../../../lib/image';
 
 interface SellerProduct {
   id: number;
@@ -29,6 +30,7 @@ interface SellerProduct {
   category_id: number;
   stock_quantity: number;
   brand: string;
+  image_url?: string | null;
   images: string[];
   specifications: Record<string, string>;
   badge: string | null;
@@ -129,11 +131,14 @@ export default function SellerDashboard() {
         fd.append('file', file);
         const res = await csrfFetch('/api/upload', { method: 'POST', body: fd });
         const data = await res.json();
-        return data.url;
+        return getImageUrl(data.url || data.path);
       });
       const urls = await Promise.all(uploadPromises);
-      setUploadedImages(prev => [...prev, ...urls]);
-      setFormData(prev => ({ ...prev, images: JSON.stringify([...uploadedImages, ...urls]) }));
+      setUploadedImages(prev => {
+        const updated = [...prev, ...urls];
+        setFormData(f => ({ ...f, images: JSON.stringify(updated) }));
+        return updated;
+      });
     } catch (error) {
       console.error('Error uploading images:', error);
     } finally {
@@ -142,14 +147,19 @@ export default function SellerDashboard() {
   };
 
   const removeImage = (index: number) => {
-    const newImages = uploadedImages.filter((_, i) => i !== index);
-    setUploadedImages(newImages);
-    setFormData(prev => ({ ...prev, images: JSON.stringify(newImages) }));
+    setUploadedImages(prev => {
+      const updated = prev.filter((_, i) => i !== index);
+      setFormData(f => ({ ...f, images: JSON.stringify(updated) }));
+      return updated;
+    });
   };
 
   const handleEdit = (product: SellerProduct) => {
     setEditingProduct(product);
-    const images = Array.isArray(product.images) ? product.images : (product.images ? JSON.parse(product.images as unknown as string) : []);
+    const rawImages = Array.isArray(product.images)
+      ? product.images
+      : (product.images ? JSON.parse(product.images as unknown as string) : (product.image_url ? [product.image_url] : []));
+    const images = rawImages.map((img: string) => getImageUrl(img));
     setUploadedImages(images);
     setFormData({
       name: product.name,
@@ -315,7 +325,7 @@ export default function SellerDashboard() {
                   {products.map((product) => (
                     <tr key={product.id} className="border-b hover:bg-gray-50">
                       <td className="px-4 py-3">
-                        <img src={product.images && Array.isArray(product.images) && product.images[0] ? product.images[0] : '/placeholder.png'} alt="" className="w-12 h-12 object-cover rounded" />
+                        <img src={getProductMainImage(product)} alt="" className="w-12 h-12 object-cover rounded" />
                       </td>
                       <td className="px-4 py-3">{product.name}</td>
                       <td className="px-4 py-3">{product.price} {t('footer.currency', {defaultValue: 'EGP'})}</td>
@@ -448,7 +458,7 @@ export default function SellerDashboard() {
                     <div className="mt-3 grid grid-cols-4 gap-2">
                       {uploadedImages.map((url, index) => (
                         <div key={index} className="relative">
-                          <img src={url} alt={`Uploaded ${index}`} className="w-full h-20 object-cover rounded" />
+                          <img src={getImageUrl(url)} alt={`Uploaded ${index}`} className="w-full h-20 object-cover rounded" />
                           <button type="button" onClick={() => removeImage(index)} className="absolute top-1 right-1 bg-red-500 text-white w-6 h-6 rounded-full text-xs hover:bg-red-600">×</button>
                         </div>
                       ))}

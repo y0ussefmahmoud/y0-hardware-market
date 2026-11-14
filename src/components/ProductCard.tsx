@@ -16,6 +16,7 @@ import { Product } from '@/types';
 import { useAuth } from '@/hooks/useAuth';
 import { useLocale, useTranslations } from 'next-intl';
 import { csrfFetch } from '@/lib/csrf';
+import { getProductMainImage } from '@/lib/image';
 
 interface ProductCardProps {
   product: Product;
@@ -38,28 +39,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   const name = locale === 'ar' ? product.name_ar : product.name;
   const currency = tFooter('currency');
   
-  // Get image from images array or fallback to image_url
-  let imageUrl = product.image_url;
-  
-  if (product.images) {
-    try {
-      // Handle both JSON string and array
-      const imagesArray = typeof product.images === 'string' 
-        ? JSON.parse(product.images) 
-        : product.images;
-      
-      if (Array.isArray(imagesArray) && imagesArray.length > 0) {
-        imageUrl = imagesArray[0];
-      }
-    } catch (error) {
-      console.error('Error parsing images:', error);
-    }
-  }
-
-  // Fallback if no image
-  if (!imageUrl) {
-    imageUrl = '/placeholder.jpg';
-  }
+  // Safely resolve main product image through centralized utility
+  const imageUrl = getProductMainImage(product);
 
   const addToCart = async () => {
     if (!isAuthenticated) {

@@ -745,3 +745,27 @@ export async function GET() {
    - `npm run build` (`next build --webpack`): Exit Code 0 across all 40 dynamic and static routes.
 
 ---
+
+## 🔗 Persistent Image Uploads & Symlink Architecture Log (v1.3.10)
+**Timestamp:** 2026-11-14 18:00:00 (UTC+2 Cairo)
+**Status:** Completed (Unified Image URL Resolution, Upload Validation & Deployment Automation Configured)
+
+### 📌 Summary of Changes:
+1. **Centralized Image URL Resolution (`src/lib/image.ts`):**
+   - Implemented `getImageUrl` and `getProductMainImage` helpers to cleanly resolve image URLs across local development and production environments.
+   - Enforced relative `/uploads/...` paths and fallback support for http/https URLs, data URIs, and root placeholders.
+2. **Component & Dashboard Standardization:**
+   - Standardized image preview and thumbnail rendering across `ProductCard`, `product/[slug]`, `cart`, `checkout`, `admin`, and `seller` dashboards.
+   - Added cyber-industrial dark placeholder assets (`public/placeholder.svg`, `public/placeholder.jpg`, `public/placeholder.png`).
+3. **Upload API Security & Extension Hardening (`src/app/api/upload/route.ts`):**
+   - Implemented strict extension validation (`.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.svg`, `.avif`) and filename sanitization.
+   - Guaranteed relative `/uploads/...` path returns with enhanced error handling.
+4. **Automated Hostinger VPS Deployment (`scripts/setup-symlink.sh`):**
+   - Created automated bash script to configure and verify the symbolic link between `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` and `./public/uploads`.
+5. **Safety & Verification:**
+   - 0 Destructive database mutations.
+   - Preserved hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Exit Code 0 across all 40 dynamic and static routes.
+
+---

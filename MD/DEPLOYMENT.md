@@ -280,4 +280,21 @@ UPLOAD_DIR=/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploa
    - Retained hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
 
 ---
+
+## 🚀 Production Deployment & Architecture Update (v1.3.10)
+**Timestamp:** 2026-11-14 18:00:00 (UTC+2 Cairo)  
+**Status:** Verification Completed (Automated Symlink Script & Image Preview Hardened)
+
+### 📌 Summary of Updates:
+1. **Automated Symlink Script (`scripts/setup-symlink.sh`):**
+   - Added automated bash deployment script to automatically verify and link `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` to `./public/uploads` upon every build or release.
+2. **Universal Image URL Resolution (`src/lib/image.ts`):**
+   - Centralized `getImageUrl` and `getProductMainImage` helpers across all components (`ProductCard`, `product/[slug]`, `cart`, `checkout`, `admin`, and `seller` dashboards).
+   - Standardized image URLs to relative `/uploads/...` paths, eliminating 404 preview issues.
+3. **Upload Security & Validation:**
+   - Enforced strict file extension whitelist (`.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.svg`, `.avif`) and sanitized uploaded filenames.
+4. **Brand Continuity:**
+   - Retained hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+
+---
 *Designed & Powered by Y0ussef.com — Hotline: +20 1129334173*
