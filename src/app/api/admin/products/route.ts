@@ -12,6 +12,7 @@ import pool from '@/lib/db';
 import { requireAdmin, requireSellerOrAdmin, unauthorizedAdminResponse } from '@/lib/auth';
 import { rejectIfUnsafeMutation } from '@/lib/security-http';
 import { revalidateTag, revalidatePath } from 'next/cache';
+import { ensureUniqueSlug } from '@/lib/slug';
 
 // GET all products
 export async function GET(request: Request) {
@@ -121,18 +122,22 @@ export async function POST(request: Request) {
       specifications,
       badge,
       is_active,
+      is_featured,
     } = body;
+
+    // Ensure valid, lowercase, URL-friendly unique slug is always present
+    const resolvedSlug = await ensureUniqueSlug(slug || name || name_ar || 'product');
 
     const [result] = await pool.query(
       `INSERT INTO products (
         name, name_ar, slug, description, description_ar,
         price, old_price, category_id, stock_quantity, brand,
-        images, specifications, badge, is_active, seller_id
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        images, specifications, badge, is_active, is_featured, seller_id
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         name,
         name_ar,
-        slug,
+        resolvedSlug,
         description,
         description_ar,
         price,
@@ -144,6 +149,7 @@ export async function POST(request: Request) {
         specifications ? JSON.stringify(specifications) : null,
         badge || null,
         is_active !== false,
+        Boolean(is_featured),
         user.role === 'seller' ? user.id : null,
       ]
     ) as any;
@@ -151,8 +157,8 @@ export async function POST(request: Request) {
     // Trigger on-demand cache revalidation
     try {
       revalidateTag('products-list', 'default');
-      if (slug) {
-        revalidateTag(`product-${slug}`, 'default');
+      if (resolvedSlug) {
+        revalidateTag(`product-${resolvedSlug}`, 'default');
       }
       revalidatePath('/[locale]', 'layout');
       revalidatePath('/[locale]/shop', 'page');

@@ -25,8 +25,8 @@ async function getFeaturedProducts(): Promise<Product[]> {
         c.name_ar as category_name_ar
       FROM products p
       LEFT JOIN categories c ON p.category_id = c.id
-      WHERE p.is_active = true AND (p.badge = 'featured' OR p.badge = 'bestseller')
-      ORDER BY p.created_at DESC
+      WHERE p.is_active = true AND (p.is_featured = 1 OR p.badge = 'featured' OR p.badge = 'bestseller')
+      ORDER BY p.is_featured DESC, p.created_at DESC
       LIMIT 8
     `) as any;
 

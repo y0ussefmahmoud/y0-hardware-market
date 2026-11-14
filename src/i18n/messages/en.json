@@ -5,6 +5,7 @@
   },
   "nav": {
     "home": "Home",
+    "shop": "Shop",
     "products": "Products",
     "about": "About Us",
     "contact": "Contact Us",
@@ -116,6 +117,7 @@
     "sortPriceHighLow": "Price: High to Low",
     "sortBestSelling": "Best Selling",
     "noProducts": "No products match your search",
+    "tryAdjustingFilters": "Try adjusting your filters or search query",
     "prev": "Previous",
     "next": "Next"
   },
@@ -187,6 +189,7 @@
       "badgeSale": "Sale",
       "badgeBestseller": "Bestseller",
       "badgeFeatured": "Featured",
+      "featuredProduct": "Featured Product",
       "images": "Images",
       "uploading": "Uploading...",
       "imagesJson": "Images (JSON array - optional)",

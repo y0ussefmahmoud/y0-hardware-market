@@ -27,6 +27,8 @@ export interface Product {
   review_count: number;
   badge: 'new' | 'sale' | 'bestseller' | 'featured' | null;
   is_active: boolean;
+  is_featured?: boolean | number;
+  seller_id?: number | null;
   created_at: string;
   updated_at: string;
   category_name?: string;

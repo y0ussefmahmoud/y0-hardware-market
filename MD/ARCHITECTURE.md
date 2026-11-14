@@ -1,4 +1,4 @@
-# 🏛️ Y0 Hardware Market - System Architecture & Route Blueprint (v1.3.8)
+# 🏛️ Y0 Hardware Market - System Architecture & Route Blueprint (v1.3.9)
 
 ## 📌 Architectural Overview
 
@@ -151,6 +151,7 @@ erDiagram
         json specifications
         string badge
         boolean is_active
+        boolean is_featured
         int seller_id FK "References USERS(id)"
         datetime created_at
         datetime updated_at
@@ -188,6 +189,7 @@ erDiagram
 3. **Direct Database Calling in SSR:** Server Components (`/shop`, `/product/[slug]`) bypass network loopback self-fetches by querying the MySQL pool directly, ensuring zero downtime in standalone host environments.
 4. **Webpack Production Flag:** Production build is strictly compiled with `next build --webpack` to avoid Turbopack CSS processing panics with Tailwind CSS v4.
 5. **Persistent Asset Storage & Symlink Architecture (v1.3.8):** File uploads (`public/uploads`) are symbolically linked to `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` on Hostinger VPS, decoupling persistent product media from versioned application builds (`hbuilds/versions/<version-id>/`). Handlers in `/api/upload` respect `process.env.UPLOAD_DIR` and authorize verified multi-vendor seller uploads.
+6. **Automated Slugification & Featured Taxonomy (v1.3.9):** Product slugs are generated and sanitized with UTF-8 bilingual support (`src/lib/slug.ts`), eliminating dynamic route 404s. Showcase queries filter with index-accelerated `is_featured` boolean flags.
 
 ---
 *Designed & Powered by Y0ussef.com — Hotline: +20 1129334173*

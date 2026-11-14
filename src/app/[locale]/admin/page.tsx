@@ -346,7 +346,8 @@ function ProductsTable() {
     stock_quantity: '',
     badge: '',
     images: '',
-    specifications: ''
+    specifications: '',
+    is_featured: false
   });
 
   useEffect(() => {
@@ -397,7 +398,8 @@ function ProductsTable() {
       stock_quantity: '',
       badge: '',
       images: '',
-      specifications: ''
+      specifications: '',
+      is_featured: false
     });
     setShowModal(true);
   };
@@ -460,7 +462,8 @@ function ProductsTable() {
       stock_quantity: product.stock_quantity,
       badge: product.badge || '',
       images: JSON.stringify(images),
-      specifications: product.specifications ? JSON.stringify(product.specifications) : ''
+      specifications: product.specifications ? JSON.stringify(product.specifications) : '',
+      is_featured: Boolean(product.is_featured)
     });
     setShowModal(true);
   };
@@ -502,7 +505,8 @@ function ProductsTable() {
         category_id: parseInt(formData.category_id),
         stock_quantity: parseInt(formData.stock_quantity),
         images: parsedImages,
-        specifications: parsedSpecs
+        specifications: parsedSpecs,
+        is_featured: Boolean(formData.is_featured)
       };
 
       const url = editingProduct 
@@ -650,7 +654,17 @@ function ProductsTable() {
                   <input
                     type="text"
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    onChange={(e) => {
+                      const newName = e.target.value;
+                      const autoSlug = newName.toLowerCase().trim().replace(/[\s_]+/g, '-').replace(/[^\w\u0621-\u064A-]+/g, '').replace(/--+/g, '-');
+                      setFormData(prev => ({
+                        ...prev,
+                        name: newName,
+                        slug: (!editingProduct && (!prev.slug || prev.slug === prev.name.toLowerCase().trim().replace(/[\s_]+/g, '-').replace(/[^\w\u0621-\u064A-]+/g, '').replace(/--+/g, '-')))
+                          ? autoSlug
+                          : prev.slug
+                      }));
+                    }}
                     className="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-high rounded text-on-surface focus:outline-none focus:border-primary-container"
                     required
                   />
@@ -754,6 +768,20 @@ function ProductsTable() {
                     <option value="featured">{tAdmin('products.badgeFeatured')}</option>
                   </select>
                 </div>
+              </div>
+
+              <div className="flex items-center gap-2 p-3 bg-surface-container-lowest border border-surface-container-high rounded-lg">
+                <input
+                  type="checkbox"
+                  id="admin_is_featured"
+                  checked={Boolean(formData.is_featured)}
+                  onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })}
+                  className="w-4 h-4 rounded text-primary-container bg-surface-container border-outline-variant/40 focus:ring-primary-container focus:ring-offset-0 cursor-pointer"
+                />
+                <label htmlFor="admin_is_featured" className="text-xs text-on-surface font-semibold cursor-pointer select-none flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00f2fe]"></span>
+                  <span>{tAdmin('products.featuredProduct')}</span>
+                </label>
               </div>
 
               <div>

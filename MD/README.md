@@ -720,3 +720,28 @@ export async function GET() {
    - `npm run build` (`next build --webpack`): Exit Code 0 across all static and dynamic routes.
 
 ---
+
+## ⚡ Consolidated Fixes & Features Log: Slug Hardening, Featured Flag & i18n (v1.3.9)
+**Timestamp:** 2026-11-14 15:05:00 (UTC+2 Cairo)
+**Status:** Completed (Slug Engine, Featured Flag, i18n Keys & Verification Protocol Passed)
+
+### 📌 Summary of Changes:
+1. **Localization Completeness (`next-intl`):**
+   - Injected missing keys `nav.shop` ("المتجر" / "Shop") and `shop.tryAdjustingFilters` in both `ar.json` and `en.json`.
+   - Eliminated runtime `MISSING_MESSAGE` console errors on shop and product navigation breadcrumbs.
+2. **Automated Slugification & Dynamic Route Resolution (`/[locale]/product/[slug]`):**
+   - Built bilingual URL-safe slug generator (`src/lib/slug.ts`) with collision avoidance.
+   - Enforced automatic slug generation in product creation and mutation APIs (`/api/admin/products`, `/api/products`).
+   - Hardened `[slug]` page loader and API routes to support URL decoding, case insensitivity, and numeric ID fallbacks, permanently eliminating "Product not found" on newly added items.
+3. **Featured Products Architecture (`is_featured`):**
+   - Added `is_featured BOOLEAN DEFAULT FALSE` column and index to MySQL database schema.
+   - Integrated `is_featured` toggle / checkbox in Admin Operations HUD and Seller Portal product modals.
+   - Updated storefront home page and `/api/products/featured` queries to prioritize `is_featured = 1` items.
+   - Updated `ProductCard` component to display featured indicators and safeguard against missing asset URLs.
+4. **Safety & Verification:**
+   - 0 Destructive database mutations.
+   - Preserved hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Exit Code 0 across all 40 dynamic and static routes.
+
+---

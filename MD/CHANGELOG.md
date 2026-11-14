@@ -4,6 +4,25 @@ All notable changes to this project are documented in this file.
 
 ---
 
+## [1.3.9] - 2026-11-14
+### Added
+- Added `is_featured BOOLEAN DEFAULT FALSE` column to MySQL `products` table schema and indexes.
+- Integrated `is_featured` toggle / checkbox in Admin Operations HUD and Seller Dashboard product management modals.
+- Implemented robust, URL-friendly slug generation utility (`src/lib/slug.ts`) supporting Arabic and English characters with automatic collision resolution on product creation and updates.
+- Configured storefront homepage and featured API to prioritize `is_featured = 1` products for top showcase placement.
+- Added missing `next-intl` localization messages: `nav.shop` and `shop.tryAdjustingFilters` in both `ar.json` and `en.json`.
+
+### Changed
+- Bumped application and documentation version to **v1.3.9**.
+- Enhanced `/[locale]/product/[slug]` and `/api/products/slug/[slug]` resolution with URI decoding, case-insensitive comparison, and numeric ID fallback.
+
+### Fixed
+- Resolved `Product not found` 404 errors on dynamic product specification pages for newly created items.
+- Eliminated `MISSING_MESSAGE` runtime warnings in navigation and shop filter UI.
+- Hardened `ProductCard` image rendering with clean fallback handling.
+
+---
+
 ## [1.3.8] - 2026-11-14
 ### Added
 - Permanent uploads and symbolic link (Symlink) architecture linking `./public/uploads` to persistent directory `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` on Hostinger VPS.

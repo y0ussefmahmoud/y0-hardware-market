@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS products (
   specifications JSON,
   badge ENUM('featured', 'bestseller', 'new', 'sale'),
   is_active BOOLEAN DEFAULT TRUE,
+  is_featured BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL,
@@ -61,6 +62,7 @@ CREATE TABLE IF NOT EXISTS products (
   INDEX idx_category_id (category_id),
   INDEX idx_is_active (is_active),
   INDEX idx_badge (badge),
+  INDEX idx_is_featured (is_featured),
   FULLTEXT idx_search (name, name_ar, description, description_ar)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

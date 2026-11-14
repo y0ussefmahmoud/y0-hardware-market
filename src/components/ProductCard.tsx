@@ -58,7 +58,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   // Fallback if no image
   if (!imageUrl) {
-    return null;
+    imageUrl = '/placeholder.jpg';
   }
 
   const addToCart = async () => {
@@ -104,12 +104,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low/80 via-transparent to-transparent pointer-events-none" />
         
-        {product.badge && (
+        {(product.badge || Boolean(product.is_featured)) && (
           <span className="absolute top-2.5 right-2.5 bg-primary-container/90 text-on-primary-container text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-[0_0_10px_rgba(0,242,254,0.4)] backdrop-blur-sm border border-primary-container">
             {product.badge === 'new' && tProduct('badgeNew')}
             {product.badge === 'sale' && tProduct('badgeSale')}
             {product.badge === 'bestseller' && tProduct('badgeBestseller')}
-            {product.badge === 'featured' && tProduct('badgeFeatured')}
+            {(product.badge === 'featured' || (!product.badge && Boolean(product.is_featured))) && tProduct('badgeFeatured')}
           </span>
         )}
         {discount > 0 && (

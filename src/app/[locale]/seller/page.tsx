@@ -33,6 +33,7 @@ interface SellerProduct {
   specifications: Record<string, string>;
   badge: string | null;
   is_active: boolean;
+  is_featured?: boolean;
   seller_id: number;
   category_name?: string;
   category_name_ar?: string;
@@ -63,7 +64,8 @@ export default function SellerDashboard() {
     stock_quantity: '',
     badge: '',
     images: '',
-    specifications: ''
+    specifications: '',
+    is_featured: false
   });
 
   const { user, loading: authLoading } = useAuth();
@@ -112,7 +114,7 @@ export default function SellerDashboard() {
     setFormData({
       name: '', name_ar: '', slug: '', description: '', description_ar: '',
       price: '', old_price: '', category_id: '', brand: '', stock_quantity: '',
-      badge: '', images: '', specifications: ''
+      badge: '', images: '', specifications: '', is_featured: false
     });
     setShowModal(true);
   };
@@ -162,7 +164,8 @@ export default function SellerDashboard() {
       stock_quantity: String(product.stock_quantity),
       badge: product.badge || '',
       images: JSON.stringify(images),
-      specifications: product.specifications ? JSON.stringify(product.specifications) : ''
+      specifications: product.specifications ? JSON.stringify(product.specifications) : '',
+      is_featured: Boolean(product.is_featured)
     });
     setShowModal(true);
   };
@@ -192,7 +195,8 @@ export default function SellerDashboard() {
         category_id: parseInt(formData.category_id),
         stock_quantity: parseInt(formData.stock_quantity),
         images: parsedImages,
-        specifications: parsedSpecs
+        specifications: parsedSpecs,
+        is_featured: Boolean(formData.is_featured)
       };
 
       const url = editingProduct
@@ -356,7 +360,23 @@ export default function SellerDashboard() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">{tAdmin('products.nameEn')}</label>
-                    <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-3 py-2 border rounded" required />
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => {
+                        const newName = e.target.value;
+                        const autoSlug = newName.toLowerCase().trim().replace(/[\s_]+/g, '-').replace(/[^\w\u0621-\u064A-]+/g, '').replace(/--+/g, '-');
+                        setFormData(prev => ({
+                          ...prev,
+                          name: newName,
+                          slug: (!editingProduct && (!prev.slug || prev.slug === prev.name.toLowerCase().trim().replace(/[\s_]+/g, '-').replace(/[^\w\u0621-\u064A-]+/g, '').replace(/--+/g, '-')))
+                            ? autoSlug
+                            : prev.slug
+                        }));
+                      }}
+                      className="w-full px-3 py-2 border rounded"
+                      required
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">{tAdmin('products.nameAr')}</label>
@@ -407,6 +427,18 @@ export default function SellerDashboard() {
                       <option value="featured">{tAdmin('products.badgeFeatured')}</option>
                     </select>
                   </div>
+                </div>
+                <div className="flex items-center gap-2 p-3 bg-gray-50 border rounded">
+                  <input
+                    type="checkbox"
+                    id="seller_is_featured"
+                    checked={Boolean(formData.is_featured)}
+                    onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })}
+                    className="w-4 h-4 rounded text-blue-600 cursor-pointer"
+                  />
+                  <label htmlFor="seller_is_featured" className="text-sm font-medium text-gray-700 cursor-pointer select-none">
+                    {tAdmin('products.featuredProduct')}
+                  </label>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">{tAdmin('products.images')}</label>

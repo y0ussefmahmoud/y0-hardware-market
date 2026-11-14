@@ -39,8 +39,21 @@ export async function generateStaticParams() {
   }
 }
 
-async function getProduct(slug: string): Promise<Product | null> {
+async function getProduct(rawSlug: string): Promise<Product | null> {
   try {
+    let decodedSlug = rawSlug;
+    try {
+      decodedSlug = decodeURIComponent(rawSlug);
+    } catch {
+      decodedSlug = rawSlug;
+    }
+
+    const cleanRaw = (rawSlug || '').trim();
+    const cleanDecoded = (decodedSlug || '').trim();
+    const lowerRaw = cleanRaw.toLowerCase();
+    const lowerDecoded = cleanDecoded.toLowerCase();
+    const isNumeric = /^\d+$/.test(cleanRaw);
+
     const [products] = await pool.query(`
       SELECT 
         p.*,
@@ -48,8 +61,15 @@ async function getProduct(slug: string): Promise<Product | null> {
         c.name_ar as category_name_ar
       FROM products p
       LEFT JOIN categories c ON p.category_id = c.id
-      WHERE p.slug = ? AND p.is_active = true
-    `, [slug]) as any;
+      WHERE (
+        p.slug = ? 
+        OR p.slug = ? 
+        OR LOWER(p.slug) = ? 
+        OR LOWER(p.slug) = ?
+        ${isNumeric ? 'OR p.id = ?' : ''}
+      ) AND p.is_active = true
+      LIMIT 1
+    `, isNumeric ? [cleanRaw, cleanDecoded, lowerRaw, lowerDecoded, parseInt(cleanRaw)] : [cleanRaw, cleanDecoded, lowerRaw, lowerDecoded]) as any;
 
     if (!products || products.length === 0) return null;
     const product = products[0];
@@ -59,7 +79,7 @@ async function getProduct(slug: string): Promise<Product | null> {
       specifications: product.specifications ? (typeof product.specifications === 'string' ? JSON.parse(product.specifications) : product.specifications) : {},
     };
   } catch (dbError) {
-    console.error(`Total failure fetching product ${slug}:`, dbError);
+    console.error(`Total failure fetching product ${rawSlug}:`, dbError);
     return null;
   }
 }

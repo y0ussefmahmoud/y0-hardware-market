@@ -12,6 +12,7 @@ import pool from '@/lib/db';
 import { requireAdmin, requireSellerOrAdmin, unauthorizedAdminResponse } from '@/lib/auth';
 import { rejectIfUnsafeMutation } from '@/lib/security-http';
 import { revalidateTag, revalidatePath } from 'next/cache';
+import { ensureUniqueSlug } from '@/lib/slug';
 
 // PUT update product
 export async function PUT(
@@ -64,19 +65,23 @@ export async function PUT(
       specifications,
       badge,
       is_active,
+      is_featured,
     } = body;
+
+    // Ensure valid unique slug
+    const resolvedSlug = await ensureUniqueSlug(slug || name || name_ar || previousSlug || 'product', parseInt(id));
 
     await pool.query(
       `UPDATE products SET
         name = ?, name_ar = ?, slug = ?, description = ?, description_ar = ?,
         price = ?, old_price = ?, category_id = ?, stock_quantity = ?, brand = ?,
-        images = ?, specifications = ?, badge = ?, is_active = ?,
+        images = ?, specifications = ?, badge = ?, is_active = ?, is_featured = ?,
         updated_at = CURRENT_TIMESTAMP
       WHERE id = ?`,
       [
         name,
         name_ar,
-        slug,
+        resolvedSlug,
         description,
         description_ar,
         price,
@@ -88,6 +93,7 @@ export async function PUT(
         specifications ? JSON.stringify(specifications) : null,
         badge || null,
         is_active !== false,
+        Boolean(is_featured),
         id,
       ]
     );
@@ -95,10 +101,10 @@ export async function PUT(
     // Trigger on-demand cache revalidation
     try {
       revalidateTag('products-list', 'default');
-      if (slug) {
-        revalidateTag(`product-${slug}`, 'default');
+      if (resolvedSlug) {
+        revalidateTag(`product-${resolvedSlug}`, 'default');
       }
-      if (previousSlug && previousSlug !== slug) {
+      if (previousSlug && previousSlug !== resolvedSlug) {
         revalidateTag(`product-${previousSlug}`, 'default');
       }
       revalidatePath('/[locale]', 'layout');

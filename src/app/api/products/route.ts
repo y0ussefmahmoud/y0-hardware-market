@@ -13,6 +13,7 @@ import pool from '@/lib/db';
 import { Product } from '@/types';
 import { requireAdmin, unauthorizedAdminResponse } from '@/lib/auth';
 import { rejectIfUnsafeMutation } from '@/lib/security-http';
+import { ensureUniqueSlug } from '@/lib/slug';
 
 export async function GET(request: NextRequest) {
   try {
@@ -132,24 +133,28 @@ export async function POST(request: NextRequest) {
       image_url,
       images,
       specifications,
-      badge
+      badge,
+      is_featured,
     } = body;
+
+    const resolvedSlug = await ensureUniqueSlug(slug || name || name_ar || 'product');
 
     const query = `
       INSERT INTO products (
         name, name_ar, slug, description, description_ar,
         price, old_price, category_id, brand, sku,
-        stock_quantity, image_url, images, specifications, badge
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        stock_quantity, image_url, images, specifications, badge, is_featured
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const [result] = await pool.query(query, [
-      name, name_ar, slug, description, description_ar,
+      name, name_ar, resolvedSlug, description, description_ar,
       price, old_price, category_id, brand, sku,
       stock_quantity, image_url,
       images ? JSON.stringify(images) : null,
       specifications ? JSON.stringify(specifications) : null,
-      badge
+      badge,
+      Boolean(is_featured)
     ]);
 
     return NextResponse.json({

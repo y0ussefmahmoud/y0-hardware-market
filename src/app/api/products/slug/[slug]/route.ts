@@ -16,6 +16,16 @@ export async function GET(
 ) {
   try {
     const { slug } = await params;
+    const rawSlug = slug || '';
+    let decodedSlug = rawSlug;
+    try {
+      decodedSlug = decodeURIComponent(rawSlug);
+    } catch {
+      decodedSlug = rawSlug;
+    }
+    const cleanRaw = rawSlug.trim();
+    const cleanDecoded = decodedSlug.trim();
+    const isNumeric = /^\d+$/.test(cleanRaw);
 
     const query = `
       SELECT 
@@ -24,10 +34,21 @@ export async function GET(
         c.name_ar as category_name_ar
       FROM products p
       LEFT JOIN categories c ON p.category_id = c.id
-      WHERE p.slug = ? AND p.is_active = true
+      WHERE (
+        p.slug = ? 
+        OR p.slug = ? 
+        OR LOWER(p.slug) = ? 
+        OR LOWER(p.slug) = ?
+        ${isNumeric ? 'OR p.id = ?' : ''}
+      ) AND p.is_active = true
+      LIMIT 1
     `;
 
-    const [products] = await pool.query(query, [slug]);
+    const paramsList = isNumeric 
+      ? [cleanRaw, cleanDecoded, cleanRaw.toLowerCase(), cleanDecoded.toLowerCase(), parseInt(cleanRaw)] 
+      : [cleanRaw, cleanDecoded, cleanRaw.toLowerCase(), cleanDecoded.toLowerCase()];
+
+    const [products] = await pool.query(query, paramsList);
 
     if ((products as any[]).length === 0) {
       return NextResponse.json(

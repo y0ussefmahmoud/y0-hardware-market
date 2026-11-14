@@ -5,6 +5,7 @@
   },
   "nav": {
     "home": "الرئيسية",
+    "shop": "المتجر",
     "products": "المنتجات",
     "about": "من نحن",
     "contact": "تواصل معنا",
@@ -116,6 +117,7 @@
     "sortPriceHighLow": "السعر: من الأعلى للأقل",
     "sortBestSelling": "الأكثر مبيعاً",
     "noProducts": "لا توجد منتجات مطابقة للبحث",
+    "tryAdjustingFilters": "حاول ضبط الفلاتر أو البحث عن منتج آخر",
     "prev": "السابق",
     "next": "التالي"
   },
@@ -187,6 +189,7 @@
       "badgeSale": "خصم",
       "badgeBestseller": "الأكثر مبيعاً",
       "badgeFeatured": "مميز",
+      "featuredProduct": "منتج مميز (Featured Product)",
       "images": "الصور",
       "uploading": "جاري الرفع...",
       "imagesJson": "الصور (مصفوفة JSON - اختياري)",

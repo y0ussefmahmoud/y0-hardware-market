@@ -23,8 +23,8 @@ export async function GET(request: NextRequest) {
       FROM products p
       LEFT JOIN categories c ON p.category_id = c.id
       WHERE p.is_active = true 
-        AND (p.badge = 'featured' OR p.badge = 'bestseller' OR p.badge = 'new')
-      ORDER BY p.rating DESC
+        AND (p.is_featured = 1 OR p.badge = 'featured' OR p.badge = 'bestseller' OR p.badge = 'new')
+      ORDER BY p.is_featured DESC, p.rating DESC, p.created_at DESC
       LIMIT ?
     `;
 
