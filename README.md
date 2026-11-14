@@ -769,3 +769,20 @@ export async function GET() {
    - `npm run build` (`next build --webpack`): Exit Code 0 across all 40 dynamic and static routes.
 
 ---
+
+## ⚡ Admin & Seller Modal Image Preview Fix Log (v1.3.11)
+**Timestamp:** 2026-11-14 18:55:00 (UTC+2 Cairo)
+**Status:** Completed (Dual String/File Thumbnail Preview Pipeline & Fallbacks Configured)
+
+### 📌 Summary of Changes:
+1. **Modal Image Preview Mapping Hardening:**
+   - Updated thumbnail rendering in `admin/page.tsx` and `seller/page.tsx` product modals to dynamically differentiate between existing database URL strings and runtime `File` instances.
+   - Replaced generic "Uploaded 0", "Uploaded 1" text with actual image filenames (`img.split('/').pop()` or `file.name`).
+   - Injected runtime `onError` handlers resetting missing or failed assets gracefully to `/placeholder.jpg`.
+2. **Safety & Verification:**
+   - 0 Destructive database mutations.
+   - Preserved hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Exit Code 0 across all 40 dynamic and static routes.
+
+---

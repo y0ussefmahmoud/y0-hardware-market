@@ -333,7 +333,7 @@ function ProductsTable() {
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any>(null);
   const [uploading, setUploading] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [uploadedImages, setUploadedImages] = useState<(string | File)[]>([]);
   const [formData, setFormData] = useState({
     name: '',
     name_ar: '',
@@ -801,18 +801,36 @@ function ProductsTable() {
                 
                 {uploadedImages.length > 0 && (
                   <div className="mt-3 grid grid-cols-4 gap-2">
-                    {uploadedImages.map((url, index) => (
-                      <div key={index} className="relative">
-                        <img src={getImageUrl(url)} alt={`Uploaded ${index}`} className="w-full h-20 object-cover rounded border border-outline-variant/30" />
-                        <button
-                          type="button"
-                          onClick={() => removeImage(index)}
-                          className="absolute top-1 right-1 bg-error text-on-error w-5 h-5 rounded-full text-xs flex items-center justify-center cursor-pointer"
-                        >
-                          ×
-                        </button>
-                      </div>
-                    ))}
+                    {uploadedImages.map((img: any, index: number) => {
+                      const isString = typeof img === 'string';
+                      const imgSrc = isString
+                        ? getImageUrl(img)
+                        : (typeof window !== 'undefined' && img instanceof File ? URL.createObjectURL(img) : getImageUrl(img));
+                      const imgName = isString ? img.split('/').pop() : ((img as File)?.name || `Image ${index + 1}`);
+
+                      return (
+                        <div key={index} className="relative group border border-cyan-500/30 rounded p-1 bg-black/40">
+                          <img 
+                            src={imgSrc} 
+                            alt={imgName || `Image ${index}`} 
+                            className="w-full h-16 object-cover rounded"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = '/placeholder.jpg';
+                            }}
+                          />
+                          <span className="text-[10px] text-cyan-300 block truncate mt-1">
+                            {imgName}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => removeImage(index)}
+                            className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-80 hover:opacity-100 cursor-pointer"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>

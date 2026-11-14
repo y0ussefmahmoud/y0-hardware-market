@@ -50,7 +50,7 @@ export default function SellerDashboard() {
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState<SellerProduct | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [uploadedImages, setUploadedImages] = useState<(string | File)[]>([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [formData, setFormData] = useState({
@@ -195,7 +195,7 @@ export default function SellerDashboard() {
     try {
       let parsedImages: string[] = [];
       let parsedSpecs = {};
-      try { parsedImages = formData.images ? JSON.parse(formData.images) : []; } catch { parsedImages = uploadedImages; }
+      try { parsedImages = formData.images ? JSON.parse(formData.images) : []; } catch { parsedImages = uploadedImages.map(img => typeof img === 'string' ? img : (img as File).name); }
       try { parsedSpecs = formData.specifications ? JSON.parse(formData.specifications) : {}; } catch { parsedSpecs = {}; }
 
       const payload = {
@@ -456,12 +456,36 @@ export default function SellerDashboard() {
                   {uploading && <p className="text-sm text-gray-500 mt-1">{tAdmin('products.uploading')}</p>}
                   {uploadedImages.length > 0 && (
                     <div className="mt-3 grid grid-cols-4 gap-2">
-                      {uploadedImages.map((url, index) => (
-                        <div key={index} className="relative">
-                          <img src={getImageUrl(url)} alt={`Uploaded ${index}`} className="w-full h-20 object-cover rounded" />
-                          <button type="button" onClick={() => removeImage(index)} className="absolute top-1 right-1 bg-red-500 text-white w-6 h-6 rounded-full text-xs hover:bg-red-600">×</button>
-                        </div>
-                      ))}
+                      {uploadedImages.map((img: any, index: number) => {
+                        const isString = typeof img === 'string';
+                        const imgSrc = isString
+                          ? getImageUrl(img)
+                          : (typeof window !== 'undefined' && img instanceof File ? URL.createObjectURL(img) : getImageUrl(img));
+                        const imgName = isString ? img.split('/').pop() : ((img as File)?.name || `Image ${index + 1}`);
+
+                        return (
+                          <div key={index} className="relative group border border-cyan-500/30 rounded p-1 bg-black/40">
+                            <img 
+                              src={imgSrc} 
+                              alt={imgName || `Image ${index}`} 
+                              className="w-full h-16 object-cover rounded"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = '/placeholder.jpg';
+                              }}
+                            />
+                            <span className="text-[10px] text-cyan-300 block truncate mt-1">
+                              {imgName}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => removeImage(index)}
+                              className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-80 hover:opacity-100 cursor-pointer"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>

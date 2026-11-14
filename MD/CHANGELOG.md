@@ -4,6 +4,17 @@ All notable changes to this project are documented in this file.
 
 ---
 
+## [1.3.11] - 2026-11-14
+### Changed
+- Bumped application and documentation version to **v1.3.11**.
+- Enhanced product modal image preview mapping in Admin Operations HUD (`admin/page.tsx`) and Seller Portal (`seller/page.tsx`) to support both existing URL strings and runtime `File` objects.
+
+### Fixed
+- Fixed product image thumbnail rendering in Admin and Seller edit modals where existing database images incorrectly displayed "Uploaded 0", "Uploaded 1" instead of the actual file names and previews.
+- Added `onError` fallback handlers to thumbnail previews ensuring seamless fallback to `/placeholder.jpg`.
+
+---
+
 ## [1.3.10] - 2026-11-14
 ### Added
 - Created centralized image URL resolution utility (`src/lib/image.ts`) with `getImageUrl` and `getProductMainImage` helpers.
