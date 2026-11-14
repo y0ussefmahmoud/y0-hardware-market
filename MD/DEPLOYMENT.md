@@ -202,6 +202,48 @@ RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
 - ❌ قد يستغرق وقتاً إذا كان السيرفر بطيئاً
 
 
+## 🔗 بنية التخزين الدائم للملفات المرفوعة والروابط الرمزية (Persistent Uploads & Symlink Architecture - v1.3.8)
+
+### 📌 المشكلة والسبب الجذري
+في بيئة الاستضافة على Hostinger VPS، يتم حفظ إصدارات البناء داخل مسارات منفصلة ومؤرخة (مثل `hbuilds/versions/<version-id>/` أو تبديل مسار البناء النشط). عند نشر إصدار جديد، كان مجلد `public/uploads` يُعاد بناؤه أو استبداله، مما أدى إلى فقدان ملفات الصور المرفوعة وظهور خطأ `404 Not Found` لصور المنتجات.
+
+### 🛠️ الحل المعماري الدائم (Symbolic Link Strategy)
+تم اعتماد استراتيجية الربط الرمزي (Symlink) لربط مجلد الرفع داخل التطبيق بمجلد تخزين دائم ومستقل خارج دورة البناء:
+- **المسار الدائم على السيرفر:** `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads`
+- **الرابط الرمزي داخل التطبيق:** `./public/uploads`
+
+### 📋 أوامر السيرفر الصريحة عبر SSH (Hostinger VPS)
+لضمان استمرار الربط عبر كل عملية بناء جديدة، نفذ الأوامر التالية:
+
+```bash
+# 1. التأكد من وجود مجلد التخزين الدائم المستقل في public_html
+mkdir -p /home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads
+
+# 2. تعيين الصلاحيات المناسبة لمجلد الرفع الدائم
+chmod 755 /home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads
+
+# 3. داخل مجلد البناء النشط (مثل hbuilds/current أو مسار الإصدار):
+cd /home/u732920986/domains/hardwaremarket.y0ussef.com/public_html
+# (أو المسار الفعلي للمشروع النشط)
+
+# 4. إزالة مجلد uploads المحلي إن وجد لإنشاء الرابط الرمزي مكانه
+rm -rf ./public/uploads
+
+# 5. إنشاء الرابط الرمزي (Symlink)
+ln -s /home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads ./public/uploads
+
+# 6. التحقق من صحة الرابط الرمزي
+ls -la ./public/uploads
+# المخرج المتوقع: ./public/uploads -> /home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads
+```
+
+### ⚙️ دعم متغير البيئة الاختياري `UPLOAD_DIR`
+يدعم معالج الرفع في `src/app/api/upload/route.ts` قراءة المسار مباشرة عبر متغير البيئة:
+```env
+UPLOAD_DIR=/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads
+```
+في حال عدم تحديده، يعتمد النظام تلقائياً على المسار الافتراضي `path.join(process.cwd(), 'public', 'uploads')` الذي يشير بدوره إلى الرابط الرمزي الدائم في بيئة الإنتاج، ويعمل محلياً بسلاسة في بيئة التطوير.
+
 ---
 
 ## 🚀 Production Deployment & Architecture Update (v1.3.6)
@@ -220,3 +262,22 @@ RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
    - All authenticated users navigate to `/[locale]/account` from the top header avatar, with distinct badges and direct dashboard launcher buttons.
 5. **Brand Continuity:**
    - Retained hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+
+---
+
+## 🚀 Production Deployment & Architecture Update (v1.3.8)
+**Timestamp:** 2026-11-14 13:15:00 (UTC+2 Cairo)  
+**Status:** Verification Completed (0 Errors, Symlink Architecture Implemented)
+
+### 📌 Summary of Updates:
+1. **Permanent Uploads & Symlink Architecture:**
+   - Implemented permanent symbolic link architecture for `/uploads/` addressing 404 errors across versioned rebuilds (`hbuilds/versions/<version-id>/`).
+   - Mapped persistent shared storage at `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` to `./public/uploads`.
+2. **Backend Upload Handler Enhancement (`src/app/api/upload/route.ts`):**
+   - Verified upload endpoints and added fallback resolution prioritizing `process.env.UPLOAD_DIR` or defaulting cleanly to `public/uploads`.
+   - Extended role authorization to allow verified sellers (`requireSellerOrAdmin`) to upload product images for their inventories.
+3. **Brand Continuity:**
+   - Retained hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+
+---
+*Designed & Powered by Y0ussef.com — Hotline: +20 1129334173*

@@ -698,3 +698,25 @@ export async function GET() {
    - `npm run build` (`next build --webpack`): Compiled successfully with Exit Code 0 across all 40 dynamic and static routes.
 
 ---
+
+## 🔗 Permanent Uploads & Symlink Architecture Log (v1.3.8)
+**Timestamp:** 2026-11-14 13:15:00 (UTC+2 Cairo)
+**Status:** Completed (Persistent Uploads Decoupled from Rebuilds & Symlink Automation Documented)
+
+### 📌 Summary of Changes:
+1. **Persistent Symbolic Link Architecture:**
+   - Addressed production 404 errors for uploaded media assets across versioned Hostinger VPS builds (`hbuilds/versions/<version-id>/`).
+   - Mapped persistent shared storage at `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` to `./public/uploads`.
+2. **Backend Upload Handler Hardening (`src/app/api/upload/route.ts`):**
+   - Configured dynamic upload path resolution respecting `process.env.UPLOAD_DIR` with reliable fallback to `path.join(process.cwd(), 'public', 'uploads')`.
+   - Updated role verification to allow multi-vendor sellers (`requireSellerOrAdmin`) to upload product images directly.
+3. **Documentation & Deployment Automation Overhaul:**
+   - Added complete persistent storage setup and shell commands in `MD/DEPLOYMENT.md`.
+   - Updated `MD/ARCHITECTURE.md` and `MD/CHANGELOG.md` to reflect the v1.3.8 architecture.
+4. **Safety & Verification:**
+   - 0 Database schema breaks; 0 API breaking changes.
+   - Preserved hotline `+20 1129334173` (01129334173) and signature `"Designed & Powered by Y0ussef.com"`.
+   - `npx tsc --noEmit`: 0 Errors.
+   - `npm run build` (`next build --webpack`): Exit Code 0 across all static and dynamic routes.
+
+---

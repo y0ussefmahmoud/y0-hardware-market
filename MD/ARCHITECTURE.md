@@ -1,4 +1,4 @@
-# 🏛️ Y0 Hardware Market - System Architecture & Route Blueprint (v1.3.6)
+# 🏛️ Y0 Hardware Market - System Architecture & Route Blueprint (v1.3.8)
 
 ## 📌 Architectural Overview
 
@@ -187,6 +187,7 @@ erDiagram
 2. **Session Cookies:** Configured with `httpOnly: true`, `sameSite: 'lax'`, and standard expiration for seamless redirect recovery.
 3. **Direct Database Calling in SSR:** Server Components (`/shop`, `/product/[slug]`) bypass network loopback self-fetches by querying the MySQL pool directly, ensuring zero downtime in standalone host environments.
 4. **Webpack Production Flag:** Production build is strictly compiled with `next build --webpack` to avoid Turbopack CSS processing panics with Tailwind CSS v4.
+5. **Persistent Asset Storage & Symlink Architecture (v1.3.8):** File uploads (`public/uploads`) are symbolically linked to `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` on Hostinger VPS, decoupling persistent product media from versioned application builds (`hbuilds/versions/<version-id>/`). Handlers in `/api/upload` respect `process.env.UPLOAD_DIR` and authorize verified multi-vendor seller uploads.
 
 ---
 *Designed & Powered by Y0ussef.com — Hotline: +20 1129334173*

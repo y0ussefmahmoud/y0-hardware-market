@@ -4,6 +4,22 @@ All notable changes to this project are documented in this file.
 
 ---
 
+## [1.3.8] - 2026-11-14
+### Added
+- Permanent uploads and symbolic link (Symlink) architecture linking `./public/uploads` to persistent directory `/home/u732920986/domains/hardwaremarket.y0ussef.com/public_html/uploads` on Hostinger VPS.
+- Support for optional `process.env.UPLOAD_DIR` configuration in `src/app/api/upload/route.ts` with clean fallback to `path.join(process.cwd(), 'public', 'uploads')`.
+- Role authorization update on image uploads to support multi-vendor sellers (`requireSellerOrAdmin`).
+- Dedicated section and shell automation guide for persistent uploads symlinks in `MD/DEPLOYMENT.md`.
+
+### Changed
+- Bumped project version to **v1.3.8** across `package.json`, architecture blueprints, and deployment documentation.
+- Updated `.env.example` and `.env.production` to document the persistent uploads directory variable.
+
+### Fixed
+- Resolved `404 Not Found` errors for uploaded product assets after versioned builds or directory redeployments (`hbuilds/versions/<version-id>/`).
+
+---
+
 ## [1.3.6] - 2026-11-10
 ### Added
 - Created `MD/ARCHITECTURE.md` documenting all 40 static and dynamic routes, entity relationships, security standards, and state architecture.

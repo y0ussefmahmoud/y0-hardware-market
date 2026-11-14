@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
-import { requireAdmin, unauthorizedAdminResponse } from '@/lib/auth';
+import { requireSellerOrAdmin, unauthorizedAdminResponse } from '@/lib/auth';
 import { rejectIfUnsafeMutation } from '@/lib/security-http';
 
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
@@ -13,8 +13,8 @@ export async function POST(request: NextRequest) {
     const unsafe = rejectIfUnsafeMutation(request);
     if (unsafe) return unsafe;
 
-    const admin = await requireAdmin(request);
-    if (!admin) {
+    const authorizedUser = await requireSellerOrAdmin(request);
+    if (!authorizedUser) {
       return unauthorizedAdminResponse();
     }
 
@@ -33,7 +33,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid file type' }, { status: 400 });
     }
 
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+    // Resolves upload target directory: respects process.env.UPLOAD_DIR or defaults to public/uploads
+    // In production with symlinks, public/uploads points directly to the persistent storage
+    const uploadsDir = process.env.UPLOAD_DIR || path.join(process.cwd(), 'public', 'uploads');
     if (!existsSync(uploadsDir)) {
       await mkdir(uploadsDir, { recursive: true });
     }
